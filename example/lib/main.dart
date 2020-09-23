@@ -41,7 +41,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   ThemeProvider themeProvider;
-  String _apiKey = "pS9UBDXe6dJkZsz0Et2sNUzvIPe822zP";
 
   //Gif
   GiphyGif currentGif;
@@ -109,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () async {
             GiphyGif gif = await GiphyGet.getGif(
               context: context,
-              apiKey: _apiKey,
+              apiKey: "your API KEY HERE",
               lang: GiphyLanguage.spanish,
             );
             if (gif != null && mounted) {
