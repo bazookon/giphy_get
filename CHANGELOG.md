@@ -1,3 +1,6 @@
-## [0.0.1] - TODO: Add release date.
+## [0.9.1] - 2020-09-12
+* Publish preview
 
-* TODO: Describe initial release.
+
+## [0.0.1] - 2020-09-12
+* Initial release
