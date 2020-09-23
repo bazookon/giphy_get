@@ -84,7 +84,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
     widget.scrollController..addListener(_scrollListener);
 
     // Listen query
-    _appBarProvider.addListener(_listenerQuery, ['query']);
+    _appBarProvider.addListener(_listenerQuery);
   }
 
   @override

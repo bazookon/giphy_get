@@ -1,11 +1,11 @@
-import 'package:property_change_notifier/property_change_notifier.dart';
+import 'package:flutter/widgets.dart';
 
-class AppBarProvider with PropertyChangeNotifier<String> {
+class AppBarProvider with ChangeNotifier {
   String _queryText = "";
   String get queryText => _queryText;
   set queryText(String queryText) {
     _queryText = queryText;
-    notifyListeners('query');
+    notifyListeners();
   }
 
   @override

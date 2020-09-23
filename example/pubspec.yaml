@@ -13,7 +13,7 @@ dependencies:
   giphy_get:
     path: ../
 
-  provider: ^3.0.0
+  provider: ^4.3.2
 
 dev_dependencies:
   flutter_test:
