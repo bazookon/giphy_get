@@ -14,7 +14,7 @@ A Flutter plugin to get gifs, sticker or emojis from [GIPHY](https://www.giphy.c
 
 ## Getting Started
 
-Important! you must register your app at [Giphy Develepers](https://developers.giphy.com/dashboard/  width=360) and get your APIKEY
+Important! you must register your app at [Giphy Develepers](https://developers.giphy.com/dashboard/) and get your APIKEY
 
 
 ```dart 
