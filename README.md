@@ -1,16 +1,33 @@
 # giphy_get
 
-A Flutter plugin for get gifs, sticker or emojis from GIPHY
+A Flutter plugin to get gifs, sticker or emojis from [GIPHY](https://www.giphy.com/) in pure dart code using [Giphy SDK](https://developers.giphy.com/docs/sdk) design guidelines.
 
-![Gif]()
+
+## Inspiration
+<img src="https://developers.giphy.com/branch/master/static/sdk-header@3x-bac7eb3abd9c3fa0e4454aceb0257a18.gif" width="360" />
+
+
+## Result
+<img src="https://github.com/bazospa/giphy_get/raw/master/example/assets/demo/giphy_get.webp" width="360" />
+
+
 
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+Important! you must register your app at [Giphy Develepers](https://developers.giphy.com/dashboard/  width=360) and get your APIKEY
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+
+```dart 
+import 'package:giphy_get/giphy_get.dart';
+
+GiphyGif gif = await GiphyGet.getGif(
+  context: context, //Required
+  apiKey: "your api key HERE", //Required.
+  lang: GiphyLanguage.english, //Optional - Language for query.
+  randomID: "abcd", // Optional - An ID/proxy for a specific user. 
+  searchText :"Search GIPHY",//Optional - AppBar search hint text.
+  tabColor:Colors.teal, // Optional- default accent color.
+);
+```
+
+### Feel free to make any PR's

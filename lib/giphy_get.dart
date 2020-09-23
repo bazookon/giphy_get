@@ -20,7 +20,6 @@ import 'package:giphy_get/src/views/main_view.dart';
 import 'package:giphy_get/src/providers/tab_provider.dart';
 import 'package:provider/provider.dart';
 
-typedef ErrorListener = void Function(dynamic error);
 
 class GiphyGet {
   static Future<GiphyGif> getGif({
@@ -32,7 +31,6 @@ class GiphyGet {
     String searchText = "Search GIPHY",
     bool modal = true,
     Color tabColor,
-    ErrorListener onError,
   }) =>
       showModalBottomSheet<GiphyGif>(
           clipBehavior: Clip.antiAlias,
