@@ -25,6 +25,8 @@ export 'package:giphy_get/src/client/models/user.dart';
 export 'package:giphy_get/src/client/models/type.dart';
 
 class GiphyGet {
+
+  // Show Bottom Sheet
   static Future<GiphyGif> getGif({
     @required BuildContext context,
     @required String apiKey,

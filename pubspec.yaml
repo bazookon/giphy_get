@@ -1,6 +1,6 @@
 name: giphy_get
 description: Pick EMOJI,STICKER or GIF from Giphy in pure dart code. Support Android,iOS,Web and Desktop.
-version: 0.9.1+1
+version: 0.9.2
 homepage: https://github.com/bazospa/giphy_get
 
 
