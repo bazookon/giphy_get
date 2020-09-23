@@ -123,15 +123,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  giphy_client:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: master
-      resolved-ref: "2a6a5ced7389e0d1569e4f71bf32a4a6b10ff917"
-      url: "https://github.com/bazookon/giphy_client.git"
-    source: git
-    version: "0.2.5"
   http:
     dependency: transitive
     description:

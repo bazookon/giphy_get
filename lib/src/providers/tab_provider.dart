@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:giphy_client/giphy_client.dart';
+import 'package:giphy_get/src/client/models/languages.dart';
+import 'package:giphy_get/src/client/models/rating.dart';
 
 class TabProvider with ChangeNotifier {
   String apiKey;

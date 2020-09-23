@@ -108,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () async {
             GiphyGif gif = await GiphyGet.getGif(
               context: context,
-              apiKey: "your API KEY HERE",
+              apiKey: "pS9UBDXe6dJkZsz0Et2sNUzvIPe822zP",
               lang: GiphyLanguage.spanish,
             );
             if (gif != null && mounted) {

@@ -1,25 +1,28 @@
 library giphy_get;
 
-// Client Library
-export 'package:giphy_client/src/client.dart';
-export 'package:giphy_client/src/models/collection.dart';
-export 'package:giphy_client/src/models/gif.dart';
-export 'package:giphy_client/src/models/image.dart';
-export 'package:giphy_client/src/models/images.dart';
-export 'package:giphy_client/src/models/languages.dart';
-export 'package:giphy_client/src/models/rating.dart';
-export 'package:giphy_client/src/models/user.dart';
-export 'package:giphy_client/src/models/type.dart';
 
-// Impoorts
+// Imports
 import 'package:flutter/material.dart';
-import 'package:giphy_client/giphy_client.dart';
+import 'package:giphy_get/src/client/models/gif.dart';
+import 'package:giphy_get/src/client/models/languages.dart';
+import 'package:giphy_get/src/client/models/rating.dart';
 import 'package:giphy_get/src/providers/app_bar_provider.dart';
 import 'package:giphy_get/src/providers/sheet_provider.dart';
 import 'package:giphy_get/src/views/main_view.dart';
 import 'package:giphy_get/src/providers/tab_provider.dart';
 import 'package:provider/provider.dart';
 
+
+// Giphy Client Export
+export 'package:giphy_get/src/client/client.dart';
+export 'package:giphy_get/src/client/models/collection.dart';
+export 'package:giphy_get/src/client/models/gif.dart';
+export 'package:giphy_get/src/client/models/image.dart';
+export 'package:giphy_get/src/client/models/images.dart';
+export 'package:giphy_get/src/client/models/languages.dart';
+export 'package:giphy_get/src/client/models/rating.dart';
+export 'package:giphy_get/src/client/models/user.dart';
+export 'package:giphy_get/src/client/models/type.dart';
 
 class GiphyGet {
   static Future<GiphyGif> getGif({

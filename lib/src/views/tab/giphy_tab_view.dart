@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:giphy_client/giphy_client.dart';
+import 'package:giphy_get/src/client/models/type.dart';
 
 import 'giphy_tab_detail.dart';
 
