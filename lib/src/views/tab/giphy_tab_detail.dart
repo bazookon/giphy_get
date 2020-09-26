@@ -146,8 +146,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         child: InkWell(
             onTap: () => _selectedGif(gif),
             child: ExtendedImage.network(gif.images.fixedWidth.webp,
-                // cache: true,
-                enableMemoryCache: false,
+                cache: true,
                 headers: {'accept': 'image/*'}, loadStateChanged: (state) {
               return AnimatedSwitcher(
                 duration: const Duration(milliseconds: 350),
