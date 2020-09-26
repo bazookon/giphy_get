@@ -157,18 +157,20 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
                   width: double.parse(gif.images.fixedWidth.width),
                   height: double.parse(gif.images.fixedHeight.height),
                 );
+                break;
 
               case LoadState.completed:
                 return ExtendedRawImage(
                   image: state.extendedImageInfo?.image,
                 );
-
+                break;
               case LoadState.failed:
                 return Container(
                   color: Theme.of(context).textTheme.headline1.color,
                   width: double.parse(gif.images.fixedWidth.width),
                   height: double.parse(gif.images.fixedHeight.height),
                 );
+                break;
             }
           },
         ),
