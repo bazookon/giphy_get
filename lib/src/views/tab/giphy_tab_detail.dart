@@ -142,40 +142,42 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
 
   Widget _item(GiphyGif gif) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(10.0),
-      child: InkWell(
-        onTap: () => _selectedGif(gif),
-        child: ExtendedImage.network(
-          gif.images.fixedWidth.webp,
-          cache: true,
-          headers: {'accept': 'image/*'},
-          loadStateChanged: (state) {
-            switch (state.extendedImageLoadState) {
-              case LoadState.loading:
-                return Container(
-                  color: Theme.of(context).textTheme.headline1.color,
-                  width: double.parse(gif.images.fixedWidth.width),
-                  height: double.parse(gif.images.fixedHeight.height),
-                );
-                break;
-
-              case LoadState.completed:
-                return ExtendedRawImage(
-                  image: state.extendedImageInfo?.image,
-                );
-                break;
-              case LoadState.failed:
-                return Container(
-                  color: Theme.of(context).textTheme.headline1.color,
-                  width: double.parse(gif.images.fixedWidth.width),
-                  height: double.parse(gif.images.fixedHeight.height),
-                );
-                break;
-            }
-          },
-        ),
-      ),
-    );
+        borderRadius: BorderRadius.circular(10.0),
+        child: InkWell(
+            onTap: () => _selectedGif(gif),
+            child: ExtendedImage.network(gif.images.fixedWidth.webp,
+                // cache: true,
+                enableMemoryCache: false,
+                headers: {'accept': 'image/*'}, loadStateChanged: (state) {
+              return AnimatedSwitcher(
+                duration: const Duration(milliseconds: 350),
+                child: case2(
+                    state.extendedImageLoadState,
+                    {
+                      LoadState.loading: Container(
+                        color: Theme.of(context).textTheme.headline1.color,
+                        width: double.parse(gif.images.fixedWidth.width),
+                        height: double.parse(gif.images.fixedWidth.height),
+                      ),
+                      LoadState.completed: ExtendedRawImage(
+                        image: state.extendedImageInfo?.image,
+                        width: double.parse(gif.images.fixedWidth.width),
+                        height: double.parse(gif.images.fixedWidth.height),
+                        fit: BoxFit.fill,
+                      ),
+                      LoadState.failed: Container(
+                        color: Theme.of(context).textTheme.headline1.color,
+                        width: double.parse(gif.images.fixedWidth.width),
+                        height: double.parse(gif.images.fixedWidth.height),
+                      ),
+                    },
+                    Container(
+                      color: Theme.of(context).textTheme.headline1.color,
+                      width: double.parse(gif.images.fixedWidth.width),
+                      height: double.parse(gif.images.fixedWidth.height),
+                    )),
+              );
+            })));
   }
 
   Future<void> _loadMore() async {
@@ -250,5 +252,17 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
 
     // Load data
     _loadMore();
+  }
+
+  TValue case2<TOptionType, TValue>(
+    TOptionType selectedOption,
+    Map<TOptionType, TValue> branches, [
+    TValue defaultValue = null,
+  ]) {
+    if (!branches.containsKey(selectedOption)) {
+      return defaultValue;
+    }
+
+    return branches[selectedOption];
   }
 }
