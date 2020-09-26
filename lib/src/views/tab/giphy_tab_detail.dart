@@ -1,7 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:giphy_get/src/client/client.dart';
 import 'package:giphy_get/src/client/models/collection.dart';
@@ -71,7 +70,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         _gifWidth = 200.0;
         break;
       case GiphyType.stickers:
-        _gifWidth = 150.0;
+        _gifWidth = 200.0;
         break;
       case GiphyType.emoji:
         _gifWidth = 100.0;
@@ -142,19 +141,50 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
 
   Widget _item(GiphyGif gif) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(10.0),
-      child: InkWell(
-        onTap: () => _selectedGif(gif),
-        child: CachedNetworkImage(
-            imageUrl: gif.images.fixedWidth.webp,
-            httpHeaders: {'accept': 'image/*'},
-            progressIndicatorBuilder: (context, url, downloadProgress) =>
-                Center(
-                    child: SpinKitPulse(
-                  color: _tabProvider.tabColor ?? Theme.of(context).accentColor,
-                ))),
-      ),
-    );
+        borderRadius: BorderRadius.circular(10.0),
+        child: InkWell(
+            onTap: () => _selectedGif(gif),
+            child: ExtendedImage.network(gif.images.fixedWidth.webp,
+                cache: true,
+                fit: BoxFit.fill,
+                headers: {'accept': 'image/*'}, loadStateChanged: (state) {
+              return AnimatedSwitcher(
+                duration: const Duration(milliseconds: 350),
+                child: case2(
+                    state.extendedImageLoadState,
+                    {
+                      LoadState.loading: Container(
+                        color: Theme.of(context).textTheme.headline1.color,
+                        width: _gifWidth,
+                        height: double.parse(gif.images.fixedWidth.height) *
+                            (_gifWidth /
+                                double.parse(gif.images.fixedWidth.width)),
+                      ),
+                      LoadState.completed: ExtendedRawImage(
+                        image: state.extendedImageInfo?.image,
+                        width: _gifWidth,
+                        height: double.parse(gif.images.fixedWidth.height) *
+                            (_gifWidth /
+                                double.parse(gif.images.fixedWidth.width)),
+                        fit: BoxFit.fill,
+                      ),
+                      LoadState.failed: Container(
+                        color: Theme.of(context).textTheme.headline1.color,
+                        width: _gifWidth,
+                        height: double.parse(gif.images.fixedWidth.height) *
+                            (_gifWidth /
+                                double.parse(gif.images.fixedWidth.width)),
+                      ),
+                    },
+                    Container(
+                      color: Theme.of(context).textTheme.headline1.color,
+                      width: _gifWidth,
+                      height: double.parse(gif.images.fixedWidth.height) *
+                          (_gifWidth /
+                              double.parse(gif.images.fixedWidth.width)),
+                    )),
+              );
+            })));
   }
 
   Future<void> _loadMore() async {
@@ -173,8 +203,6 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         ? 0
         : _collection.pagination.offset + _collection.pagination.count;
 
-
-    print(_tabProvider.lang);
     // Get Gif or Emoji
     if (widget.type == GiphyType.emoji) {
       _collection = await client.emojis(offset: offset, limit: _limit);
@@ -197,7 +225,6 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
             limit: _limit);
       }
     }
-
 
     // Set result to list
     if (_collection.data.isNotEmpty && mounted) {
@@ -231,5 +258,17 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
 
     // Load data
     _loadMore();
+  }
+
+  TValue case2<TOptionType, TValue>(
+    TOptionType selectedOption,
+    Map<TOptionType, TValue> branches, [
+    TValue defaultValue = null,
+  ]) {
+    if (!branches.containsKey(selectedOption)) {
+      return defaultValue;
+    }
+
+    return branches[selectedOption];
   }
 }
