@@ -146,6 +146,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
             onTap: () => _selectedGif(gif),
             child: ExtendedImage.network(gif.images.fixedWidth.webp,
                 cache: true,
+                fit: BoxFit.fill,
                 headers: {'accept': 'image/*'}, loadStateChanged: (state) {
               return AnimatedSwitcher(
                 duration: const Duration(milliseconds: 350),
