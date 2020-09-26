@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -145,14 +145,33 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
       borderRadius: BorderRadius.circular(10.0),
       child: InkWell(
         onTap: () => _selectedGif(gif),
-        child: CachedNetworkImage(
-            imageUrl: gif.images.fixedWidth.webp,
-            httpHeaders: {'accept': 'image/*'},
-            progressIndicatorBuilder: (context, url, downloadProgress) =>
-                Center(
-                    child: SpinKitPulse(
-                  color: _tabProvider.tabColor ?? Theme.of(context).accentColor,
-                ))),
+        child: ExtendedImage.network(
+          gif.images.fixedWidth.webp,
+          cache: true,
+          headers: {'accept': 'image/*'},
+          loadStateChanged: (state) {
+            switch (state.extendedImageLoadState) {
+              case LoadState.loading:
+                return Container(
+                  color: Theme.of(context).textTheme.headline1.color,
+                  width: double.parse(gif.images.fixedWidth.width),
+                  height: double.parse(gif.images.fixedHeight.height),
+                );
+
+              case LoadState.completed:
+                return ExtendedRawImage(
+                  image: state.extendedImageInfo?.image,
+                );
+
+              case LoadState.failed:
+                return Container(
+                  color: Theme.of(context).textTheme.headline1.color,
+                  width: double.parse(gif.images.fixedWidth.width),
+                  height: double.parse(gif.images.fixedHeight.height),
+                );
+            }
+          },
+        ),
       ),
     );
   }
@@ -172,7 +191,6 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
     int offset = _collection == null
         ? 0
         : _collection.pagination.offset + _collection.pagination.count;
-
 
     print(_tabProvider.lang);
     // Get Gif or Emoji
@@ -197,7 +215,6 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
             limit: _limit);
       }
     }
-
 
     // Set result to list
     if (_collection.data.isNotEmpty && mounted) {
