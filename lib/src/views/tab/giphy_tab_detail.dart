@@ -70,7 +70,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         _gifWidth = 200.0;
         break;
       case GiphyType.stickers:
-        _gifWidth = 150.0;
+        _gifWidth = 200.0;
         break;
       case GiphyType.emoji:
         _gifWidth = 100.0;
@@ -155,25 +155,33 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
                     {
                       LoadState.loading: Container(
                         color: Theme.of(context).textTheme.headline1.color,
-                        width: double.parse(gif.images.fixedWidth.width),
-                        height: double.parse(gif.images.fixedWidth.height),
+                        width: _gifWidth,
+                        height: double.parse(gif.images.fixedWidth.height) *
+                            (_gifWidth /
+                                double.parse(gif.images.fixedWidth.width)),
                       ),
                       LoadState.completed: ExtendedRawImage(
                         image: state.extendedImageInfo?.image,
-                        width: double.parse(gif.images.fixedWidth.width),
-                        height: double.parse(gif.images.fixedWidth.height),
+                        width: _gifWidth,
+                        height: double.parse(gif.images.fixedWidth.height) *
+                            (_gifWidth /
+                                double.parse(gif.images.fixedWidth.width)),
                         fit: BoxFit.fill,
                       ),
                       LoadState.failed: Container(
                         color: Theme.of(context).textTheme.headline1.color,
-                        width: double.parse(gif.images.fixedWidth.width),
-                        height: double.parse(gif.images.fixedWidth.height),
+                        width: _gifWidth,
+                        height: double.parse(gif.images.fixedWidth.height) *
+                            (_gifWidth /
+                                double.parse(gif.images.fixedWidth.width)),
                       ),
                     },
                     Container(
                       color: Theme.of(context).textTheme.headline1.color,
-                      width: double.parse(gif.images.fixedWidth.width),
-                      height: double.parse(gif.images.fixedWidth.height),
+                      width: _gifWidth,
+                      height: double.parse(gif.images.fixedWidth.height) *
+                          (_gifWidth /
+                              double.parse(gif.images.fixedWidth.width)),
                     )),
               );
             })));
@@ -195,7 +203,6 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         ? 0
         : _collection.pagination.offset + _collection.pagination.count;
 
-    print(_tabProvider.lang);
     // Get Gif or Emoji
     if (widget.type == GiphyType.emoji) {
       _collection = await client.emojis(offset: offset, limit: _limit);
