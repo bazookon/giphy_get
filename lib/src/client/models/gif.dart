@@ -1,5 +1,3 @@
-
-
 import 'package:giphy_get/src/client/models/images.dart';
 import 'package:giphy_get/src/client/models/user.dart';
 
@@ -94,8 +92,8 @@ class GiphyGif {
       'is_sticker': isSticker,
       'import_datetime': importDatetime?.toIso8601String(),
       'trending_datetime': trendingDatetime?.toIso8601String(),
-      'user': user,
-      'images': images
+      'user': user?.toJson(),
+      'images': images?.toJson()
     };
   }
 

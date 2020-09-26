@@ -1,4 +1,3 @@
-
 import 'package:giphy_get/src/client/models/image.dart';
 
 class GiphyImages {
@@ -154,30 +153,30 @@ class GiphyImages {
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'fixed_height_still': fixedHeightStill,
-      'original_still': originalStill,
-      'fixed_width': fixedWidth,
-      'fixed_height_small_still': fixedHeightSmallStill,
-      'fixed_height_downsampled': fixedHeightDownsampled,
-      'preview': preview,
-      'fixed_height_small': fixedHeightSmall,
-      'downsized_still': downsizedStill,
-      'downsized': downsized,
-      'downsized_large': downsizedLarge,
-      'fixed_width_small_still': fixedWidthSmallStill,
-      'preview_webp': previewWebp,
-      'fixed_width_still': fixedWidthStill,
-      'fixed_width_small': fixedWidthSmall,
-      'downsized_small': downsizedSmall,
-      'fixed_width_downsampled': fixedWidthDownsampled,
-      'downsized_medium': downsizedMedium,
-      'original': original,
-      'fixed_height': fixedHeight,
-      'hd': hd,
-      'looping': looping,
-      'original_mp4': originalMp4,
-      'preview_gif': previewGif,
-      '480w_still': w480Still
+      'fixed_height_still': fixedHeightStill?.toJson(),
+      'original_still': originalStill?.toJson(),
+      'fixed_width': fixedWidth?.toJson(),
+      'fixed_height_small_still': fixedHeightSmallStill?.toJson(),
+      'fixed_height_downsampled': fixedHeightDownsampled?.toJson(),
+      'preview': preview?.toJson(),
+      'fixed_height_small': fixedHeightSmall?.toJson(),
+      'downsized_still': downsizedStill?.toJson(),
+      'downsized': downsized?.toJson(),
+      'downsized_large': downsizedLarge?.toJson(),
+      'fixed_width_small_still': fixedWidthSmallStill?.toJson(),
+      'preview_webp': previewWebp?.toJson(),
+      'fixed_width_still': fixedWidthStill?.toJson(),
+      'fixed_width_small': fixedWidthSmall?.toJson(),
+      'downsized_small': downsizedSmall?.toJson(),
+      'fixed_width_downsampled': fixedWidthDownsampled?.toJson(),
+      'downsized_medium': downsizedMedium?.toJson(),
+      'original': original?.toJson(),
+      'fixed_height': fixedHeight?.toJson(),
+      'hd': hd?.toJson(),
+      'looping': looping?.toJson(),
+      'original_mp4': originalMp4?.toJson(),
+      'preview_gif': previewGif?.toJson(),
+      '480w_still': w480Still?.toJson()
     };
   }
 
