@@ -37,8 +37,8 @@ GiphyGif gif = await GiphyGet.getGif(
 
 ### Options
 
-| Value  | Type |    Description                |   Default      |
-| ---------|--------|--------------------|--------------- |
+| Value   | Type    |    Description                |   Default      |
+| ---------|-------------|--------------------|--------------- |
 | `lang` | String | Use [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) language code or use GiphyLanguage constants | `GiphyLanguage.english` | 
 | `randomID` | String | An ID/proxy for a specific user.  |  `null`  | 
 | `searchText` | String | Input search hint, we recomend use [flutter_18n pcakage](https://pub.dev/packages/flutter_i18n) for translation   |  `"Search GIPHY"`  | 
