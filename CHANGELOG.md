@@ -1,3 +1,6 @@
+## [0.9.4] - 2020-09-29
+* Fix loading gif speed
+
 ## [0.9.3] - 2020-09-23
 * Fixes the toJson method of GiphyGif which was preventing the json to be stored in Firestore
 
