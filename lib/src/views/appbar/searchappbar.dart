@@ -70,9 +70,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
       elevation: 0.0,
       titleSpacing: 10.0,
       automaticallyImplyLeading: false,
-      title: _tabProvider.tabType == GiphyType.emoji
-          ? _giphyLogo()
-          : _searchWidget(),
+      title: _searchWidget(),
       actions: [],
     );
   }
@@ -85,29 +83,33 @@ class _SearchAppBarState extends State<SearchAppBar> {
             height: 2,
             color: Theme.of(context).textTheme.bodyText1.color,
           ),
-          Container(
-            decoration: BoxDecoration(
-                color: (Theme.of(context).brightness == Brightness.light)
-                    ? Colors.grey[300]
-                    : Colors.white,
-                borderRadius: BorderRadius.circular(8.0)),
-            height: 40.0,
-            child: Center(
-              child: TextField(
-                autofocus:
-                    _sheetProvider.initialExtent == SheetProvider.maxExtent,
-                focusNode: _focus,
-                controller: _textEditingController,
-                style: TextStyle(color: Colors.black),
-                decoration: InputDecoration(
-                    prefixIcon: _searchIcon(),
-                    hintStyle: TextStyle(color: Colors.black45),
-                    hintText: _tabProvider.searchText,
-                    border: InputBorder.none),
-                autocorrect: false,
-              ),
-            ),
-          ),
+          _tabProvider.tabType == GiphyType.emoji
+              ? Container(
+                height: 40.0,
+                child: _giphyLogo())
+              : Container(
+                  decoration: BoxDecoration(
+                      color: (Theme.of(context).brightness == Brightness.light)
+                          ? Colors.grey[300]
+                          : Colors.white,
+                      borderRadius: BorderRadius.circular(8.0)),
+                  height: 40.0,
+                  child: Center(
+                    child: TextField(
+                      autofocus: _sheetProvider.initialExtent ==
+                          SheetProvider.maxExtent,
+                      focusNode: _focus,
+                      controller: _textEditingController,
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                          prefixIcon: _searchIcon(),
+                          hintStyle: TextStyle(color: Colors.black45),
+                          hintText: _tabProvider.searchText,
+                          border: InputBorder.none),
+                      autocorrect: false,
+                    ),
+                  ),
+                ),
         ],
       );
 

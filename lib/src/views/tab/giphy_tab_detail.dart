@@ -70,10 +70,10 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         _gifWidth = 200.0;
         break;
       case GiphyType.stickers:
-        _gifWidth = 200.0;
+        _gifWidth = 150.0;
         break;
       case GiphyType.emoji:
-        _gifWidth = 100.0;
+        _gifWidth = 80.0;
         break;
       default:
         break;
@@ -154,7 +154,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
                     state.extendedImageLoadState,
                     {
                       LoadState.loading: Container(
-                        color: Theme.of(context).textTheme.headline1.color,
+                        color: Theme.of(context).cardColor,
                         width: _gifWidth,
                         height: double.parse(gif.images.fixedWidth.height) *
                             (_gifWidth /
@@ -166,10 +166,12 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
                         height: double.parse(gif.images.fixedWidth.height) *
                             (_gifWidth /
                                 double.parse(gif.images.fixedWidth.width)),
-                        fit: BoxFit.fill,
+                        fit: widget.type == GiphyType.gifs
+                            ? BoxFit.fill
+                            : BoxFit.fitWidth,
                       ),
                       LoadState.failed: Container(
-                        color: Theme.of(context).textTheme.headline1.color,
+                        color: Theme.of(context).cardColor,
                         width: _gifWidth,
                         height: double.parse(gif.images.fixedWidth.height) *
                             (_gifWidth /
@@ -177,7 +179,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
                       ),
                     },
                     Container(
-                      color: Theme.of(context).textTheme.headline1.color,
+                      color: Theme.of(context).cardColor,
                       width: _gifWidth,
                       height: double.parse(gif.images.fixedWidth.height) *
                           (_gifWidth /

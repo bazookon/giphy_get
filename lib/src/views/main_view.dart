@@ -12,15 +12,20 @@ class MainView extends StatefulWidget {
   _MainViewState createState() => _MainViewState();
 }
 
-class _MainViewState extends State<MainView> {
+class _MainViewState extends State<MainView> with SingleTickerProviderStateMixin{
   // Scroll Controller
   ScrollController _scrollController;
 
   // Sheet Provider
   SheetProvider _sheetProvider;
 
+  // Tab Controller
+  TabController _tabController;
+
   @override
   void initState() {
+    _tabController = TabController(length: 3, vsync: this);
+
     super.initState();
   }
 
@@ -56,21 +61,12 @@ class _MainViewState extends State<MainView> {
         mainAxisSize: MainAxisSize.min,
         children: [
           SearchAppBar(scrollController: this._scrollController),
-          Expanded(child: _defaultTabController())
+          GiphyTabBar(tabController: _tabController,),
+          Expanded(child: GiphyTabView(
+              tabController: _tabController,
+              scrollController: this._scrollController,
+            ))
         ],
       );
 
-  Widget _defaultTabController() => DefaultTabController(
-        length: 3,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            GiphyTabBar(),
-            Expanded(
-                child: GiphyTabView(
-              scrollController: this._scrollController,
-            ))
-          ],
-        ),
-      );
 }

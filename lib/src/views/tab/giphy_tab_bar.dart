@@ -4,7 +4,8 @@ import 'package:giphy_get/src/providers/tab_provider.dart';
 import 'package:provider/provider.dart';
 
 class GiphyTabBar extends StatefulWidget {
-  const GiphyTabBar({Key key}) : super(key: key);
+  final TabController tabController;
+  const GiphyTabBar({Key key, @required this.tabController}) : super(key: key);
 
   @override
   _GiphyTabBarState createState() => _GiphyTabBarState();
@@ -12,15 +13,43 @@ class GiphyTabBar extends StatefulWidget {
 
 class _GiphyTabBarState extends State<GiphyTabBar> {
   TabProvider _tabProvider;
+  List<Tab> _tabs;
 
   @override
   void initState() {
     super.initState();
+
+    // TabProvider
     _tabProvider = Provider.of<TabProvider>(context, listen: false);
+
+    // Set TabList
+    _tabs = [
+      Tab(
+        text: "GIFs",
+      ),
+      Tab(
+        text: "Stickers",
+      ),
+      Tab(
+        text: "Emoji",
+      ),
+    ];
+
+    //  Listen Tab Controller
+    widget.tabController.addListener(() {
+      _setTabType(widget.tabController.index);
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _setTabType(0);
     });
+  }
+
+  @override
+  void dispose() {
+    //Dispose tabController
+    widget.tabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -34,17 +63,8 @@ class _GiphyTabBarState extends State<GiphyTabBar> {
       labelColor: _tabProvider.tabColor ?? Theme.of(context).accentColor,
       indicatorColor: Colors.transparent,
       indicatorSize: TabBarIndicatorSize.label,
-      tabs: [
-        Tab(
-          text: "GIFs",
-        ),
-        Tab(
-          text: "Stickers",
-        ),
-        Tab(
-          text: "Emoji",
-        ),
-      ],
+      controller: widget.tabController,
+      tabs: _tabs,
       onTap: _setTabType,
     );
   }
@@ -52,15 +72,16 @@ class _GiphyTabBarState extends State<GiphyTabBar> {
   _setTabType(int pos) {
     String _tabType;
     // set Tab Type to provider
-    switch (pos) {
+    switch (widget.tabController.index) {
       case 0:
         _tabType = GiphyType.gifs;
         break;
       case 1:
         _tabType = GiphyType.stickers;
         break;
-      default:
+      case 2:
         _tabType = GiphyType.emoji;
+        break;
     }
     _tabProvider.tabType = _tabType;
   }
