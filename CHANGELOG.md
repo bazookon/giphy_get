@@ -1,3 +1,7 @@
+## [0.9.5] - 2020-09-29
+* Fix scroll focus
+
+
 ## [0.9.4] - 2020-09-29
 * Fix loading gif speed
 
