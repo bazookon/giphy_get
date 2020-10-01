@@ -107,8 +107,8 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
   void dispose() {
     // dispose listener
     // Important
-    _appBarProvider.removeListener(_listenerQuery);
     widget.scrollController.removeListener(_scrollListener);
+    _appBarProvider.removeListener(_listenerQuery);
     super.dispose();
   }
 

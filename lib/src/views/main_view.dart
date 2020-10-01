@@ -12,7 +12,8 @@ class MainView extends StatefulWidget {
   _MainViewState createState() => _MainViewState();
 }
 
-class _MainViewState extends State<MainView> with SingleTickerProviderStateMixin{
+class _MainViewState extends State<MainView>
+    with SingleTickerProviderStateMixin {
   // Scroll Controller
   ScrollController _scrollController;
 
@@ -24,14 +25,15 @@ class _MainViewState extends State<MainView> with SingleTickerProviderStateMixin
 
   @override
   void initState() {
-    _tabController = TabController(length: 3, vsync: this);
-
     super.initState();
+
+    _sheetProvider = Provider.of<SheetProvider>(context, listen: false);
+
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
   void didChangeDependencies() {
-    _sheetProvider = Provider.of<SheetProvider>(context);
     super.didChangeDependencies();
   }
 
@@ -46,11 +48,10 @@ class _MainViewState extends State<MainView> with SingleTickerProviderStateMixin
   }
 
   Widget _draggableScrollableSheet() => DraggableScrollableSheet(
-      key: Key("${_sheetProvider.initialExtent}"),
       expand: _sheetProvider.isExpanded,
       minChildSize: SheetProvider.minExtent,
       maxChildSize: SheetProvider.maxExtent,
-      initialChildSize: _sheetProvider.initialExtent,
+      initialChildSize: SheetProvider.maxExtent,
       builder: (ctx, scrollController) {
         // Set ScrollController
         this._scrollController = scrollController;
@@ -61,12 +62,14 @@ class _MainViewState extends State<MainView> with SingleTickerProviderStateMixin
         mainAxisSize: MainAxisSize.min,
         children: [
           SearchAppBar(scrollController: this._scrollController),
-          GiphyTabBar(tabController: _tabController,),
-          Expanded(child: GiphyTabView(
-              tabController: _tabController,
-              scrollController: this._scrollController,
-            ))
+          GiphyTabBar(
+            tabController: _tabController,
+          ),
+          Expanded(
+              child: GiphyTabView(
+            tabController: _tabController,
+            scrollController: this._scrollController,
+          ))
         ],
       );
-
 }

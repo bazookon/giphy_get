@@ -32,14 +32,13 @@ class _SearchAppBarState extends State<SearchAppBar> {
 
   @override
   void initState() {
-    super.initState();
-
-    _focus..addListener(_focusListener);
+    _focus.addListener(_focusListener);
 
     // Listener TextField
     _textEditingController.addListener(() {
       _appBarProvider.queryText = _textEditingController.text;
     });
+    super.initState();
   }
 
   @override
@@ -84,9 +83,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
             color: Theme.of(context).textTheme.bodyText1.color,
           ),
           _tabProvider.tabType == GiphyType.emoji
-              ? Container(
-                height: 40.0,
-                child: _giphyLogo())
+              ? Container(height: 40.0, child: _giphyLogo())
               : Container(
                   decoration: BoxDecoration(
                       color: (Theme.of(context).brightness == Brightness.light)
