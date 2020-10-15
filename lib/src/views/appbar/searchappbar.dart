@@ -26,23 +26,42 @@ class _SearchAppBarState extends State<SearchAppBar> {
   SheetProvider _sheetProvider;
 
   // Input controller
-  TextEditingController _textEditingController = new TextEditingController();
+  final TextEditingController _textEditingController =
+      new TextEditingController();
   // Input Focus
-  FocusNode _focus = new FocusNode();
+  final FocusNode _focus = new FocusNode();
+
+  //Colors
+  Color _canvasColor;
+  Color _searchBackgroundColor;
+
+  //Is DarkMode
+  bool _isDarkMode;
 
   @override
   void initState() {
+    // Focus
     _focus.addListener(_focusListener);
 
     // Listener TextField
     _textEditingController.addListener(() {
-      _appBarProvider.queryText = _textEditingController.text;
+      if (_textEditingController.text.isNotEmpty) {
+        _appBarProvider.queryText = _textEditingController.text;
+      }
     });
+
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
+    //Colors
+    _canvasColor = Theme.of(context).canvasColor;
+    _searchBackgroundColor = Theme.of(context).textTheme.bodyText1.color;
+
+    //Is DarkMode
+    _isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     // Providers
     _tabProvider = Provider.of<TabProvider>(context);
 
@@ -65,7 +84,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Theme.of(context).canvasColor,
+      backgroundColor: _canvasColor,
       elevation: 0.0,
       titleSpacing: 10.0,
       automaticallyImplyLeading: false,
@@ -80,15 +99,13 @@ class _SearchAppBarState extends State<SearchAppBar> {
             margin: EdgeInsets.symmetric(vertical: 8.0),
             width: 50,
             height: 2,
-            color: Theme.of(context).textTheme.bodyText1.color,
+            color: _searchBackgroundColor,
           ),
           _tabProvider.tabType == GiphyType.emoji
               ? Container(height: 40.0, child: _giphyLogo())
               : Container(
                   decoration: BoxDecoration(
-                      color: (Theme.of(context).brightness == Brightness.light)
-                          ? Colors.grey[300]
-                          : Colors.white,
+                      color: _isDarkMode ? Colors.white : Colors.grey[300],
                       borderRadius: BorderRadius.circular(8.0)),
                   height: 40.0,
                   child: Center(

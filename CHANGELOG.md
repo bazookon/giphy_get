@@ -1,3 +1,6 @@
+## [1.0.0] - 2020-10-15
+* Fix rebuild gifs on textfield focus
+
 ## [0.9.5] - 2020-09-29
 * Fix scroll focus
 

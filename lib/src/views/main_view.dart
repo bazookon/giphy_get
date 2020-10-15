@@ -27,13 +27,13 @@ class _MainViewState extends State<MainView>
   void initState() {
     super.initState();
 
-    _sheetProvider = Provider.of<SheetProvider>(context, listen: false);
-
     _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
   void didChangeDependencies() {
+    _sheetProvider = Provider.of<SheetProvider>(context, listen: false);
+
     super.didChangeDependencies();
   }
 
@@ -51,9 +51,10 @@ class _MainViewState extends State<MainView>
       expand: _sheetProvider.isExpanded,
       minChildSize: SheetProvider.minExtent,
       maxChildSize: SheetProvider.maxExtent,
-      initialChildSize: SheetProvider.maxExtent,
+      initialChildSize: _sheetProvider.initialExtent,
       builder: (ctx, scrollController) {
         // Set ScrollController
+
         this._scrollController = scrollController;
         return _bottomSheetBody();
       });
