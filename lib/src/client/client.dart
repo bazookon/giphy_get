@@ -103,6 +103,9 @@ class GiphyClient {
   Future<GiphyGif> byId(String id) async =>
       _fetchGif(baseUri.replace(path: 'v1/gifs/$id'));
 
+  Future<String> getRandomId() async =>
+      _getRandomId(baseUri.replace(path: 'v1/randomid'));
+
   Future<GiphyGif> _fetchGif(Uri uri) async {
     final response = await _getWithAuthorization(uri);
 
@@ -115,6 +118,12 @@ class GiphyClient {
 
     return GiphyCollection.fromJson(
         json.decode(response.body) as Map<String, dynamic>);
+  }
+
+  Future<String> _getRandomId(Uri uri) async {
+    final response = await _getWithAuthorization(uri);
+    var decoded = json.decode(response.body);
+    return decoded["data"]["random_id"];
   }
 
   Future<Response> _getWithAuthorization(Uri uri) async {

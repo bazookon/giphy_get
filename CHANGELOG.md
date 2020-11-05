@@ -1,3 +1,7 @@
+## [1.0.1] - 2020-11-05
+* Fix min giphy limit 
+* Added get Random ID
+
 ## [1.0.0] - 2020-10-15
 * Fix rebuild gifs on textfield focus
 

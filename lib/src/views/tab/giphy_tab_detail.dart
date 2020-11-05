@@ -95,7 +95,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
 
     // Set vertical max items count
     int _mainAxisCount =
-        ((MediaQuery.of(context).size.height - 20) / _gifWidth).round();
+        ((MediaQuery.of(context).size.height - 30) / _gifWidth).round();
 
     _limit = _crossAxisCount * _mainAxisCount;
 

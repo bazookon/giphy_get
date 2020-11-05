@@ -1,6 +1,6 @@
 # giphy_get
 
-[![pub package](https://img.shields.io/badge/pub-v0.9.2-orange)](https://pub.dev/packages/giphy_get)
+[![pub package](https://img.shields.io/badge/pub-v1.0.1-orange)](https://pub.dev/packages/giphy_get)
 [![pub package](https://img.shields.io/badge/platform-flutter-blue.svg)](https://github.com/bazospa)
 
 
@@ -41,9 +41,16 @@ GiphyGif gif = await GiphyGet.getGif(
 | ---------|-------------|--------------------|--------------- |
 | `lang` | String | Use [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) language code or use GiphyLanguage constants | `GiphyLanguage.english` | 
 | `randomID` | String | An ID/proxy for a specific user.  |  `null`  | 
-| `searchText` | String | Input search hint, we recomend use [flutter_18n pcakage](https://pub.dev/packages/flutter_i18n) for translation   |  `"Search GIPHY"`  | 
+| `searchText` | String | Input search hint, we recomend use [flutter_18n package](https://pub.dev/packages/flutter_i18n) for translation   |  `"Search GIPHY"`  | 
 | `tabColor` | Color | Color for tabs and loading progress,    |  `Theme.of(context).accentColor`  | 
 
+### [Get Random ID](https://developers.giphy.com/docs/api/endpoint#random-id)
+```dart
+
+GiphyClient giphyClient = GiphyClient(apiKey: "YOUR API KEY");
+String randomId = await giphyClient.getRandomId();
+
+```
 
 
 ## Contrib

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:giphy_get/giphy_get.dart';
 import 'package:giphy_get_demo/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  await DotEnv().load('.env');
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
         create: (ctx) => ThemeProvider(currentTheme: ThemeMode.system))
@@ -45,9 +47,26 @@ class _MyHomePageState extends State<MyHomePage> {
   //Gif
   GiphyGif currentGif;
 
+  // Giphy Client
+  GiphyClient client;
+
+  // Random ID
+  String randomId = "";
+
+  String giphy_api_key = DotEnv().env["giphy_api_key"];
+
   @override
   void initState() {
     super.initState();
+
+    client = GiphyClient(apiKey: giphy_api_key);
+    initAsync();
+  }
+
+  initAsync() {
+    setState(() async {
+      randomId = await client.getRandomId();
+    });
   }
 
   @override
@@ -88,6 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               height: 20,
             ),
+            Text("Random ID: $randomId"),
             Text(
               "Selected GIF",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -108,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () async {
             GiphyGif gif = await GiphyGet.getGif(
               context: context,
-              apiKey: "Your API KEY",
+              apiKey: giphy_api_key, //YOUR API KEY HERE
               lang: GiphyLanguage.spanish,
             );
             if (gif != null && mounted) {
@@ -118,7 +138,8 @@ class _MyHomePageState extends State<MyHomePage> {
             }
           },
           tooltip: 'Open Sticker',
-          child: Icon(Icons.insert_emoticon)), // This trailing comma makes auto-formatting nicer for build methods.
+          child: Icon(Icons
+              .insert_emoticon)), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
