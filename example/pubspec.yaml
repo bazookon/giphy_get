@@ -14,7 +14,7 @@ dependencies:
   giphy_get:
     path: ../
 
-  provider: ^4.3.2
+  provider: ^5.0.0-nullsafety.2
 
 dev_dependencies:
   flutter_test:

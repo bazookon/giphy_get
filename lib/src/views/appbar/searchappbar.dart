@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:giphy_get/src/client/models/type.dart';
 import 'package:giphy_get/src/providers/app_bar_provider.dart';
@@ -136,11 +137,16 @@ class _SearchAppBarState extends State<SearchAppBar> {
     return Center(
         child: Image.asset(
       "$basePath$logoPath",
+      width: 100.0,
       package: 'giphy_get',
     ));
   }
 
-  Widget _searchIcon() => ShaderMask(
+  Widget _searchIcon() {
+    if (kIsWeb) {
+      return Icon(Icons.search);
+    } else {
+      return ShaderMask(
         shaderCallback: (bounds) => LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -150,6 +156,8 @@ class _SearchAppBarState extends State<SearchAppBar> {
             ]).createShader(bounds),
         child: Icon(Icons.search),
       );
+    }
+  }
 
   void _focusListener() {
     // Set to max extent height if Textfield has focus

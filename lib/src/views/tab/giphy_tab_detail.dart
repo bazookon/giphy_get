@@ -132,7 +132,6 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
           itemBuilder: (ctx, idx) {
             GiphyGif _gif = _list[idx];
             if (_gif == null) return Container();
-
             return _item(_gif);
           },
           staggeredTileBuilder: (idx) => StaggeredTile.fit(1)),

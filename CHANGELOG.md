@@ -1,3 +1,7 @@
+## [1.1.0] - 2020-11-05
+* Upgrade Dependencies
+* Added Web support
+
 ## [1.0.1] - 2020-11-05
 * Fix min giphy limit 
 * Added get Random ID

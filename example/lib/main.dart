@@ -60,7 +60,9 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
 
     client = GiphyClient(apiKey: giphy_api_key);
-    initAsync();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      initAsync();
+    });
   }
 
   initAsync() {
