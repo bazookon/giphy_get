@@ -122,7 +122,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.1.0"
+    version: "2.0.0-nullsafety.0"
   http:
     dependency: transitive
     description:
@@ -248,7 +248,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.0-nullsafety.2"
+    version: "5.0.0-nullsafety.3"
   sky_engine:
     dependency: transitive
     description: flutter

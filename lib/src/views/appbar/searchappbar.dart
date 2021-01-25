@@ -10,7 +10,7 @@ class SearchAppBar extends StatefulWidget {
   // Scroll Controller
   final ScrollController scrollController;
 
-  SearchAppBar({Key key, this.scrollController}) : super(key: key);
+  SearchAppBar({Key? key, required this.scrollController}) : super(key: key);
 
   @override
   _SearchAppBarState createState() => _SearchAppBarState();
@@ -18,13 +18,13 @@ class SearchAppBar extends StatefulWidget {
 
 class _SearchAppBarState extends State<SearchAppBar> {
   // Tab Provider
-  TabProvider _tabProvider;
+  late TabProvider _tabProvider;
 
   // AppBar Provider
-  AppBarProvider _appBarProvider;
+  late AppBarProvider _appBarProvider;
 
   // Sheet Provider
-  SheetProvider _sheetProvider;
+  late SheetProvider _sheetProvider;
 
   // Input controller
   final TextEditingController _textEditingController =
@@ -33,11 +33,11 @@ class _SearchAppBarState extends State<SearchAppBar> {
   final FocusNode _focus = new FocusNode();
 
   //Colors
-  Color _canvasColor;
-  Color _searchBackgroundColor;
+  late Color _canvasColor;
+  late Color _searchBackgroundColor;
 
   //Is DarkMode
-  bool _isDarkMode;
+  late bool _isDarkMode;
 
   @override
   void initState() {
@@ -58,7 +58,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
   void didChangeDependencies() {
     //Colors
     _canvasColor = Theme.of(context).canvasColor;
-    _searchBackgroundColor = Theme.of(context).textTheme.bodyText1.color;
+    _searchBackgroundColor = Theme.of(context).textTheme.bodyText1!.color!;
 
     //Is DarkMode
     _isDarkMode = Theme.of(context).brightness == Brightness.dark;
@@ -152,7 +152,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
             end: Alignment.bottomRight,
             colors: [
               Colors.pinkAccent,
-              Colors.purple[700],
+              Colors.purple[700]!,
             ]).createShader(bounds),
         child: Icon(Icons.search),
       );

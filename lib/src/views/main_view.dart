@@ -6,7 +6,7 @@ import 'package:giphy_get/src/views/tab/giphy_tab_view.dart';
 import 'package:provider/provider.dart';
 
 class MainView extends StatefulWidget {
-  MainView({Key key}) : super(key: key);
+  MainView({Key? key}) : super(key: key);
 
   @override
   _MainViewState createState() => _MainViewState();
@@ -15,13 +15,13 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView>
     with SingleTickerProviderStateMixin {
   // Scroll Controller
-  ScrollController _scrollController;
+  late ScrollController _scrollController;
 
   // Sheet Provider
-  SheetProvider _sheetProvider;
+  late SheetProvider _sheetProvider;
 
   // Tab Controller
-  TabController _tabController;
+  late TabController _tabController;
 
   @override
   void initState() {

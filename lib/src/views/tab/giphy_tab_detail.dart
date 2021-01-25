@@ -8,12 +8,13 @@ import 'package:giphy_get/src/client/models/gif.dart';
 import 'package:giphy_get/src/client/models/type.dart';
 import 'package:giphy_get/src/providers/app_bar_provider.dart';
 import 'package:giphy_get/src/providers/tab_provider.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 class GiphyTabDetail extends StatefulWidget {
   final String type;
   final ScrollController scrollController;
-  GiphyTabDetail({Key key, @required this.type, this.scrollController})
+  GiphyTabDetail({Key? key, required this.type, required this.scrollController})
       : super(key: key);
 
   @override
@@ -22,31 +23,31 @@ class GiphyTabDetail extends StatefulWidget {
 
 class _GiphyTabDetailState extends State<GiphyTabDetail> {
   // Tab Provider
-  TabProvider _tabProvider;
+  late TabProvider _tabProvider;
 
   // AppBar Provider
-  AppBarProvider _appBarProvider;
+  late AppBarProvider _appBarProvider;
 
   // Collection
-  GiphyCollection _collection;
+  GiphyCollection? _collection;
 
   // List of gifs
   List<GiphyGif> _list = [];
 
   // Direction
-  Axis _scrollDirection;
+  final Axis _scrollDirection = Axis.vertical;
 
   // Axis count
-  int _crossAxisCount;
+  late int _crossAxisCount;
 
   // Spacing between gifs in grid
   double _spacing = 8.0;
 
   // Default gif with
-  double _gifWidth;
+  late double _gifWidth;
 
   // Limit of query
-  int _limit;
+  late int _limit;
 
   // is Loading gifs
   bool _isLoading = false;
@@ -60,9 +61,6 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
 
     // AppBar Provider
     _appBarProvider = Provider.of<AppBarProvider>(context, listen: false);
-
-    // GridOptions
-    _scrollDirection = Axis.vertical;
 
     // Gif WIDTH
     switch (widget.type) {
@@ -78,17 +76,17 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
       default:
         break;
     }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
 
     // ScrollController
     widget.scrollController..addListener(_scrollListener);
 
     // Listen query
     _appBarProvider.addListener(_listenerQuery);
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
 
     // Set items count responsive
     _crossAxisCount = (MediaQuery.of(context).size.width / _gifWidth).round();
@@ -131,7 +129,6 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
           crossAxisSpacing: _spacing,
           itemBuilder: (ctx, idx) {
             GiphyGif _gif = _list[idx];
-            if (_gif == null) return Container();
             return _item(_gif);
           },
           staggeredTileBuilder: (idx) => StaggeredTile.fit(1)),
@@ -143,47 +140,52 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         borderRadius: BorderRadius.circular(10.0),
         child: InkWell(
             onTap: () => _selectedGif(gif),
-            child: ExtendedImage.network(gif.images.fixedWidth.webp,
+            child: ExtendedImage.network(gif.images?.fixedWidth.webp,
                 cache: true,
                 fit: BoxFit.fill,
                 headers: {'accept': 'image/*'}, loadStateChanged: (state) {
               return AnimatedSwitcher(
                 duration: const Duration(milliseconds: 350),
-                child: case2(
-                    state.extendedImageLoadState,
-                    {
-                      LoadState.loading: Container(
-                        color: Theme.of(context).cardColor,
-                        width: _gifWidth,
-                        height: double.parse(gif.images.fixedWidth.height) *
-                            (_gifWidth /
-                                double.parse(gif.images.fixedWidth.width)),
-                      ),
-                      LoadState.completed: ExtendedRawImage(
-                        image: state.extendedImageInfo?.image,
-                        width: _gifWidth,
-                        height: double.parse(gif.images.fixedWidth.height) *
-                            (_gifWidth /
-                                double.parse(gif.images.fixedWidth.width)),
-                        fit: widget.type == GiphyType.gifs
-                            ? BoxFit.fill
-                            : BoxFit.fitWidth,
-                      ),
-                      LoadState.failed: Container(
-                        color: Theme.of(context).cardColor,
-                        width: _gifWidth,
-                        height: double.parse(gif.images.fixedWidth.height) *
-                            (_gifWidth /
-                                double.parse(gif.images.fixedWidth.width)),
-                      ),
-                    },
-                    Container(
-                      color: Theme.of(context).cardColor,
-                      width: _gifWidth,
-                      height: double.parse(gif.images.fixedWidth.height) *
-                          (_gifWidth /
-                              double.parse(gif.images.fixedWidth.width)),
-                    )),
+                child: gif.images == null
+                    ? Container()
+                    : case2(
+                        state.extendedImageLoadState,
+                        {
+                          LoadState.loading: Container(
+                            color: Theme.of(context).cardColor,
+                            width: _gifWidth,
+                            height: double.parse(
+                                    gif.images!.fixedWidth.height) *
+                                (_gifWidth /
+                                    double.parse(gif.images!.fixedWidth.width)),
+                          ),
+                          LoadState.completed: ExtendedRawImage(
+                            image: state.extendedImageInfo?.image,
+                            width: _gifWidth,
+                            height: double.parse(
+                                    gif.images!.fixedWidth.height) *
+                                (_gifWidth /
+                                    double.parse(gif.images!.fixedWidth.width)),
+                            fit: widget.type == GiphyType.gifs
+                                ? BoxFit.fill
+                                : BoxFit.fitWidth,
+                          ),
+                          LoadState.failed: Container(
+                            color: Theme.of(context).cardColor,
+                            width: _gifWidth,
+                            height: double.parse(
+                                    gif.images!.fixedWidth.height) *
+                                (_gifWidth /
+                                    double.parse(gif.images!.fixedWidth.width)),
+                          ),
+                        },
+                        Container(
+                          color: Theme.of(context).cardColor,
+                          width: _gifWidth,
+                          height: double.parse(gif.images!.fixedWidth.height) *
+                              (_gifWidth /
+                                  double.parse(gif.images!.fixedWidth.width)),
+                        )),
               );
             })));
   }
@@ -200,9 +202,12 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         apiKey: _tabProvider.apiKey, randomId: _tabProvider.randomID);
 
     // Offset pagination for query
-    int offset = _collection == null
-        ? 0
-        : _collection.pagination.offset + _collection.pagination.count;
+    int offset;
+    if (_collection == null) {
+      offset = 0;
+    } else {
+      offset = _collection!.pagination!.offset + _collection!.pagination!.count;
+    }
 
     // Get Gif or Emoji
     if (widget.type == GiphyType.emoji) {
@@ -228,9 +233,9 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
     }
 
     // Set result to list
-    if (_collection.data.isNotEmpty && mounted) {
+    if (_collection!.data!.isNotEmpty && mounted) {
       setState(() {
-        _list.addAll(_collection.data);
+        _list.addAll(_collection!.data!);
       });
     }
 
@@ -261,10 +266,10 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
     _loadMore();
   }
 
-  TValue case2<TOptionType, TValue>(
+  TValue? case2<TOptionType, TValue>(
     TOptionType selectedOption,
     Map<TOptionType, TValue> branches, [
-    TValue defaultValue = null,
+    TValue? defaultValue = null,
   ]) {
     if (!branches.containsKey(selectedOption)) {
       return defaultValue;

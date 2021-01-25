@@ -7,7 +7,8 @@ class GiphyTabView extends StatelessWidget {
   final ScrollController scrollController;
   final TabController tabController;
 
-  const GiphyTabView({Key key, @required this.scrollController,this.tabController})
+  const GiphyTabView(
+      {Key? key, required this.scrollController, required this.tabController})
       : super(key: key);
 
   @override
@@ -18,6 +19,7 @@ class GiphyTabView extends StatelessWidget {
         GiphyTabDetail(
           type: GiphyType.gifs,
           scrollController: scrollController,
+          key: null,
         ),
         GiphyTabDetail(
           type: GiphyType.stickers,

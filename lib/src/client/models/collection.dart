@@ -1,20 +1,17 @@
-
 import 'package:giphy_get/src/client/models/gif.dart';
 
 class GiphyCollection {
-  final List<GiphyGif> data;
-  final GiphyPagination pagination;
-  final GiphyMeta meta;
+  List<GiphyGif>? data;
+  GiphyPagination? pagination;
+  GiphyMeta? meta;
 
   GiphyCollection({this.data, this.pagination, this.meta});
 
   factory GiphyCollection.fromJson(Map<String, dynamic> json) =>
       GiphyCollection(
-          data: (json['data'] as List)
-              ?.map((e) => e == null
-                  ? null
-                  : GiphyGif.fromJson(e as Map<String, dynamic>))
-              ?.toList(),
+          data: json.containsKey('data')
+              ? (json['data'] as List).map((e) => GiphyGif.fromJson(e)).toList()
+              : null,
           pagination: json['pagination'] == null
               ? null
               : GiphyPagination.fromJson(
@@ -49,7 +46,8 @@ class GiphyPagination {
   final int count;
   final int offset;
 
-  GiphyPagination({this.totalCount, this.count, this.offset});
+  GiphyPagination(
+      {required this.totalCount, required this.count, required this.offset});
 
   factory GiphyPagination.fromJson(Map<String, dynamic> json) =>
       GiphyPagination(
@@ -89,7 +87,8 @@ class GiphyMeta {
 
   final String responseId;
 
-  GiphyMeta({this.status, this.msg, this.responseId});
+  GiphyMeta(
+      {required this.status, required this.msg, required this.responseId});
 
   factory GiphyMeta.fromJson(Map<String, dynamic> json) => GiphyMeta(
       status: json['status'] as int,

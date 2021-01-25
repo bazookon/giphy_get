@@ -5,15 +5,15 @@ import 'package:provider/provider.dart';
 
 class GiphyTabBar extends StatefulWidget {
   final TabController tabController;
-  const GiphyTabBar({Key key, @required this.tabController}) : super(key: key);
+  const GiphyTabBar({Key? key, required this.tabController}) : super(key: key);
 
   @override
   _GiphyTabBarState createState() => _GiphyTabBarState();
 }
 
 class _GiphyTabBarState extends State<GiphyTabBar> {
-  TabProvider _tabProvider;
-  List<Tab> _tabs;
+  late TabProvider _tabProvider;
+  late List<Tab> _tabs;
 
   @override
   void initState() {
@@ -40,7 +40,7 @@ class _GiphyTabBarState extends State<GiphyTabBar> {
       _setTabType(widget.tabController.index);
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       _setTabType(0);
     });
   }
@@ -79,7 +79,7 @@ class _GiphyTabBarState extends State<GiphyTabBar> {
       case 1:
         _tabType = GiphyType.stickers;
         break;
-      case 2:
+      default:
         _tabType = GiphyType.emoji;
         break;
     }

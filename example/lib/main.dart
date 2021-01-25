@@ -59,15 +59,13 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
-    client = GiphyClient(apiKey: giphy_api_key);
+    client = GiphyClient(apiKey: giphy_api_key, randomId: '');
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      initAsync();
-    });
-  }
-
-  initAsync() {
-    setState(() async {
-      randomId = await client.getRandomId();
+      client.getRandomId().then((value) {
+        setState(() {
+          randomId = value;
+        });
+      });
     });
   }
 

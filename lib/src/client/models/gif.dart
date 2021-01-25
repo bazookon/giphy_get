@@ -2,46 +2,46 @@ import 'package:giphy_get/src/client/models/images.dart';
 import 'package:giphy_get/src/client/models/user.dart';
 
 class GiphyGif {
-  final String title;
-  final String type;
-  final String id;
-  final String slug;
-  final String url;
-  final String bitlyGifUrl;
-  final String bitlyUrl;
-  final String embedUrl;
-  final String username;
-  final String source;
-  final String rating;
-  final String contentUrl;
-  final String sourceTld;
-  final String sourcePostUrl;
-  final int isSticker;
-  final DateTime importDatetime;
-  final DateTime trendingDatetime;
-  final GiphyUser user;
-  final GiphyImages images;
+  String? title;
+  String? type;
+  String? id;
+  String? slug;
+  String? url;
+  String? bitlyGifUrl;
+  String? bitlyUrl;
+  String? embedUrl;
+  String? username;
+  String? source;
+  String? rating;
+  String? contentUrl;
+  String? sourceTld;
+  String? sourcePostUrl;
+  int? isSticker;
+  DateTime? importDatetime;
+  DateTime? trendingDatetime;
+  GiphyUser? user;
+  GiphyImages? images;
 
   GiphyGif({
-    this.title,
-    this.type,
-    this.id,
-    this.slug,
-    this.url,
-    this.bitlyGifUrl,
-    this.bitlyUrl,
-    this.embedUrl,
-    this.username,
-    this.source,
-    this.rating,
-    this.contentUrl,
-    this.sourceTld,
-    this.sourcePostUrl,
-    this.isSticker,
-    this.importDatetime,
-    this.trendingDatetime,
-    this.user,
-    this.images,
+    required this.title,
+    required this.type,
+    required this.id,
+    required this.slug,
+    required this.url,
+    required this.bitlyGifUrl,
+    required this.bitlyUrl,
+    required this.embedUrl,
+    required this.username,
+    required this.source,
+    required this.rating,
+    required this.contentUrl,
+    required this.sourceTld,
+    required this.sourcePostUrl,
+    required this.isSticker,
+    required this.importDatetime,
+    required this.trendingDatetime,
+    required this.user,
+    required this.images,
   });
 
   factory GiphyGif.fromJson(Map<String, dynamic> json) => GiphyGif(
@@ -60,18 +60,10 @@ class GiphyGif {
       sourceTld: json['source_tld'] as String,
       sourcePostUrl: json['source_post_url'] as String,
       isSticker: json['is_sticker'] as int,
-      importDatetime: json['import_datetime'] == null
-          ? null
-          : DateTime.parse(json['import_datetime'] as String),
-      trendingDatetime: json['trending_datetime'] == null
-          ? null
-          : DateTime.parse(json['trending_datetime'] as String),
-      user: json['user'] == null
-          ? null
-          : GiphyUser.fromJson(json['user'] as Map<String, dynamic>),
-      images: json['images'] == null
-          ? null
-          : GiphyImages.fromJson(json['images'] as Map<String, dynamic>));
+      importDatetime: DateTime.parse(json['import_datetime'] as String),
+      trendingDatetime: DateTime.parse(json['trending_datetime'] as String),
+      user: GiphyUser.fromJson(json['user'] as Map<String, dynamic>),
+      images: GiphyImages.fromJson(json['images'] as Map<String, dynamic>));
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{

@@ -1,6 +1,5 @@
 library giphy_get;
 
-
 // Imports
 import 'package:flutter/material.dart';
 import 'package:giphy_get/src/client/models/gif.dart';
@@ -11,7 +10,6 @@ import 'package:giphy_get/src/providers/sheet_provider.dart';
 import 'package:giphy_get/src/views/main_view.dart';
 import 'package:giphy_get/src/providers/tab_provider.dart';
 import 'package:provider/provider.dart';
-
 
 // Giphy Client Export
 export 'package:giphy_get/src/client/client.dart';
@@ -25,17 +23,16 @@ export 'package:giphy_get/src/client/models/user.dart';
 export 'package:giphy_get/src/client/models/type.dart';
 
 class GiphyGet {
-
   // Show Bottom Sheet
-  static Future<GiphyGif> getGif({
-    @required BuildContext context,
-    @required String apiKey,
+  static Future<GiphyGif?> getGif({
+    required BuildContext context,
+    required String apiKey,
     String rating = GiphyRating.g,
     String lang = GiphyLanguage.english,
     String randomID = "",
     String searchText = "Search GIPHY",
     bool modal = true,
-    Color tabColor,
+    Color? tabColor,
   }) =>
       showModalBottomSheet<GiphyGif>(
           clipBehavior: Clip.antiAlias,

@@ -1,22 +1,22 @@
 class GiphyUser {
-  final String avatarUrl;
-  final String bannerUrl;
-  final String profileUrl;
-  final String username;
-  final String displayName;
-  final String twitter;
-  final String guid;
-  final String metadataDescription;
-  final String attributionDisplayName;
-  final String name;
-  final String description;
-  final String facebookUrl;
-  final String twitterUrl;
-  final String instagramUrl;
-  final String tumblrUrl;
-  final bool suppressChrome;
-  final String websiteUrl;
-  final String websiteDisplayUrl;
+  String? avatarUrl;
+  String? bannerUrl;
+  String? profileUrl;
+  String? username;
+  String? displayName;
+  String? twitter;
+  String? guid;
+  String? metadataDescription;
+  String? attributionDisplayName;
+  String? name;
+  String? description;
+  String? facebookUrl;
+  String? twitterUrl;
+  String? instagramUrl;
+  String? tumblrUrl;
+  bool? suppressChrome;
+  String? websiteUrl;
+  String? websiteDisplayUrl;
 
   GiphyUser({
     this.avatarUrl,
@@ -39,26 +39,59 @@ class GiphyUser {
     this.websiteDisplayUrl,
   });
 
-  factory GiphyUser.fromJson(Map<String, dynamic> json) {
+  factory GiphyUser.fromJson(Map<String, dynamic>? json) {
     return GiphyUser(
-      avatarUrl: json['avatar_url'] as String,
-      bannerUrl: json['banner_url'] as String,
-      profileUrl: json['profile_url'] as String,
-      username: json['username'] as String,
-      displayName: json['display_name'] as String,
-      twitter: json['twitter'] as String,
-      guid: json['guid'] as String,
-      metadataDescription: json['metadata_description'] as String,
-      attributionDisplayName: json['attribution_display_name'] as String,
-      name: json['name'] as String,
-      description: json['description'] as String,
-      facebookUrl: json['facebook_url'] as String,
-      twitterUrl: json['twitter_url'] as String,
-      instagramUrl: json['instagram_url'] as String,
-      tumblrUrl: json['tumblr_url'] as String,
-      suppressChrome: json['suppress_chrome'] as bool,
-      websiteUrl: json['website_url'] as String,
-      websiteDisplayUrl: json['website_display_url'] as String,
+      avatarUrl: json != null && json.containsKey('avatar_url')
+          ? json['avatar_url']
+          : null,
+      bannerUrl: json != null && json.containsKey('banner_url')
+          ? json['banner_url']
+          : null,
+      profileUrl: json != null && json.containsKey('profile_url')
+          ? json['profile_url']
+          : null,
+      username: json != null && json.containsKey('username')
+          ? json['username']
+          : null,
+      displayName: json != null && json.containsKey('display_name')
+          ? json['display_name']
+          : null,
+      twitter:
+          json != null && json.containsKey('twitter') ? json['twitter'] : null,
+      guid: json != null && json.containsKey('guid') ? json['guid'] : null,
+      metadataDescription:
+          json != null && json.containsKey('metadata_description')
+              ? json['metadata_description']
+              : null,
+      attributionDisplayName:
+          json != null && json.containsKey('attribution_display_name')
+              ? json['attribution_display_name']
+              : null,
+      name: json != null && json.containsKey('name') ? json['name'] : null,
+      description: json != null && json.containsKey('description')
+          ? json['description']
+          : null,
+      facebookUrl: json != null && json.containsKey('facebook_url')
+          ? json['facebook_url']
+          : null,
+      twitterUrl: json != null && json.containsKey('twitter_url')
+          ? json['twitter_url']
+          : null,
+      instagramUrl: json != null && json.containsKey('instagram_url')
+          ? json['instagram_url']
+          : null,
+      tumblrUrl: json != null && json.containsKey('tumblr_url')
+          ? json['tumblr_url']
+          : null,
+      suppressChrome: json != null && json.containsKey('suppress_chrome')
+          ? json['suppress_chrome']
+          : null,
+      websiteUrl: json != null && json.containsKey('website_url')
+          ? json['website_url']
+          : null,
+      websiteDisplayUrl: json != null && json.containsKey('website_display_url')
+          ? json['website_display_url']
+          : null,
     );
   }
 
