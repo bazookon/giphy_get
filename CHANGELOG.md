@@ -1,3 +1,6 @@
+## [1.1.1] - 2021-01-31
+* Fix empty grid
+
 ## [1.1.0] - 2020-11-05
 * Upgrade Dependencies
 * Added Web support
