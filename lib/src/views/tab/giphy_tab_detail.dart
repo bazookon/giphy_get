@@ -8,7 +8,6 @@ import 'package:giphy_get/src/client/models/gif.dart';
 import 'package:giphy_get/src/client/models/type.dart';
 import 'package:giphy_get/src/providers/app_bar_provider.dart';
 import 'package:giphy_get/src/providers/tab_provider.dart';
-import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 class GiphyTabDetail extends StatefulWidget {
@@ -140,54 +139,61 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         borderRadius: BorderRadius.circular(10.0),
         child: InkWell(
             onTap: () => _selectedGif(gif),
-            child: ExtendedImage.network(gif.images?.fixedWidth.webp,
-                cache: true,
-                fit: BoxFit.fill,
-                headers: {'accept': 'image/*'}, loadStateChanged: (state) {
-              return AnimatedSwitcher(
-                duration: const Duration(milliseconds: 350),
-                child: gif.images == null
-                    ? Container()
-                    : case2(
-                        state.extendedImageLoadState,
-                        {
-                          LoadState.loading: Container(
-                            color: Theme.of(context).cardColor,
-                            width: _gifWidth,
-                            height: double.parse(
-                                    gif.images!.fixedWidth.height) *
-                                (_gifWidth /
-                                    double.parse(gif.images!.fixedWidth.width)),
-                          ),
-                          LoadState.completed: ExtendedRawImage(
-                            image: state.extendedImageInfo?.image,
-                            width: _gifWidth,
-                            height: double.parse(
-                                    gif.images!.fixedWidth.height) *
-                                (_gifWidth /
-                                    double.parse(gif.images!.fixedWidth.width)),
-                            fit: widget.type == GiphyType.gifs
-                                ? BoxFit.fill
-                                : BoxFit.fitWidth,
-                          ),
-                          LoadState.failed: Container(
-                            color: Theme.of(context).cardColor,
-                            width: _gifWidth,
-                            height: double.parse(
-                                    gif.images!.fixedWidth.height) *
-                                (_gifWidth /
-                                    double.parse(gif.images!.fixedWidth.width)),
-                          ),
-                        },
-                        Container(
-                          color: Theme.of(context).cardColor,
-                          width: _gifWidth,
-                          height: double.parse(gif.images!.fixedWidth.height) *
-                              (_gifWidth /
-                                  double.parse(gif.images!.fixedWidth.width)),
-                        )),
-              );
-            })));
+            child: gif.images == null
+                ? Container()
+                : ExtendedImage.network(gif.images!.fixedWidth.webp,
+                    cache: true,
+                    fit: BoxFit.fill,
+                    headers: {'accept': 'image/*'}, loadStateChanged: (state) {
+                    return AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 350),
+                      child: gif.images == null
+                          ? Container()
+                          : case2(
+                              state.extendedImageLoadState,
+                              {
+                                LoadState.loading: Container(
+                                  color: Theme.of(context).cardColor,
+                                  width: _gifWidth,
+                                  height: double.parse(
+                                          gif.images!.fixedWidth.height) *
+                                      (_gifWidth /
+                                          double.parse(
+                                              gif.images!.fixedWidth.width)),
+                                ),
+                                LoadState.completed: ExtendedRawImage(
+                                  image: state.extendedImageInfo?.image,
+                                  width: _gifWidth,
+                                  height: double.parse(
+                                          gif.images!.fixedWidth.height) *
+                                      (_gifWidth /
+                                          double.parse(
+                                              gif.images!.fixedWidth.width)),
+                                  fit: widget.type == GiphyType.gifs
+                                      ? BoxFit.fill
+                                      : BoxFit.fitWidth,
+                                ),
+                                LoadState.failed: Container(
+                                  color: Theme.of(context).cardColor,
+                                  width: _gifWidth,
+                                  height: double.parse(
+                                          gif.images!.fixedWidth.height) *
+                                      (_gifWidth /
+                                          double.parse(
+                                              gif.images!.fixedWidth.width)),
+                                ),
+                              },
+                              Container(
+                                color: Theme.of(context).cardColor,
+                                width: _gifWidth,
+                                height: double.parse(
+                                        gif.images!.fixedWidth.height) *
+                                    (_gifWidth /
+                                        double.parse(
+                                            gif.images!.fixedWidth.width)),
+                              )),
+                    );
+                  })));
   }
 
   Future<void> _loadMore() async {

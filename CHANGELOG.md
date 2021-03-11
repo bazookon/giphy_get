@@ -1,3 +1,6 @@
+## [2.0.0-nullsafety.1] - 2021-03-11
+* Null Safety Migration
+
 ## [1.1.1] - 2021-01-31
 * Fix empty grid
 
