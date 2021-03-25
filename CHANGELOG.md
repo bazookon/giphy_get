@@ -1,3 +1,6 @@
+## [2.0.0-nullsafety.2] - 2021-03-24
+* Upgrade Dependencies
+
 ## [2.0.0-nullsafety.1] - 2021-03-11
 * Null Safety Migration
 

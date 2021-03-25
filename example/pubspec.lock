@@ -56,14 +56,14 @@ packages:
       name: extended_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
+    version: "4.0.0"
   extended_image_library:
     dependency: transitive
     description:
       name: extended_image_library
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "3.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -96,7 +96,7 @@ packages:
       name: flutter_dotenv
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "4.0.0-nullsafety.0"
   flutter_staggered_grid_view:
     dependency: transitive
     description:
@@ -115,21 +115,21 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "2.0.0-nullsafety.1"
+    version: "2.0.0-nullsafety.2"
   http:
     dependency: transitive
     description:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.0"
+    version: "0.13.1"
   http_client_helper:
     dependency: transitive
     description:
       name: http_client_helper
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.2"
   http_parser:
     dependency: transitive
     description:

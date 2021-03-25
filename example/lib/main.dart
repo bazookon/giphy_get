@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart'
+    show load, clean, isEveryDefined, env;
 import 'package:giphy_get/giphy_get.dart';
 import 'package:giphy_get_demo/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
-  await DotEnv().load('.env');
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
         create: (ctx) => ThemeProvider(currentTheme: ThemeMode.system))
@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // Random ID
   String randomId = "";
 
-  String giphy_api_key = DotEnv().env["giphy_api_key"];
+  String giphy_api_key = env["giphy_api_key"];
 
   @override
   void initState() {
