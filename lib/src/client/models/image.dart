@@ -20,14 +20,14 @@ class GiphyFullImage {
   });
 
   factory GiphyFullImage.fromJson(Map<String, dynamic> json) => GiphyFullImage(
-      url: json['url'] as String,
-      width: json['width'] as String,
-      height: json['height'] as String,
-      size: json['size'] as String,
-      mp4: json['mp4'] as String,
-      mp4Size: json['mp4_size'] as String,
-      webp: json['webp'] as String,
-      webpSize: json['webp_size'] as String);
+      url: json['url'],
+      width: json['width'],
+      height: json['height'],
+      size: json['size'],
+      mp4: json['mp4'],
+      mp4Size: json['mp4_size'],
+      webp: json['webp'],
+      webpSize: json['webp_size']);
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
@@ -100,16 +100,16 @@ class GiphyOriginalImage {
 
   factory GiphyOriginalImage.fromJson(Map<String, dynamic> json) {
     return GiphyOriginalImage(
-        url: json['url'] as String,
-        width: json['width'] as String,
-        height: json['height'] as String,
-        size: json['size'] as String,
-        frames: json['frames'] as String,
-        mp4: json['mp4'] as String,
-        mp4Size: json['mp4_size'] as String,
-        webp: json['webp'] as String,
-        webpSize: json['webp_size'] as String,
-        hash: json['hash'] as String);
+        url: json['url'],
+        width: json['width'],
+        height: json['height'],
+        size: json['size'],
+        frames: json['frames'],
+        mp4: json['mp4'],
+        mp4Size: json['mp4_size'],
+        webp: json['webp'],
+        webpSize: json['webp_size'],
+        hash: json['hash']);
   }
 
   Map<String, dynamic> toJson() {
@@ -177,10 +177,10 @@ class GiphyStillImage {
 
   factory GiphyStillImage.fromJson(Map<String, dynamic> json) =>
       GiphyStillImage(
-          url: json['url'] as String,
-          width: json['width'] as String,
-          height: json['height'] as String,
-          size: json['size'] as String);
+          url: json['url'],
+          width: json['width'],
+          height: json['height'],
+          size: json['size']);
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
@@ -230,12 +230,12 @@ class GiphyDownsampledImage {
 
   factory GiphyDownsampledImage.fromJson(Map<String, dynamic> json) {
     return GiphyDownsampledImage(
-        url: json['url'] as String,
-        width: json['width'] as String,
-        height: json['height'] as String,
-        size: json['size'] as String,
-        webp: json['webp'] as String,
-        webpSize: json['webp_size'] as String);
+        url: json['url'],
+        width: json['width'],
+        height: json['height'],
+        size: json['size'],
+        webp: json['webp'],
+        webpSize: json['webp_size']);
   }
 
   Map<String, dynamic> toJson() {
@@ -286,8 +286,7 @@ class GiphyLoopingImage {
   });
 
   factory GiphyLoopingImage.fromJson(Map<String, dynamic> json) =>
-      GiphyLoopingImage(
-          mp4: json['mp4'] as String, mp4Size: json['mp4_size'] as String);
+      GiphyLoopingImage(mp4: json['mp4'], mp4Size: json['mp4_size']);
 
   Map<String, dynamic> toJson() =>
       <String, dynamic>{'mp4': mp4, 'mp4_size': mp4Size};
@@ -324,10 +323,10 @@ class GiphyPreviewImage {
 
   factory GiphyPreviewImage.fromJson(Map<String, dynamic> json) {
     return GiphyPreviewImage(
-      width: json['width'] as String,
-      height: json['height'] as String,
-      mp4: json['mp4'] as String,
-      mp4Size: json['mp4_size'] as String,
+      width: json['width'],
+      height: json['height'],
+      mp4: json['mp4'],
+      mp4Size: json['mp4_size'],
     );
   }
 
@@ -375,10 +374,10 @@ class GiphyDownsizedImage {
 
   factory GiphyDownsizedImage.fromJson(Map<String, dynamic> json) {
     return GiphyDownsizedImage(
-      url: json['url'] as String,
-      width: json['width'] as String,
-      height: json['height'] as String,
-      size: json['size'] as String,
+      url: json['url'],
+      width: json['width'],
+      height: json['height'],
+      size: json['size'],
     );
   }
 
@@ -426,10 +425,10 @@ class GiphyWebPImage {
 
   factory GiphyWebPImage.fromJson(Map<String, dynamic> json) {
     return GiphyWebPImage(
-      url: json['url'] as String,
-      width: json['width'] as String,
-      height: json['height'] as String,
-      size: json['size'] as String,
+      url: json['url'],
+      width: json['width'],
+      height: json['height'],
+      size: json['size'],
     );
   }
 

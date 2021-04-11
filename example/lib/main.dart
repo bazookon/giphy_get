@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart'
-    show load, clean, isEveryDefined, env;
+import 'package:flutter_dotenv/flutter_dotenv.dart' show env;
 import 'package:giphy_get/giphy_get.dart';
 import 'package:giphy_get_demo/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await DotEnv.load(fileName: ".env");
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
         create: (ctx) => ThemeProvider(currentTheme: ThemeMode.system))
