@@ -96,14 +96,14 @@ packages:
       name: flutter_dotenv
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.0-nullsafety.0"
+    version: "4.0.0-nullsafety.1"
   flutter_staggered_grid_view:
     dependency: transitive
     description:
       name: flutter_staggered_grid_view
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.0-nullsafety.3"
+    version: "0.4.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -115,14 +115,14 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "2.0.0-nullsafety.3"
+    version: "2.0.0"
   http:
     dependency: transitive
     description:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.1"
+    version: "0.13.2"
   http_client_helper:
     dependency: transitive
     description:

@@ -1,3 +1,7 @@
+## [2.0.0] - 2021-05-01
+* Upgrade Dependencies
+* Fix Null Safety string in Giph class
+
 ## [2.0.0-nullsafety.3] - 2021-04-11
 * Upgrade Dependencies
 * Fix Null Safety string
