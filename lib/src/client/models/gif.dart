@@ -62,7 +62,7 @@ class GiphyGif {
       isSticker: json['is_sticker'] as int,
       importDatetime: DateTime.parse(json['import_datetime']),
       trendingDatetime: DateTime.parse(json['trending_datetime']),
-      user: GiphyUser.fromJson(json['user'] as Map<String, dynamic>),
+      user: GiphyUser.fromJson(json['user'] as Map<String, dynamic>?),
       images: GiphyImages.fromJson(json['images'] as Map<String, dynamic>));
 
   Map<String, dynamic> toJson() {
