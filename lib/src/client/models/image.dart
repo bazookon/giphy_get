@@ -321,12 +321,12 @@ class GiphyPreviewImage {
     required this.mp4Size,
   });
 
-  factory GiphyPreviewImage.fromJson(Map<String, dynamic> json) {
+  factory GiphyPreviewImage.fromJson(Map<String, dynamic?> json) {
     return GiphyPreviewImage(
       width: json['width'],
       height: json['height'],
-      mp4: json['mp4'],
-      mp4Size: json['mp4_size'],
+      mp4: json['mp4'] ?? '',
+      mp4Size: json['mp4_size'] ?? '',
     );
   }
 
