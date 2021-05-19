@@ -175,12 +175,12 @@ class GiphyStillImage {
     required this.size,
   });
 
-  factory GiphyStillImage.fromJson(Map<String, dynamic> json) =>
+  factory GiphyStillImage.fromJson(Map<String, dynamic?> json) =>
       GiphyStillImage(
           url: json['url'],
           width: json['width'],
           height: json['height'],
-          size: json['size']);
+          size: json['size'] ?? '');
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
