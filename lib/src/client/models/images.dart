@@ -58,10 +58,12 @@ class GiphyImages {
       fixedHeightStill: GiphyStillImage.fromJson(json['fixed_height_still']),
       originalStill: GiphyStillImage.fromJson(json['original_still']),
       fixedWidth: GiphyFullImage.fromJson(json['fixed_width']),
-      fixedHeightSmallStill:
-          GiphyStillImage.fromJson(json['fixed_height_small_still']),
-      fixedHeightDownsampled:
-          GiphyDownsampledImage.fromJson(json['fixed_height_downsampled']),
+      fixedHeightSmallStill: json['fixed_height_small_still'] == null
+          ? null
+          : GiphyStillImage.fromJson(json['fixed_height_small_still']),
+      fixedHeightDownsampled: json['fixed_height_downsampled'] == null
+          ? null
+          : GiphyDownsampledImage.fromJson(json['fixed_height_downsampled']),
       preview: json['preview'] == null
           ? null
           : GiphyPreviewImage.fromJson(json['preview']),
