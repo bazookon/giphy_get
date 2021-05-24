@@ -3,10 +3,10 @@ class GiphyFullImage {
   final String width;
   final String height;
   final String size;
-  final String mp4;
-  final String mp4Size;
+  final String? mp4;
+  final String? mp4Size;
   final String webp;
-  final String webpSize;
+  final String? webpSize;
 
   GiphyFullImage({
     required this.url,
@@ -19,7 +19,7 @@ class GiphyFullImage {
     required this.webpSize,
   });
 
-  factory GiphyFullImage.fromJson(Map<String, dynamic> json) => GiphyFullImage(
+  factory GiphyFullImage.fromJson(Map<String, dynamic?> json) => GiphyFullImage(
       url: json['url'],
       width: json['width'],
       height: json['height'],
