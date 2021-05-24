@@ -4,8 +4,8 @@ class GiphyImages {
   GiphyStillImage fixedHeightStill;
   GiphyStillImage originalStill;
   GiphyFullImage fixedWidth;
-  GiphyStillImage fixedHeightSmallStill;
-  GiphyDownsampledImage fixedHeightDownsampled;
+  GiphyStillImage? fixedHeightSmallStill;
+  GiphyDownsampledImage? fixedHeightDownsampled;
   GiphyPreviewImage? preview;
   GiphyFullImage? fixedHeightSmall;
   GiphyStillImage? downsizedStill;
@@ -30,8 +30,8 @@ class GiphyImages {
     required this.fixedHeightStill,
     required this.originalStill,
     required this.fixedWidth,
-    required this.fixedHeightSmallStill,
-    required this.fixedHeightDownsampled,
+    this.fixedHeightSmallStill,
+    this.fixedHeightDownsampled,
     this.preview,
     this.fixedHeightSmall,
     this.downsizedStill,
@@ -53,7 +53,7 @@ class GiphyImages {
     this.w480Still,
   });
 
-  factory GiphyImages.fromJson(Map<String, dynamic> json) {
+  factory GiphyImages.fromJson(Map<String, dynamic?> json) {
     return GiphyImages(
       fixedHeightStill: GiphyStillImage.fromJson(json['fixed_height_still']),
       originalStill: GiphyStillImage.fromJson(json['original_still']),
@@ -125,8 +125,8 @@ class GiphyImages {
       'fixed_height_still': fixedHeightStill.toJson(),
       'original_still': originalStill.toJson(),
       'fixed_width': fixedWidth.toJson(),
-      'fixed_height_small_still': fixedHeightSmallStill.toJson(),
-      'fixed_height_downsampled': fixedHeightDownsampled.toJson(),
+      'fixed_height_small_still': fixedHeightSmallStill?.toJson(),
+      'fixed_height_downsampled': fixedHeightDownsampled?.toJson(),
       'preview': preview?.toJson(),
       'fixed_height_small': fixedHeightSmall?.toJson(),
       'downsized_still': downsizedStill?.toJson(),
