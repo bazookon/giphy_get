@@ -139,9 +139,9 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         borderRadius: BorderRadius.circular(10.0),
         child: InkWell(
             onTap: () => _selectedGif(gif),
-            child: gif.images == null
+            child: gif.images == null || gif.images?.fixedWidth.webp == null
                 ? Container()
-                : ExtendedImage.network(gif.images!.fixedWidth.webp,
+                : ExtendedImage.network(gif.images!.fixedWidth.webp!,
                     cache: true,
                     fit: BoxFit.fill,
                     headers: {'accept': 'image/*'}, loadStateChanged: (state) {
