@@ -4,6 +4,12 @@ A new Flutter project.
 
 ## Getting Started
 
+1. Create a GIPHY API Key on the [Developer Dashboard](https://developers.giphy.com/dashboard/).
+2. Create a ```.env``` file in the root and add your API key.
+```
+giphy_api_key = 'Your API key'
+```
+
 This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
