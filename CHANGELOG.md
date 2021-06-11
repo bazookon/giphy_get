@@ -1,3 +1,6 @@
+## [2.0.2] - 2021-06-10
+* Fix Null Safety Thanks to [TramPamPam](https://github.com/TramPamPam)
+
 ## [2.0.1] - 2021-05-19
 * Fix Null Safety
 
