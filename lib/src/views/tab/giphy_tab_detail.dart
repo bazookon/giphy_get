@@ -143,6 +143,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
                 ? Container()
                 : ExtendedImage.network(gif.images!.fixedWidth.webp!,
                     cache: true,
+                    gaplessPlayback: true,
                     fit: BoxFit.fill,
                     headers: {'accept': 'image/*'}, loadStateChanged: (state) {
                     return AnimatedSwitcher(
