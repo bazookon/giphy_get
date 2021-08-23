@@ -1,6 +1,5 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:giphy_get/giphy_get.dart';
 
 void main() {
   const MethodChannel channel = MethodChannel('giphy_get');

@@ -1,6 +1,6 @@
 # giphy_get
 
-[![pub package](https://img.shields.io/badge/pub-v1.0.1-orange)](https://pub.dev/packages/giphy_get)
+[![pub package](https://img.shields.io/badge/pub-v2.0.3-orange)](https://pub.dev/packages/giphy_get)
 [![pub package](https://img.shields.io/badge/platform-flutter-blue.svg)](https://github.com/bazospa)
 
 
