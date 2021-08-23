@@ -158,8 +158,8 @@ class _SearchAppBarState extends State<SearchAppBar> {
     } else {
       return ShaderMask(
         shaderCallback: (bounds) => LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
             colors: [
               Color(0xFFFF6666),
               Color(0xFF9933FF),
