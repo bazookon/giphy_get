@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:giphy_get/src/client/models/type.dart';
@@ -105,23 +107,31 @@ class _SearchAppBarState extends State<SearchAppBar> {
           _tabProvider.tabType == GiphyType.emoji
               ? Container(height: 40.0, child: _giphyLogo())
               : Container(
-                  decoration: BoxDecoration(
-                      color: _isDarkMode ? Colors.white : Colors.grey[300],
-                      borderRadius: BorderRadius.circular(8.0)),
                   height: 40.0,
                   child: Center(
-                    child: TextField(
-                      autofocus: _sheetProvider.initialExtent ==
-                          SheetProvider.maxExtent,
-                      focusNode: _focus,
-                      controller: _textEditingController,
-                      style: TextStyle(color: Colors.black),
-                      decoration: InputDecoration(
-                          prefixIcon: _searchIcon(),
-                          hintStyle: TextStyle(color: Colors.black45),
-                          hintText: _tabProvider.searchText,
-                          border: InputBorder.none),
-                      autocorrect: false,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: TextField(
+                        autofocus: _sheetProvider.initialExtent ==
+                            SheetProvider.maxExtent,
+                        focusNode: _focus,
+                        controller: _textEditingController,
+                        style: TextStyle(color: Colors.black),
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            prefixIcon: _searchIcon(),
+                            hintStyle: TextStyle(color: Colors.black45),
+                            hintText: _tabProvider.searchText,
+                            contentPadding: EdgeInsets.only(
+                                left: 15, bottom: 10.5, top: 10.5, right: 15),
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            border: InputBorder.none),
+                        autocorrect: false,
+                      ),
                     ),
                   ),
                 ),
@@ -148,13 +158,19 @@ class _SearchAppBarState extends State<SearchAppBar> {
     } else {
       return ShaderMask(
         shaderCallback: (bounds) => LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
             colors: [
-              Colors.pinkAccent,
-              Colors.purple[700]!,
+              Color(0xFFFF6666),
+              Color(0xFF9933FF),
             ]).createShader(bounds),
-        child: Icon(Icons.search),
+        child: Transform(
+            alignment: Alignment.center,
+            transform: Matrix4.rotationY(pi),
+            child: Icon(
+              Icons.search,
+              color: Colors.white,
+            )),
       );
     }
   }
