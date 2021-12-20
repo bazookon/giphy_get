@@ -1,7 +1,11 @@
+## [2.0.4] - 2021-12-19
+* Upgrade dependencies
+
+
 ## [2.0.3] - 2021-08-23
 * Added gaplessPlayback parameter to network image to fix the issue with images dimming on scroll. [PR#15](https://github.com/bazospa/giphy_get/pull/15) Thanks to  [Brazol](https://github.com/Brazol)
 * Searchbar along Giphy guidelines [PR#16](https://github.com/bazospa/giphy_get/pull/16 ) Thanks to  [Brazol](https://github.com/Brazol)
-* Update dependencies
+* Upgrade dependencies
 
 ## [2.0.2] - 2021-06-10
 * Fix Null Safety Thanks to [TramPamPam](https://github.com/TramPamPam)
