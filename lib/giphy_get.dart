@@ -21,7 +21,7 @@ export 'package:giphy_get/src/client/models/languages.dart';
 export 'package:giphy_get/src/client/models/rating.dart';
 export 'package:giphy_get/src/client/models/user.dart';
 export 'package:giphy_get/src/client/models/type.dart';
-
+export 'package:giphy_get/src/widgets/giphy_gif.widget.dart';
 class GiphyGet {
   // Show Bottom Sheet
   static Future<GiphyGif?> getGif({

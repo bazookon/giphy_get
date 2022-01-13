@@ -1,6 +1,5 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:giphy_get/src/client/client.dart';
 import 'package:giphy_get/src/client/models/collection.dart';
@@ -119,18 +118,19 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: StaggeredGridView.countBuilder(
-          scrollDirection: _scrollDirection,
-          controller: widget.scrollController,
-          itemCount: _list.length,
-          crossAxisCount: _crossAxisCount,
-          mainAxisSpacing: _spacing,
-          crossAxisSpacing: _spacing,
-          itemBuilder: (ctx, idx) {
-            GiphyGif _gif = _list[idx];
-            return _item(_gif);
-          },
-          staggeredTileBuilder: (idx) => StaggeredTile.fit(1)),
+      // child: StaggeredGrid.countB
+      child: MasonryGridView.count(
+        scrollDirection: _scrollDirection,
+        controller: widget.scrollController,
+        itemCount: _list.length,
+        crossAxisCount: _crossAxisCount,
+        mainAxisSpacing: _spacing,
+        crossAxisSpacing: _spacing,
+        itemBuilder: (ctx, idx) {
+          GiphyGif _gif = _list[idx];
+          return _item(_gif);
+        },
+      ),
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:giphy_get/giphy_get.dart';
+
 import 'package:giphy_get_demo/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -117,10 +118,8 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 10,
             ),
             currentGif != null
-                ? Image.network(
-                    currentGif.images.original.webp,
-                    headers: {'accept': 'image/*'},
-                  )
+                ? GiphyGifWidget(
+                  gif:currentGif,borderRadius: BorderRadius.circular(5),)
                 : Text("No GIF")
           ],
         ),
