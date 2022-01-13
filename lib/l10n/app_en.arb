@@ -1,0 +1,6 @@
+{
+    "search": "Search",
+    "@search": {
+      "description": "Search label for the search box"
+    }
+}

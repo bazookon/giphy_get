@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:giphy_get/src/client/models/gif.dart';
@@ -14,12 +16,22 @@ class GiphyGifWidget extends StatefulWidget {
 
 class _GiphyGifWidgetState extends State<GiphyGifWidget> {
   bool _showMenu = false;
+  Timer? _timerMenu;
+
   @override
   Widget build(BuildContext context) {
     const TextStyle buttonsTextStyle = TextStyle(
       fontSize: 12,
       color: Colors.white,
     );
+
+   
+
+    @override
+    void dispose() {
+      _timerMenu?.cancel();
+      super.dispose();
+    }
 
     return Stack(
       alignment: Alignment.center,
@@ -29,17 +41,11 @@ class _GiphyGifWidgetState extends State<GiphyGifWidget> {
           children: [
             GestureDetector(
                 onLongPress: () {
-                  setState(() {
-                    _showMenu = true;
-                    Future.delayed(Duration(seconds: 5), () {
-                      setState(() {
-                        _showMenu = false;
-                      });
-                    });
-                  });
+                  _triggerShowHideMenu();
                 },
                 onTap: () {
                   setState(() {
+                    _timerMenu?.cancel();
                     _showMenu = false;
                   });
                 },
@@ -84,9 +90,7 @@ class _GiphyGifWidgetState extends State<GiphyGifWidget> {
                   ),
                 ),
                 TextButton(
-                    onPressed: () {
-
-                    },
+                    onPressed: () {},
                     child: Text('More by @${widget.gif.username}',
                         style: buttonsTextStyle))
               ],
@@ -95,5 +99,22 @@ class _GiphyGifWidgetState extends State<GiphyGifWidget> {
         )
       ],
     );
+  }
+
+  _triggerShowHideMenu() {
+    // Cancel Timer
+    _timerMenu?.cancel();
+
+    // Show menu
+    setState(() {
+      _showMenu = true;
+    });
+
+    // Triger Timer
+    _timerMenu = Timer(Duration(seconds: 5), () {
+      setState(() {
+        _showMenu = !_showMenu;
+      });
+    });
   }
 }
