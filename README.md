@@ -1,6 +1,6 @@
 # giphy_get
 
-[![pub package](https://img.shields.io/badge/pub-v2.0.3-orange)](https://pub.dev/packages/giphy_get)
+[![pub package](https://img.shields.io/badge/pub-v3.0.0-orange)](https://pub.dev/packages/giphy_get)
 [![pub package](https://img.shields.io/badge/platform-flutter-blue.svg)](https://github.com/bazospa)
 
 
@@ -13,7 +13,7 @@ This package allow to get gifs, sticker or emojis from [GIPHY](https://www.giphy
 
 
 ### Result
-<img src="https://github.com/bazospa/giphy_get/raw/master/example/assets/demo/giphy_get.webp" width="360" />
+<img src="example/assets/demo/giphy_get_widget.gif" width="360" />
 
 
 
@@ -30,7 +30,6 @@ GiphyGif gif = await GiphyGet.getGif(
   apiKey: "your api key HERE", //Required.
   lang: GiphyLanguage.english, //Optional - Language for query.
   randomID: "abcd", // Optional - An ID/proxy for a specific user. 
-  searchText :"Search GIPHY",//Optional - AppBar search hint text.
   tabColor:Colors.teal, // Optional- default accent color.
 );
 ```
@@ -49,6 +48,100 @@ GiphyGif gif = await GiphyGet.getGif(
 
 GiphyClient giphyClient = GiphyClient(apiKey: "YOUR API KEY");
 String randomId = await giphyClient.getRandomId();
+
+```
+
+## Localizations
+Currently english and spanish is supported.
+```dart
+return MaterialApp(
+      title: 'Giphy Get Demo',
+      localizationsDelegates: [
+        // Default Delegates 
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+
+        // Add this line 
+        GiphyGetUILocalizations.delegate
+      ],
+      supportedLocales: [
+
+        //Your supported languages
+        Locale('en', ''),
+        Locale('es', ''),
+      ],
+      home: MyHomePage(title: 'Giphy Get Demo'),
+      themeMode: Provider.of<ThemeProvider>(context).currentTheme,
+    );
+
+
+```
+
+
+# Widgets
+
+
+Optional but this widget is required to get more gif's of user or view on Giphy following Giphy Design guidelines and return Gif's with stream  
+
+
+
+
+![giphy](https://developers.giphy.com/branch/master/static/attribution@2x-d66dd0ec49c03f6ba401354859bfca13.png)
+
+## GiphyGifWidget
+Params
+| Value   | Type    |    Description  |   Default  |
+|--|---|--|--|
+| gif `required` | GiphyGif  | GiphyGif object from stream or JSON | null  |
+|giphyGetWrapper `required`| GiphyGetWrapper instance required for tap to more | |
+| showGiphyLabel | boolean | show or hide `Powered by GIPHY`label at bottom | true|
+|borderRadius| BorderRadius  ex: BorderRadius.circular(10)| add border radius to image | null|
+|imageAlignment| Alignment | this widget is a [STACK](https://api.flutter.dev/flutter/widgets/Stack-class.html) with Image and tap buttons this property adjust alignment| Alignment.center|
+
+
+## GiphyGetWrapper
+
+Params
+| Value   | Type    |    Description                |   Default      |
+| ---------|-------------|--------------------|--------------- |
+| `giphy_api_key` required | String | Your Giphy API KEY | null | 
+| `builder`| function | return  Stream\<GiphyGif\> and Instance of  GiphyGetWrapper  | |
+
+## Methods
+void getGif(String queryText,BuildContext context)
+
+```dart
+return GiphyGetWrapper(
+    giphy_api_key: REPLACE_WITH YOUR_API_KEY, 
+    // Builder with Stream<GiphyGif> and Instance of GiphyGetWrapper
+    builder: (stream, giphyGetWrapper) => StreamBuilder<GiphyGif>(
+      stream: stream,
+      builder: (context, snapshot) {
+        return Scaffold(
+          body: snapshot.hasData
+              ? SizedBox(
+                // GiphyGifWidget with tap to more
+                child: GiphyGifWidget(
+                  imageAlignment: Alignment.center,
+                  gif: snapshot.data,
+                  giphyGetWrapper: giphyGetWrapper,
+                  borderRadius: BorderRadius.circular(30),
+                  showGiphyLabel: true,
+                ),
+              )
+              : Text("No GIF"),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () async {
+              //Open Giphy Sheet
+              giphyGetWrapper.getGif('', context);
+            },
+            tooltip: 'Open Sticker',
+            child: Icon(Icons
+                .insert_emoticon)),
+        );
+    })
+      
+    });
 
 ```
 
