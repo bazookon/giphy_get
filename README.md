@@ -81,7 +81,7 @@ return MaterialApp(
 # Widgets
 
 
-Optional but this widget is required to get more gif's of user or view on Giphy following Giphy Design guidelines and return Gif's with stream  
+Optional but this widget is required if you get more gif's of user or view on Giphy following Giphy Design guidelines  
 
 
 
