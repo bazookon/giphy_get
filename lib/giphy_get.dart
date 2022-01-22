@@ -22,6 +22,8 @@ export 'package:giphy_get/src/client/models/rating.dart';
 export 'package:giphy_get/src/client/models/user.dart';
 export 'package:giphy_get/src/client/models/type.dart';
 export 'package:giphy_get/src/widgets/giphy_gif.widget.dart';
+export 'package:giphy_get/src/widgets/giphy_get.widget.dart';
+
 class GiphyGet {
   // Show Bottom Sheet
   static Future<GiphyGif?> getGif({
@@ -30,7 +32,8 @@ class GiphyGet {
     String rating = GiphyRating.g,
     String lang = GiphyLanguage.english,
     String randomID = "",
-    String searchText = "Search GIPHY",
+    String searchText = "",
+    String queryText = "",
     bool modal = true,
     Color? tabColor,
   }) =>
@@ -42,7 +45,7 @@ class GiphyGet {
           context: context,
           builder: (ctx) => MultiProvider(providers: [
                 ChangeNotifierProvider(
-                  create: (ctx) => AppBarProvider(),
+                  create: (ctx) => AppBarProvider(queryText = queryText),
                 ),
                 ChangeNotifierProvider(
                   create: (ctx) => SheetProvider(),

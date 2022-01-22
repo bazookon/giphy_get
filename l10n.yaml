@@ -1,4 +1,0 @@
-arb-dir: lib/l10n
-template-arb-file: app_en.arb
-output-class: GiphyGetLocalizations
-output-localization-file: giphy_get_localizations.dart

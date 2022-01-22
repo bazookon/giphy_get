@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:giphy_get/l10n.dart';
 import 'package:giphy_get/src/client/models/type.dart';
 import 'package:giphy_get/src/providers/tab_provider.dart';
 import 'package:provider/provider.dart';
@@ -14,26 +15,18 @@ class GiphyTabBar extends StatefulWidget {
 class _GiphyTabBarState extends State<GiphyTabBar> {
   late TabProvider _tabProvider;
   late List<Tab> _tabs;
+  
 
   @override
   void initState() {
     super.initState();
 
+    
+
     // TabProvider
     _tabProvider = Provider.of<TabProvider>(context, listen: false);
 
-    // Set TabList
-    _tabs = [
-      Tab(
-        text: "GIFs",
-      ),
-      Tab(
-        text: "Stickers",
-      ),
-      Tab(
-        text: "Emoji",
-      ),
-    ];
+    
 
     //  Listen Tab Controller
     widget.tabController.addListener(() {
@@ -43,6 +36,24 @@ class _GiphyTabBarState extends State<GiphyTabBar> {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       _setTabType(0);
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    // Set TabList
+    final l = GiphyGetUILocalizations.labelsOf(context);
+    _tabs = [
+      Tab(
+        text: l.gifsLabel,
+      ),
+      Tab(
+        text: l.stickersLabel,
+      ),
+      Tab(
+        text: l.emojisLabel,
+      ),
+    ];
+    super.didChangeDependencies();
   }
 
   @override
