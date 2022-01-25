@@ -1,6 +1,5 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:giphy_get/src/client/client.dart';
 import 'package:giphy_get/src/client/models/collection.dart';
@@ -119,22 +118,26 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: StaggeredGridView.countBuilder(
-          scrollDirection: _scrollDirection,
-          controller: widget.scrollController,
-          itemCount: _list.length,
-          crossAxisCount: _crossAxisCount,
-          mainAxisSpacing: _spacing,
-          crossAxisSpacing: _spacing,
-          itemBuilder: (ctx, idx) {
-            GiphyGif _gif = _list[idx];
-            return _item(_gif);
-          },
-          staggeredTileBuilder: (idx) => StaggeredTile.fit(1)),
+      // child: StaggeredGrid.countB
+      child: MasonryGridView.count(
+        scrollDirection: _scrollDirection,
+        controller: widget.scrollController,
+        itemCount: _list.length,
+        crossAxisCount: _crossAxisCount,
+        mainAxisSpacing: _spacing,
+        crossAxisSpacing: _spacing,
+        itemBuilder: (ctx, idx) {
+          GiphyGif _gif = _list[idx];
+          return _item(_gif);
+        },
+      ),
     );
   }
 
   Widget _item(GiphyGif gif) {
+    double _aspectRatio = (double.parse(gif.images!.fixedWidth.width) /
+        double.parse(gif.images!.fixedWidth.height));
+
     return ClipRRect(
         borderRadius: BorderRadius.circular(10.0),
         child: InkWell(
@@ -153,45 +156,30 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
                           : case2(
                               state.extendedImageLoadState,
                               {
-                                LoadState.loading: Container(
-                                  color: Theme.of(context).cardColor,
-                                  width: _gifWidth,
-                                  height: double.parse(
-                                          gif.images!.fixedWidth.height) *
-                                      (_gifWidth /
-                                          double.parse(
-                                              gif.images!.fixedWidth.width)),
+                                LoadState.loading: AspectRatio(
+                                  aspectRatio: _aspectRatio,
+                                  child: Container(
+                                    color: Theme.of(context).cardColor,
+                                  ),
                                 ),
-                                LoadState.completed: ExtendedRawImage(
-                                  image: state.extendedImageInfo?.image,
-                                  width: _gifWidth,
-                                  height: double.parse(
-                                          gif.images!.fixedWidth.height) *
-                                      (_gifWidth /
-                                          double.parse(
-                                              gif.images!.fixedWidth.width)),
-                                  fit: widget.type == GiphyType.gifs
-                                      ? BoxFit.fill
-                                      : BoxFit.fitWidth,
+                                LoadState.completed: AspectRatio(
+                                  aspectRatio: _aspectRatio,
+                                  child: ExtendedRawImage(
+                                    image: state.extendedImageInfo?.image,
+                                  ),
                                 ),
-                                LoadState.failed: Container(
-                                  color: Theme.of(context).cardColor,
-                                  width: _gifWidth,
-                                  height: double.parse(
-                                          gif.images!.fixedWidth.height) *
-                                      (_gifWidth /
-                                          double.parse(
-                                              gif.images!.fixedWidth.width)),
+                                LoadState.failed: AspectRatio(
+                                  aspectRatio: _aspectRatio,
+                                  child: Container(
+                                    color: Theme.of(context).cardColor,
+                                  ),
                                 ),
                               },
-                              Container(
-                                color: Theme.of(context).cardColor,
-                                width: _gifWidth,
-                                height: double.parse(
-                                        gif.images!.fixedWidth.height) *
-                                    (_gifWidth /
-                                        double.parse(
-                                            gif.images!.fixedWidth.width)),
+                              AspectRatio(
+                                aspectRatio: _aspectRatio,
+                                child: Container(
+                                  color: Theme.of(context).cardColor,
+                                ),
                               )),
                     );
                   })));
