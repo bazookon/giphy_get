@@ -1,3 +1,9 @@
+## [3.0.0] - 2022-01-24
+* Readme updated
+* Upgrade dependencies
+* Added new widgets
+* Fixed aspect ratio
+
 ## [3.0.0-pre.1+2] - 2022-01-24
 * Readme updated
 

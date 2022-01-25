@@ -22,6 +22,8 @@ This package allow to get gifs, sticker or emojis from [GIPHY](https://www.giphy
 Important! you must register your app at [Giphy Develepers](https://developers.giphy.com/dashboard/) and get your APIKEY
 
 
+### Get only Gif
+
 ```dart 
 import 'package:giphy_get/giphy_get.dart';
 
