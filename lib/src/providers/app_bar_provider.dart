@@ -8,6 +8,10 @@ class AppBarProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  AppBarProvider(String queryText) {
+    this._queryText = queryText;
+  }
+
   @override
   // ignore: must_call_super
   void dispose() {

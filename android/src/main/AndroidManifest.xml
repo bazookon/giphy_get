@@ -1,3 +1,3 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.example.giphy_get">
+  package="cl.bazo.giphy_get">
 </manifest>

@@ -2,7 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:giphy_get/giphy_get.dart';
 import 'package:giphy_get/src/client/models/type.dart';
+import 'package:giphy_get/src/l10n/l10n.dart';
 import 'package:giphy_get/src/providers/app_bar_provider.dart';
 import 'package:giphy_get/src/providers/sheet_provider.dart';
 import 'package:giphy_get/src/providers/tab_provider.dart';
@@ -29,8 +31,8 @@ class _SearchAppBarState extends State<SearchAppBar> {
   late SheetProvider _sheetProvider;
 
   // Input controller
-  final TextEditingController _textEditingController =
-      new TextEditingController();
+  late TextEditingController _textEditingController;
+
   // Input Focus
   final FocusNode _focus = new FocusNode();
 
@@ -46,9 +48,13 @@ class _SearchAppBarState extends State<SearchAppBar> {
     // Focus
     _focus.addListener(_focusListener);
 
+    //Set Texfielf
+    _textEditingController = new TextEditingController(
+        text: Provider.of<AppBarProvider>(context, listen: false).queryText);
+
     // Listener TextField
     _textEditingController.addListener(() {
-      if (_textEditingController.text.isNotEmpty) {
+      if (_appBarProvider.queryText != _textEditingController.text) {
         _appBarProvider.queryText = _textEditingController.text;
       }
     });
@@ -96,47 +102,60 @@ class _SearchAppBarState extends State<SearchAppBar> {
     );
   }
 
-  Widget _searchWidget() => Column(
-        children: [
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 8.0),
-            width: 50,
-            height: 2,
-            color: _searchBackgroundColor,
-          ),
-          _tabProvider.tabType == GiphyType.emoji
-              ? Container(height: 40.0, child: _giphyLogo())
-              : Container(
-                  height: 40.0,
-                  child: Center(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: TextField(
-                        autofocus: _sheetProvider.initialExtent ==
-                            SheetProvider.maxExtent,
-                        focusNode: _focus,
-                        controller: _textEditingController,
-                        style: TextStyle(color: Colors.black),
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.grey[200],
-                            prefixIcon: _searchIcon(),
-                            hintStyle: TextStyle(color: Colors.black45),
-                            hintText: _tabProvider.searchText,
-                            contentPadding: EdgeInsets.only(
-                                left: 15, bottom: 10.5, top: 10.5, right: 15),
-                            focusedBorder: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            errorBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
-                            border: InputBorder.none),
-                        autocorrect: false,
-                      ),
+  Widget _searchWidget() {
+    final l = GiphyGetUILocalizations.labelsOf(context);
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.symmetric(vertical: 8.0),
+          width: 50,
+          height: 2,
+          color: _searchBackgroundColor,
+        ),
+        _tabProvider.tabType == GiphyType.emoji
+            ? Container(height: 40.0, child: _giphyLogo())
+            : Container(
+                height: 40.0,
+                child: Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: TextField(
+                      autofocus: _sheetProvider.initialExtent ==
+                          SheetProvider.maxExtent,
+                      focusNode: _focus,
+                      controller: _textEditingController,
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.grey[200],
+                          prefixIcon: _searchIcon(),
+                          hintStyle: TextStyle(color: Colors.black45),
+                          hintText: l.searchInputLabel,
+                          suffixIcon: IconButton(
+                              icon: Icon(
+                                Icons.clear,
+                                color: Colors.black,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _textEditingController.clear();
+                                });
+                              }),
+                          contentPadding: EdgeInsets.only(
+                              left: 15, bottom: 10.5, top: 10.5, right: 15),
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                          border: InputBorder.none),
+                      autocorrect: false,
                     ),
                   ),
                 ),
-        ],
-      );
+              ),
+      ],
+    );
+  }
 
   Widget _giphyLogo() {
     const basePath = "assets/img/";
