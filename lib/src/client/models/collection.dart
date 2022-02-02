@@ -51,9 +51,9 @@ class GiphyPagination {
 
   factory GiphyPagination.fromJson(Map<String, dynamic> json) =>
       GiphyPagination(
-          totalCount: json['total_count'] as int,
-          count: json['count'] as int,
-          offset: json['offset'] as int);
+          totalCount: json['total_count'] ?? 0,
+          count: json['count'] ?? 0,
+          offset: json['offset'] ?? 0);
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{

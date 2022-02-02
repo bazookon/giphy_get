@@ -36,13 +36,6 @@ class _SearchAppBarState extends State<SearchAppBar> {
   // Input Focus
   final FocusNode _focus = new FocusNode();
 
-  //Colors
-  late Color _canvasColor;
-  late Color _searchBackgroundColor;
-
-  //Is DarkMode
-  late bool _isDarkMode;
-
   @override
   void initState() {
     // Focus
@@ -64,13 +57,6 @@ class _SearchAppBarState extends State<SearchAppBar> {
 
   @override
   void didChangeDependencies() {
-    //Colors
-    _canvasColor = Theme.of(context).canvasColor;
-    _searchBackgroundColor = Theme.of(context).textTheme.bodyText1!.color!;
-
-    //Is DarkMode
-    _isDarkMode = Theme.of(context).brightness == Brightness.dark;
-
     // Providers
     _tabProvider = Provider.of<TabProvider>(context);
 
@@ -92,13 +78,9 @@ class _SearchAppBarState extends State<SearchAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: _canvasColor,
-      elevation: 0.0,
-      titleSpacing: 10.0,
-      automaticallyImplyLeading: false,
-      title: _searchWidget(),
-      actions: [],
+    return Container(
+      padding: EdgeInsets.only(left: 8, right: 8, bottom: 10),
+      child: _searchWidget(),
     );
   }
 
@@ -106,53 +88,40 @@ class _SearchAppBarState extends State<SearchAppBar> {
     final l = GiphyGetUILocalizations.labelsOf(context);
     return Column(
       children: [
-        Container(
-          margin: EdgeInsets.symmetric(vertical: 8.0),
-          width: 50,
-          height: 2,
-          color: _searchBackgroundColor,
-        ),
         _tabProvider.tabType == GiphyType.emoji
-            ? Container(height: 40.0, child: _giphyLogo())
-            : Container(
-                height: 40.0,
-                child: Center(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: TextField(
-                      autofocus: _sheetProvider.initialExtent ==
-                          SheetProvider.maxExtent,
-                      focusNode: _focus,
-                      controller: _textEditingController,
-                      style: TextStyle(color: Colors.black),
-                      decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.grey[200],
-                          prefixIcon: _searchIcon(),
-                          hintStyle: TextStyle(color: Colors.black45),
-                          hintText: l.searchInputLabel,
-                          suffixIcon: IconButton(
-                              icon: Icon(
-                                Icons.clear,
-                                color: Colors.black,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _textEditingController.clear();
-                                });
-                              }),
-                          contentPadding: EdgeInsets.only(
-                              left: 15, bottom: 10.5, top: 10.5, right: 15),
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          border: InputBorder.none),
-                      autocorrect: false,
-                    ),
-                  ),
+            // ? Container(height: 40.0, child: _giphyLogo())
+            ? Container()
+            : ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: TextField(
+                  autofocus:
+                      _sheetProvider.initialExtent == SheetProvider.maxExtent,
+                  focusNode: _focus,
+                  controller: _textEditingController,
+                 
+                  decoration: InputDecoration(
+                      filled: true,
+                      prefixIcon: _searchIcon(),
+                      hintText: l.searchInputLabel,
+                      suffixIcon: IconButton(
+                          icon: Icon(
+                            Icons.clear,
+                            color: Theme.of(context).textTheme.bodyText1!.color!,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _textEditingController.clear();
+                            });
+                          }),
+                     
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                      ),
+                  autocorrect: false,
                 ),
-              ),
+            ),
       ],
     );
   }

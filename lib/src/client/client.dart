@@ -77,6 +77,7 @@ class GiphyClient {
           'limit': '$limit',
           'rating': rating,
           'lang': lang,
+          
         },
       ),
     );

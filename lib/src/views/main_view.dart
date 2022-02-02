@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:giphy_get/src/providers/sheet_provider.dart';
 import 'package:giphy_get/src/views/appbar/searchappbar.dart';
 import 'package:giphy_get/src/views/tab/giphy_tab_bar.dart';
+import 'package:giphy_get/src/views/tab/giphy_tab_bottom.dart';
+import 'package:giphy_get/src/views/tab/giphy_tab_top.dart';
 import 'package:giphy_get/src/views/tab/giphy_tab_view.dart';
 import 'package:provider/provider.dart';
 
@@ -62,15 +64,17 @@ class _MainViewState extends State<MainView>
   Widget _bottomSheetBody() => Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SearchAppBar(scrollController: this._scrollController),
+          GiphyTabTop(),
           GiphyTabBar(
             tabController: _tabController,
           ),
+          SearchAppBar(scrollController: this._scrollController),
           Expanded(
               child: GiphyTabView(
             tabController: _tabController,
             scrollController: this._scrollController,
-          ))
+          )),
+          GiphyTabBottom()
         ],
       );
 }
