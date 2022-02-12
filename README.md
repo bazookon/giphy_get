@@ -148,5 +148,12 @@ return GiphyGetWrapper(
 ```
 
 
+## Example APP
+First export your giphy api key
+```terminal
+export GIPHY_API_KEY=YOUR_GIPHY_API_KEY 
+```
+and ther run.
+
 ## Contrib
 Feel free to make any PR's

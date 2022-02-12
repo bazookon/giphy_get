@@ -9,12 +9,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  try {
-    await dotenv.load(fileName: ".env", mergeWith: Platform.environment);
-  } catch (e) {
-    await dotenv.load(mergeWith: Platform.environment);
-    print(e);
-  }
+  await dotenv.load(mergeWith: Platform.environment);
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
@@ -72,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // Random ID
   String randomId = "";
 
-  String giphy_api_key = dotenv.env["giphy_api_key"];
+  String giphy_api_key = dotenv.env["GIPHY_API_KEY"];
 
   @override
   void initState() {

@@ -9,7 +9,7 @@ class MockClient extends Mock implements Client {}
 
 Future<void> main() async {
 
-  var _apiKey = Platform.environment['giphy_api_key']??'';
+  var _apiKey = Platform.environment['GIPHY_API_KEY']??'';
 
   group('GiphyClient', () {
     test('should fetch trending gifs', () async {
