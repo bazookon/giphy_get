@@ -8,7 +8,7 @@ on:
 
 
 env:
-  giphy_api_key: ${{secrets.giphy_api_key}}
+  GIPHY_API_KEY: ${{secrets.GIPHY_API_KEY}}
 
 jobs:
   tests:
