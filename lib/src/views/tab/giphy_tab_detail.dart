@@ -50,6 +50,9 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
   // is Loading gifs
   bool _isLoading = false;
 
+  // Offset
+  int offset=0;
+
   @override
   void initState() {
     super.initState();
@@ -94,6 +97,9 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         ((MediaQuery.of(context).size.height - 30) / _gifWidth).round();
 
     _limit = _crossAxisCount * _mainAxisCount;
+
+    // Initial offset
+    offset = 0;
 
     // Load Initial Data
     _loadMore();
@@ -186,9 +192,13 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
   }
 
   Future<void> _loadMore() async {
+    print( "Total of collections: ${_collection?.pagination?.totalCount}");
     //Return if is loading or no more gifs
-    if (_isLoading || _collection?.pagination?.totalCount == _list.length)
+    if (_isLoading || _collection?.pagination?.totalCount == _list.length){
+      print("No more object");
       return;
+    }
+      
 
     _isLoading = true;
 
@@ -197,7 +207,6 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         apiKey: _tabProvider.apiKey, randomId: _tabProvider.randomID);
 
     // Offset pagination for query
-    int offset;
     if (_collection == null) {
       offset = 0;
     } else {
