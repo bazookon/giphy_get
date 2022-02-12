@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:giphy_get/giphy_get.dart';
 import 'package:giphy_get/l10n.dart';
@@ -7,7 +9,13 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
+  try {
+    await dotenv.load(fileName: ".env", mergeWith: Platform.environment);
+  } catch (e) {
+    await dotenv.load(mergeWith: Platform.environment);
+    print(e);
+  }
+
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
         create: (ctx) => ThemeProvider(currentTheme: ThemeMode.system))
@@ -90,7 +98,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return GiphyGetWrapper(
         giphy_api_key: giphy_api_key,
-        
         builder: (stream, giphyGetWrapper) {
           stream.listen((gif) {
             setState(() {
@@ -139,7 +146,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   currentGif != null
                       ? SizedBox(
-                         
                           child: GiphyGifWidget(
                             imageAlignment: Alignment.center,
                             gif: currentGif,
