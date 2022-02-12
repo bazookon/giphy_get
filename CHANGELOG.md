@@ -1,3 +1,7 @@
+## [3.0.2] - 2022-02-12
+* Upgrade dependencies
+* Automated Test
+
 ## [3.0.1] - 2022-02-02
 * Fixed [Issue [#22](https://github.com/bazookon/giphy_get/issues/22)]
 * Added "Powered by GIPHY" label

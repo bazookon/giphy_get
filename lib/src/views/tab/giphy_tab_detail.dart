@@ -51,7 +51,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
   bool _isLoading = false;
 
   // Offset
-  int offset=0;
+  int offset = 0;
 
   @override
   void initState() {
@@ -192,13 +192,12 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
   }
 
   Future<void> _loadMore() async {
-    print( "Total of collections: ${_collection?.pagination?.totalCount}");
+    print("Total of collections: ${_collection?.pagination?.totalCount}");
     //Return if is loading or no more gifs
-    if (_isLoading || _collection?.pagination?.totalCount == _list.length){
+    if (_isLoading || _collection?.pagination?.totalCount == _list.length) {
       print("No more object");
       return;
     }
-      
 
     _isLoading = true;
 
@@ -218,8 +217,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
       _collection = await client.emojis(offset: offset, limit: _limit);
     } else {
       // If query text is not null search gif else trendings
-      if (_appBarProvider.queryText.isNotEmpty &&
-          widget.type != GiphyType.emoji) {
+      if (_appBarProvider.queryText.isNotEmpty) {
         _collection = await client.search(_appBarProvider.queryText,
             lang: _tabProvider.lang,
             offset: offset,

@@ -13,16 +13,41 @@ This package allow to get gifs, sticker or emojis from [GIPHY](https://www.giphy
 
 
 ### Result
-<img src="https://raw.githubusercontent.com/bazookon/giphy_get/gifwidget/example/assets/demo/giphy_get_widget.gif" width="360" />
+<img src="https://github.com/bazookon/giphy_get/raw/main/example/assets/demo/giphy_get_widget.gif" width="360" />
 
 
 
 ## Getting Started
 
 Important! you must register your app at [Giphy Develepers](https://developers.giphy.com/dashboard/) and get your APIKEY
+## Localizations
+Currently english and spanish is supported.
+```dart
+return MaterialApp(
+      title: 'Giphy Get Demo',
+      localizationsDelegates: [
+        // Default Delegates 
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
 
+        // Add this line 
+        GiphyGetUILocalizations.delegate
+      ],
+      supportedLocales: [
+
+        //Your supported languages
+        Locale('en', ''),
+        Locale('es', ''),
+      ],
+      home: MyHomePage(title: 'Giphy Get Demo'),
+      themeMode: Provider.of<ThemeProvider>(context).currentTheme,
+    );
+
+
+```
 
 ### Get only Gif
+This is for get gif without wrapper and tap to more
 
 ```dart 
 import 'package:giphy_get/giphy_get.dart';
@@ -53,31 +78,7 @@ String randomId = await giphyClient.getRandomId();
 
 ```
 
-## Localizations
-Currently english and spanish is supported.
-```dart
-return MaterialApp(
-      title: 'Giphy Get Demo',
-      localizationsDelegates: [
-        // Default Delegates 
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
 
-        // Add this line 
-        GiphyGetUILocalizations.delegate
-      ],
-      supportedLocales: [
-
-        //Your supported languages
-        Locale('en', ''),
-        Locale('es', ''),
-      ],
-      home: MyHomePage(title: 'Giphy Get Demo'),
-      themeMode: Provider.of<ThemeProvider>(context).currentTheme,
-    );
-
-
-```
 
 
 # Widgets
