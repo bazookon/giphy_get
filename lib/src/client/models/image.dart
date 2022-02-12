@@ -19,7 +19,7 @@ class GiphyFullImage {
     required this.webpSize,
   });
 
-  factory GiphyFullImage.fromJson(Map<String, dynamic?> json) => GiphyFullImage(
+  factory GiphyFullImage.fromJson(Map<String, dynamic> json) => GiphyFullImage(
       url: json['url'],
       width: json['width'],
       height: json['height'],
@@ -98,7 +98,7 @@ class GiphyOriginalImage {
     required this.hash,
   });
 
-  factory GiphyOriginalImage.fromJson(Map<String, dynamic?> json) {
+  factory GiphyOriginalImage.fromJson(Map<String, dynamic> json) {
     return GiphyOriginalImage(
         url: json['url'],
         width: json['width'],
@@ -175,7 +175,7 @@ class GiphyStillImage {
     required this.size,
   });
 
-  factory GiphyStillImage.fromJson(Map<String, dynamic?> json) =>
+  factory GiphyStillImage.fromJson(Map<String, dynamic> json) =>
       GiphyStillImage(
           url: json['url'],
           width: json['width'],
@@ -228,7 +228,7 @@ class GiphyDownsampledImage {
     required this.webpSize,
   });
 
-  factory GiphyDownsampledImage.fromJson(Map<String, dynamic?> json) {
+  factory GiphyDownsampledImage.fromJson(Map<String, dynamic> json) {
     return GiphyDownsampledImage(
         url: json['url'],
         width: json['width'],
@@ -321,7 +321,7 @@ class GiphyPreviewImage {
     required this.mp4Size,
   });
 
-  factory GiphyPreviewImage.fromJson(Map<String, dynamic?> json) {
+  factory GiphyPreviewImage.fromJson(Map<String, dynamic> json) {
     return GiphyPreviewImage(
       width: json['width'],
       height: json['height'],

@@ -53,7 +53,7 @@ class GiphyImages {
     this.w480Still,
   });
 
-  factory GiphyImages.fromJson(Map<String, dynamic?> json) {
+  factory GiphyImages.fromJson(Map<String, dynamic> json) {
     return GiphyImages(
       fixedHeightStill: GiphyStillImage.fromJson(json['fixed_height_still']),
       originalStill: GiphyStillImage.fromJson(json['original_still']),

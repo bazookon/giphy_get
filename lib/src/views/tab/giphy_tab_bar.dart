@@ -71,7 +71,7 @@ class _GiphyTabBarState extends State<GiphyTabBar> {
       unselectedLabelColor: Theme.of(context).brightness == Brightness.light
           ? Colors.black54
           : Colors.white54,
-      labelColor: _tabProvider.tabColor ?? Theme.of(context).accentColor,
+      labelColor: _tabProvider.tabColor ?? Theme.of(context).colorScheme.secondary,
       indicatorColor: Colors.transparent,
       indicatorSize: TabBarIndicatorSize.label,
       controller: widget.tabController,

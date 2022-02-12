@@ -126,19 +126,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
     );
   }
 
-  Widget _giphyLogo() {
-    const basePath = "assets/img/";
-    String logoPath = Theme.of(context).brightness == Brightness.light
-        ? "GIPHY_light.png"
-        : "GIPHY_dark.png";
 
-    return Center(
-        child: Image.asset(
-      "$basePath$logoPath",
-      width: 100.0,
-      package: 'giphy_get',
-    ));
-  }
 
   Widget _searchIcon() {
     if (kIsWeb) {
