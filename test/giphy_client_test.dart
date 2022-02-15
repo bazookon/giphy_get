@@ -76,7 +76,7 @@ Future<void> main() async {
       );
 
       // Gif Validation
-      final gif = (await client.trending()).data!.first;
+      final gif = (await client.trending()).data.first;
       expect(gif.rating, GiphyRating.g);
       expect(gif.type, 'gif');
     
@@ -89,7 +89,7 @@ Future<void> main() async {
       );
 
       // Gif Validation
-      final user = (await client.trending()).data!.first.user;
+      final user = (await client.trending()).data.first.user;
      
       expect(user?.profileUrl, isNotNull);
     });
@@ -101,7 +101,7 @@ Future<void> main() async {
       );
 
       // Gif Validation
-      final images = (await client.trending()).data!.first.images;
+      final images = (await client.trending()).data.first.images;
       expect(images!.fixedHeightStill, TypeMatcher<GiphyStillImage>());
       expect(images.originalStill, TypeMatcher<GiphyStillImage>());
       // expect(images.fixedWidth, GiphyFullImage());

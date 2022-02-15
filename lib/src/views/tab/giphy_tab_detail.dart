@@ -235,9 +235,9 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
     }
 
     // Set result to list
-    if (_collection!.data!.isNotEmpty && mounted) {
+    if (_collection!.data.isNotEmpty && mounted) {
       setState(() {
-        _list.addAll(_collection!.data!);
+        _list.addAll(_collection!.data);
       });
     }
 
