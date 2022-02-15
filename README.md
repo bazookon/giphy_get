@@ -1,6 +1,6 @@
 # giphy_get
 [![Flutter_Tests](https://github.com/bazookon/giphy_get/actions/workflows/test.yml/badge.svg)](https://github.com/bazookon/giphy_get/actions/workflows/test.yml)
-[![pub package](https://img.shields.io/badge/pub-v3.0.2-orange)](https://pub.dev/packages/giphy_get)
+[![pub package](https://img.shields.io/badge/pub-v3.0.4-orange)](https://pub.dev/packages/giphy_get)
 [![pub package](https://img.shields.io/badge/platform-flutter-blue.svg)](https://github.com/bazospa)
 
 
