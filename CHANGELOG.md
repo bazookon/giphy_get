@@ -1,3 +1,7 @@
+## [3.0.3] - 2022-02-12
+* Search bar ui tweak [#26](https://github.com/bazookon/giphy_get/pull/26)
+
+
 ## [3.0.2] - 2022-02-12
 * Upgrade dependencies
 * Automated Test
