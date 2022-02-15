@@ -103,7 +103,6 @@ class _SearchAppBarState extends State<SearchAppBar> {
                       focusNode: _focus,
                       controller: _textEditingController,
                       decoration: InputDecoration(
-                        isCollapsed: true,
                         filled: true,
                         prefixIcon: _searchIcon(),
                         hintText: l.searchInputLabel,

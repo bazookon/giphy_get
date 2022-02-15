@@ -1,4 +1,7 @@
-## [3.0.3] - 2022-02-12
+## [3.0.4] - 2022-02-15
+* Center Search Text
+
+## [3.0.3] - 2022-02-14
 * Search bar ui tweak [#26](https://github.com/bazookon/giphy_get/pull/26)
 
 
