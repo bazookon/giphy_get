@@ -91,42 +91,46 @@ class _SearchAppBarState extends State<SearchAppBar> {
         _tabProvider.tabType == GiphyType.emoji
             // ? Container(height: 40.0, child: _giphyLogo())
             ? Container()
-            : ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: TextField(
-                  autofocus:
-                      _sheetProvider.initialExtent == SheetProvider.maxExtent,
-                  focusNode: _focus,
-                  controller: _textEditingController,
-                 
-                  decoration: InputDecoration(
-                      filled: true,
-                      prefixIcon: _searchIcon(),
-                      hintText: l.searchInputLabel,
-                      suffixIcon: IconButton(
-                          icon: Icon(
-                            Icons.clear,
-                            color: Theme.of(context).textTheme.bodyText1!.color!,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _textEditingController.clear();
-                            });
-                          }),
-                     
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
+            : SizedBox(
+                height: 40,
+                child: Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: TextField(
+                      textAlignVertical: TextAlignVertical.center,
+                      autofocus: _sheetProvider.initialExtent ==
+                          SheetProvider.maxExtent,
+                      focusNode: _focus,
+                      controller: _textEditingController,
+                      decoration: InputDecoration(
+                        isCollapsed: true,
+                        filled: true,
+                        prefixIcon: _searchIcon(),
+                        hintText: l.searchInputLabel,
+                        suffixIcon: IconButton(
+                            icon: Icon(
+                              Icons.clear,
+                              color:
+                                  Theme.of(context).textTheme.bodyText1!.color!,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _textEditingController.clear();
+                              });
+                            }),
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
                       ),
-                  autocorrect: false,
+                      autocorrect: false,
+                    ),
+                  ),
                 ),
-            ),
+              ),
       ],
     );
   }
-
-
 
   Widget _searchIcon() {
     if (kIsWeb) {
