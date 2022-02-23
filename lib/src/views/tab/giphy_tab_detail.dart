@@ -171,6 +171,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
                                 LoadState.completed: AspectRatio(
                                   aspectRatio: _aspectRatio,
                                   child: ExtendedRawImage(
+                                    fit: BoxFit.fill,
                                     image: state.extendedImageInfo?.image,
                                   ),
                                 ),
@@ -240,6 +241,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         _list.addAll(_collection!.data);
       });
     }
+    
 
     _isLoading = false;
   }
