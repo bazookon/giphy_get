@@ -241,7 +241,6 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         _list.addAll(_collection!.data);
       });
     }
-    
 
     _isLoading = false;
   }
