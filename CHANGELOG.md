@@ -1,3 +1,6 @@
+## [3.0.5] - 2022-03-25
+* Fixed null scroll position
+
 ## [3.0.4] - 2022-02-15
 * Center Search Text
 

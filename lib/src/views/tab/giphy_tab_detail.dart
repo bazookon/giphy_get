@@ -247,7 +247,8 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
 
   // Scroll listener. if scroll end load more gifs
   void _scrollListener() {
-    if ((widget.scrollController.position.extentAfter < 500) && !_isLoading) {
+    if (widget.scrollController.positions.last.extentAfter.lessThan(500) &&
+        !_isLoading) {
       _loadMore();
     }
   }
