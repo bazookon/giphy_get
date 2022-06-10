@@ -20,7 +20,7 @@ class GiphyGetWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return builder(streamController.stream, this);
+    return SafeArea(child: builder(streamController.stream, this));
   }
 
   getGif(String queryText, BuildContext context) async {

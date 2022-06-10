@@ -1,5 +1,6 @@
 ## [3.1.0] - 2022-06-09
-* update package and support flutter 3[#30](https://github.com/bazookon/giphy_get/pull/30) thanks to [hifiaz](https://github.com/hifiaz)
+* Update package and support flutter 3[#30](https://github.com/bazookon/giphy_get/pull/30) thanks to [hifiaz](https://github.com/hifiaz)
+* Add SafeArea to Wrapper
 
 ## [3.0.5] - 2022-03-25
 * Fixed null scroll position

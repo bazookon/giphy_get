@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:giphy_get/giphy_get.dart';
 import 'package:giphy_get/l10n.dart';
@@ -9,7 +10,11 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(mergeWith: Platform.environment);
+  if (!kIsWeb) {
+    await dotenv.load(mergeWith: Platform.environment);
+  } else {
+    await dotenv.load();
+  }
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
