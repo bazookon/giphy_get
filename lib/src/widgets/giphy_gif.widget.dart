@@ -96,7 +96,7 @@ class _GiphyGifWidgetState extends State<GiphyGifWidget> {
                   children: [
                     TextButton(
                         onPressed: () {
-                          launch(widget.gif.url!);
+                          launchUrl(Uri.parse(widget.gif.url!));
                         },
                         child: Text(
                           l.viewOnGiphy,

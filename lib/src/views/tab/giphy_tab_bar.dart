@@ -33,7 +33,7 @@ class _GiphyTabBarState extends State<GiphyTabBar> {
       _setTabType(widget.tabController.index);
     });
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _setTabType(0);
     });
   }
