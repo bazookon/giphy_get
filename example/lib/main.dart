@@ -38,20 +38,21 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GiphyGetUILocalizations.delegate
       ],
-      supportedLocales: [
+      supportedLocales: const [
         Locale('en', ''),
         Locale('es', ''),
       ],
-      home: MyHomePage(title: 'Giphy Get Demo'),
+      home: const MyHomePage(title: 'Giphy Get Demo'),
       themeMode: Provider.of<ThemeProvider>(context).currentTheme,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
+  const MyHomePage({Key key, this.title}) : super(key: key);
   @override
+  // ignore: library_private_types_in_public_api
   _MyHomePageState createState() => _MyHomePageState();
 }
 
@@ -67,13 +68,13 @@ class _MyHomePageState extends State<MyHomePage> {
   // Random ID
   String randomId = "";
 
-  String giphy_api_key = dotenv.env["GIPHY_API_KEY"];
+  String giphyApiKey = dotenv.env["GIPHY_API_KEY"];
 
   @override
   void initState() {
     super.initState();
 
-    client = GiphyClient(apiKey: giphy_api_key, randomId: '');
+    client = GiphyClient(apiKey: giphyApiKey, randomId: '');
     WidgetsBinding.instance.addPostFrameCallback((_) {
       client.getRandomId().then((value) {
         setState(() {
@@ -92,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return GiphyGetWrapper(
-        giphy_api_key: giphy_api_key,
+        giphy_api_key: giphyApiKey,
         builder: (stream, giphyGetWrapper) {
           stream.listen((gif) {
             setState(() {
@@ -105,10 +106,10 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Row(
                 children: [
                   Image.asset("assets/img/GIPHY Transparent 18px.png"),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
-                  Text("GET DEMO")
+                  const Text("GET DEMO")
                 ],
               ),
             ),
@@ -118,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Row(
                     children: [
-                      Expanded(child: Text("Dark Mode")),
+                      const Expanded(child: Text("Dark Mode")),
                       Switch(
                           value:
                               Theme.of(context).brightness == Brightness.dark,
@@ -128,15 +129,15 @@ class _MyHomePageState extends State<MyHomePage> {
                           })
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Text("Random ID: $randomId"),
-                  Text(
+                  const Text(
                     "Selected GIF",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   currentGif != null
@@ -149,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             showGiphyLabel: true,
                           ),
                         )
-                      : Text("No GIF")
+                      : const Text("No GIF")
                 ],
               ),
             ),
@@ -158,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   giphyGetWrapper.getGif('', context);
                 },
                 tooltip: 'Open Sticker',
-                child: Icon(Icons
+                child: const Icon(Icons
                     .insert_emoticon)), // This trailing comma makes auto-formatting nicer for build methods.
           );
         });
