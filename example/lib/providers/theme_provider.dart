@@ -8,7 +8,7 @@ class ThemeProvider extends ChangeNotifier {
   ThemeMode get currentTheme => _currentTheme;
 
   void setCurrentTheme(ThemeMode mode) {
-    this._currentTheme = mode;
+    _currentTheme = mode;
     notifyListeners();
   }
 }
