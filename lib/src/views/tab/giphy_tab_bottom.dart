@@ -5,9 +5,8 @@ class GiphyTabBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      height: 30,
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
       child: Center(child: _giphyLogo(context)),
     );
   }

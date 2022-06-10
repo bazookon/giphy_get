@@ -58,10 +58,11 @@ class GiphyGet {
                   create: (ctx) => TabProvider(
                       apiKey: apiKey,
                       randomID: randomID,
-                      tabColor: tabColor ?? Theme.of(context).colorScheme.secondary,
+                      tabColor:
+                          tabColor ?? Theme.of(context).colorScheme.secondary,
                       searchText: searchText,
                       rating: rating,
                       lang: lang))
-            ], child: MainView()));
+            ], child: SafeArea(child: MainView())));
   }
 }
