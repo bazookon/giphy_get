@@ -120,6 +120,9 @@ class _SearchAppBarState extends State<SearchAppBar> {
                                   Theme.of(context).textTheme.bodyText1!.color!,
                             ),
                             onPressed: () {
+                              if (_appBarProvider.queryText != '') {
+                                _appBarProvider.queryText = '';
+                              }
                               setState(() {
                                 _textEditingController.clear();
                               });
