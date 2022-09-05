@@ -45,13 +45,6 @@ class _SearchAppBarState extends State<SearchAppBar> {
     _textEditingController = new TextEditingController(
         text: Provider.of<AppBarProvider>(context, listen: false).queryText);
 
-    // Listener TextField
-    _textEditingController.addListener(() {
-      if (_appBarProvider.queryText != _textEditingController.text) {
-        _appBarProvider.queryText = _textEditingController.text;
-      }
-    });
-
     super.initState();
   }
 
@@ -102,6 +95,20 @@ class _SearchAppBarState extends State<SearchAppBar> {
                           SheetProvider.maxExtent,
                       focusNode: _focus,
                       controller: _textEditingController,
+                      onChanged: (value) async {
+                        //wait for a second maybe user is typing more
+                        await Future.delayed(Duration(seconds: 1));
+
+                        if (value == _textEditingController.text &&
+                            value != _appBarProvider.queryText) {
+                          //if value is still same as controller then proceed to search
+
+                          _appBarProvider.queryText =
+                              _textEditingController.text;
+                        }
+
+                        return;
+                      },
                       decoration: InputDecoration(
                         filled: true,
                         prefixIcon: _searchIcon(),

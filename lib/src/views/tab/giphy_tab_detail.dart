@@ -195,10 +195,12 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
   Future<void> _loadMore() async {
     print("Total of collections: ${_collection?.pagination?.totalCount}");
     //Return if is loading or no more gifs
-    if (_isLoading || _collection?.pagination?.totalCount == _list.length) {
+    if (_collection?.pagination?.totalCount == _list.length) {
       print("No more object");
       return;
     }
+
+    var query = _appBarProvider.queryText;
 
     _isLoading = true;
 
@@ -218,8 +220,8 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
       _collection = await client.emojis(offset: offset, limit: _limit);
     } else {
       // If query text is not null search gif else trendings
-      if (_appBarProvider.queryText.isNotEmpty) {
-        _collection = await client.search(_appBarProvider.queryText,
+      if (query.isNotEmpty) {
+        _collection = await client.search(query,
             lang: _tabProvider.lang,
             offset: offset,
             rating: _tabProvider.rating,
@@ -235,13 +237,19 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
       }
     }
 
-    // Set result to list
+    if (query != _appBarProvider.queryText) {
+      //if the query has changed then no need to update anything
+      return;
+    }
+
+    // only the relevant query can update the list
     if (_collection!.data.isNotEmpty && mounted) {
       setState(() {
         _list.addAll(_collection!.data);
       });
     }
 
+    //only the relevant query can set loading to false
     _isLoading = false;
   }
 
