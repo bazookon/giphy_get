@@ -205,11 +205,11 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
     var query = _appBarProvider.queryText;
 
     //wait for ur turn dont discard the execution immediately
-    int maxTries = 30;
+    int maxRetries = 10;
     while (_isLoading) {
       await Future.delayed(const Duration(seconds: 1));
-      maxTries--;
-      if (query != _appBarProvider.queryText || maxTries < 0) {
+      maxRetries--;
+      if (query != _appBarProvider.queryText || maxRetries < 0) {
         return;
       }
     }
