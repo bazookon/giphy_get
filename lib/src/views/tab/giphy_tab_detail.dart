@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -196,11 +199,20 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
     print("Total of collections: ${_collection?.pagination?.totalCount}");
     //Return if is loading or no more gifs
     if (_collection?.pagination?.totalCount == _list.length) {
-      print("No more object");
       return;
     }
 
     var query = _appBarProvider.queryText;
+
+    //wait for ur turn dont discard the execution immediately
+    int maxTries = 30;
+    while (_isLoading) {
+      await Future.delayed(const Duration(seconds: 1));
+      maxTries--;
+      if (query != _appBarProvider.queryText || maxTries < 0) {
+        return;
+      }
+    }
 
     _isLoading = true;
 
@@ -237,8 +249,9 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
       }
     }
 
+    _isLoading = false;
+
     if (query != _appBarProvider.queryText) {
-      //if the query has changed then no need to update anything
       return;
     }
 
@@ -248,12 +261,8 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         _list.addAll(_collection!.data);
       });
     }
-
-    //only the relevant query can set loading to false
-    _isLoading = false;
   }
 
-  // Scroll listener. if scroll end load more gifs
   void _scrollListener() {
     if (widget.scrollController.positions.last.extentAfter.lessThan(500) &&
         !_isLoading) {
