@@ -1,3 +1,6 @@
+## [3.1.1] - 2022-09-06
+* Update dependencies to latest
+
 ## [3.1.0] - 2022-06-09
 * Update package and support flutter 3[#30](https://github.com/bazookon/giphy_get/pull/30) thanks to [hifiaz](https://github.com/hifiaz)
 * Add SafeArea to Wrapper
