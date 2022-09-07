@@ -96,8 +96,8 @@ class _SearchAppBarState extends State<SearchAppBar> {
                       focusNode: _focus,
                       controller: _textEditingController,
                       onChanged: (value) async {
-                        //wait for a second maybe user is typing more
-                        await Future.delayed(Duration(seconds: 1));
+                        //debounce
+                        await Future.delayed(Duration(milliseconds: 350));
 
                         if (value == _textEditingController.text &&
                             value != _appBarProvider.queryText) {
