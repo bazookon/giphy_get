@@ -8,6 +8,7 @@ import 'package:giphy_get/src/l10n/l10n.dart';
 import 'package:giphy_get/src/providers/app_bar_provider.dart';
 import 'package:giphy_get/src/providers/sheet_provider.dart';
 import 'package:giphy_get/src/providers/tab_provider.dart';
+import 'package:giphy_get/src/tools/debouncer.dart';
 import 'package:provider/provider.dart';
 
 class SearchAppBar extends StatefulWidget {
@@ -41,15 +42,22 @@ class _SearchAppBarState extends State<SearchAppBar> {
     // Focus
     _focus.addListener(_focusListener);
 
+    // Establish the debouncer
+    final _debouncer = Debouncer(
+        delay:
+            Duration(milliseconds: _appBarProvider.debounceTimeInMilliseconds));
+
     //Set Texfielf
     _textEditingController = new TextEditingController(
         text: Provider.of<AppBarProvider>(context, listen: false).queryText);
 
     // Listener TextField
     _textEditingController.addListener(() {
-      if (_appBarProvider.queryText != _textEditingController.text) {
-        _appBarProvider.queryText = _textEditingController.text;
-      }
+      _debouncer.call(() {
+        if (_appBarProvider.queryText != _textEditingController.text) {
+          _appBarProvider.queryText = _textEditingController.text;
+        }
+      });
     });
 
     super.initState();

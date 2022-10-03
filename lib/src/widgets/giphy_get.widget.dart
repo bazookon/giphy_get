@@ -29,6 +29,7 @@ class GiphyGetWrapper extends StatelessWidget {
       context: context,
       apiKey: giphy_api_key, //YOUR API KEY HERE
       lang: GiphyLanguage.spanish,
+      debounceTimeInMilliseconds: 350,
     );
     if (gif != null) streamController.add(gif);
     // stream.add(gif!);
