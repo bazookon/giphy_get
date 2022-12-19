@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: const [
         Locale('en', ''),
         Locale('es', ''),
+        Locale('da', ''),
       ],
       home: const MyHomePage(title: 'Giphy Get Demo'),
       themeMode: Provider.of<ThemeProvider>(context).currentTheme,

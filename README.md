@@ -40,6 +40,7 @@ return MaterialApp(
         // Your supported languages
         Locale('en', ''),
         Locale('es', ''),
+        Locale('da', ''),
       ],
       home: MyHomePage(title: 'Giphy Get Demo'),
       themeMode: Provider.of<ThemeProvider>(context).currentTheme,
