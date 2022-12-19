@@ -23,11 +23,12 @@ jobs:
       - name: Restore packages
         run: flutter pub get
 
+      - name: Add .env file
+        run: echo "GIPHY_API_KEY=${GIPHY_API_KEY} TEST=true" > example/.env
+        
       - name: Analyze
         run: flutter analyze
       
-      - name: Add .env file
-        run: echo "GIPHY_API_KEY=${GIPHY_API_KEY} TEST=true" > example/.env
       
       - name: Run tests
         run: flutter test --coverage
