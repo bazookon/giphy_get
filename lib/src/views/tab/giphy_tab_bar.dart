@@ -6,27 +6,42 @@ import 'package:provider/provider.dart';
 
 class GiphyTabBar extends StatefulWidget {
   final TabController tabController;
-  const GiphyTabBar({Key? key, required this.tabController}) : super(key: key);
+  const GiphyTabBar({
+    Key? key,
+    required this.tabController,
+    this.showEmojis = true,
+    this.showGIFs = true,
+    this.showStickers = true,
+  }) : super(key: key);
+
+  final bool showGIFs;
+  final bool showStickers;
+  final bool showEmojis;
 
   @override
   _GiphyTabBarState createState() => _GiphyTabBarState();
 }
 
+class TabWithType {
+  final Tab tab;
+  final String type;
+
+  TabWithType({
+    required this.tab,
+    required this.type,
+  });
+}
+
 class _GiphyTabBarState extends State<GiphyTabBar> {
   late TabProvider _tabProvider;
-  late List<Tab> _tabs;
-  
+  late List<TabWithType> _tabs;
 
   @override
   void initState() {
     super.initState();
 
-    
-
     // TabProvider
     _tabProvider = Provider.of<TabProvider>(context, listen: false);
-
-    
 
     //  Listen Tab Controller
     widget.tabController.addListener(() {
@@ -43,16 +58,14 @@ class _GiphyTabBarState extends State<GiphyTabBar> {
     // Set TabList
     final l = GiphyGetUILocalizations.labelsOf(context);
     _tabs = [
-      Tab(
-        text: l.gifsLabel,
-      ),
-      Tab(
-        text: l.stickersLabel,
-      ),
-      Tab(
-        text: l.emojisLabel,
-      ),
+      if (widget.showGIFs)
+        TabWithType(tab: Tab(text: l.gifsLabel), type: GiphyType.gifs),
+      if (widget.showStickers)
+        TabWithType(tab: Tab(text: l.stickersLabel), type: GiphyType.stickers),
+      if (widget.showEmojis)
+        TabWithType(tab: Tab(text: l.emojisLabel), type: GiphyType.emoji),
     ];
+
     super.didChangeDependencies();
   }
 
@@ -67,33 +80,23 @@ class _GiphyTabBarState extends State<GiphyTabBar> {
   Widget build(BuildContext context) {
     _tabProvider = Provider.of<TabProvider>(context);
 
+    if (_tabs.length == 1) return SizedBox();
+
     return TabBar(
       unselectedLabelColor: Theme.of(context).brightness == Brightness.light
           ? Colors.black54
           : Colors.white54,
-      labelColor: _tabProvider.tabColor ?? Theme.of(context).colorScheme.secondary,
+      labelColor:
+          _tabProvider.tabColor ?? Theme.of(context).colorScheme.secondary,
       indicatorColor: Colors.transparent,
       indicatorSize: TabBarIndicatorSize.label,
       controller: widget.tabController,
-      tabs: _tabs,
+      tabs: _tabs.map((e) => e.tab).toList(),
       onTap: _setTabType,
     );
   }
 
   _setTabType(int pos) {
-    String _tabType;
-    // set Tab Type to provider
-    switch (widget.tabController.index) {
-      case 0:
-        _tabType = GiphyType.gifs;
-        break;
-      case 1:
-        _tabType = GiphyType.stickers;
-        break;
-      default:
-        _tabType = GiphyType.emoji;
-        break;
-    }
-    _tabProvider.tabType = _tabType;
+    _tabProvider.tabType = _tabs[pos].type;
   }
 }

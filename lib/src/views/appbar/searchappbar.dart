@@ -8,6 +8,7 @@ import 'package:giphy_get/src/l10n/l10n.dart';
 import 'package:giphy_get/src/providers/app_bar_provider.dart';
 import 'package:giphy_get/src/providers/sheet_provider.dart';
 import 'package:giphy_get/src/providers/tab_provider.dart';
+import 'package:giphy_get/src/tools/debouncer.dart';
 import 'package:provider/provider.dart';
 
 class SearchAppBar extends StatefulWidget {
@@ -41,15 +42,26 @@ class _SearchAppBarState extends State<SearchAppBar> {
     // Focus
     _focus.addListener(_focusListener);
 
-    //Set Texfielf
+    //Set Texfield Controller
     _textEditingController = new TextEditingController(
         text: Provider.of<AppBarProvider>(context, listen: false).queryText);
 
-    // Listener TextField
-    _textEditingController.addListener(() {
-      if (_appBarProvider.queryText != _textEditingController.text) {
-        _appBarProvider.queryText = _textEditingController.text;
-      }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Establish the debouncer
+      final _debouncer = Debouncer(
+        delay: Duration(
+          milliseconds: _appBarProvider.debounceTimeInMilliseconds,
+        ),
+      );
+
+      // Listener TextField
+      _textEditingController.addListener(() {
+        _debouncer.call(() {
+          if (_appBarProvider.queryText != _textEditingController.text) {
+            _appBarProvider.queryText = _textEditingController.text;
+          }
+        });
+      });
     });
 
     super.initState();
@@ -89,7 +101,6 @@ class _SearchAppBarState extends State<SearchAppBar> {
     return Column(
       children: [
         _tabProvider.tabType == GiphyType.emoji
-            // ? Container(height: 40.0, child: _giphyLogo())
             ? Container()
             : SizedBox(
                 height: 40,
@@ -137,19 +148,21 @@ class _SearchAppBarState extends State<SearchAppBar> {
     } else {
       return ShaderMask(
         shaderCallback: (bounds) => LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Color(0xFFFF6666),
-              Color(0xFF9933FF),
-            ]).createShader(bounds),
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [
+            Color(0xFFFF6666),
+            Color(0xFF9933FF),
+          ],
+        ).createShader(bounds),
         child: Transform(
-            alignment: Alignment.center,
-            transform: Matrix4.rotationY(pi),
-            child: Icon(
-              Icons.search,
-              color: Colors.white,
-            )),
+          alignment: Alignment.center,
+          transform: Matrix4.rotationY(pi),
+          child: Icon(
+            Icons.search,
+            color: Colors.white,
+          ),
+        ),
       );
     }
   }
@@ -160,6 +173,5 @@ class _SearchAppBarState extends State<SearchAppBar> {
         _sheetProvider.initialExtent == SheetProvider.minExtent) {
       _sheetProvider.initialExtent = SheetProvider.maxExtent;
     }
-    print("Focus : ${_focus.hasFocus}");
   }
 }

@@ -45,25 +45,28 @@ class GiphyGif {
   });
 
   factory GiphyGif.fromJson(Map<String, dynamic> json) => GiphyGif(
-      title: json['title'],
-      type: json['type'],
-      id: json['id'],
-      slug: json['slug'],
-      url: json['url'],
-      bitlyGifUrl: json['bitly_gif_url'],
-      bitlyUrl: json['bitly_url'],
-      embedUrl: json['embed_url'],
-      username: json['username'],
-      source: json['source'],
-      rating: json['rating'],
-      contentUrl: json['content_url'],
-      sourceTld: json['source_tld'],
-      sourcePostUrl: json['source_post_url'],
-      isSticker: json['is_sticker'] as int,
-      importDatetime: DateTime.parse(json['import_datetime']),
-      trendingDatetime: DateTime.parse(json['trending_datetime']),
-      user: GiphyUser.fromJson(json['user'] as Map<String, dynamic>?),
-      images: GiphyImages.fromJson(json['images'] as Map<String, dynamic>));
+        title: json['title'],
+        type: json['type'],
+        id: json['id'],
+        slug: json['slug'],
+        url: json['url'],
+        bitlyGifUrl: json['bitly_gif_url'],
+        bitlyUrl: json['bitly_url'],
+        embedUrl: json['embed_url'],
+        username: json['username'],
+        source: json['source'],
+        rating: json['rating'],
+        contentUrl: json['content_url'],
+        sourceTld: json['source_tld'],
+        sourcePostUrl: json['source_post_url'],
+        isSticker: json['is_sticker'] as int,
+        importDatetime: DateTime.parse(json['import_datetime']),
+        trendingDatetime: DateTime.parse(json['trending_datetime']),
+        user: GiphyUser.fromJson(json['user'] as Map<String, dynamic>?),
+        images: GiphyImages.fromJson(
+          json['images'] as Map<String, dynamic>,
+        ),
+      );
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{

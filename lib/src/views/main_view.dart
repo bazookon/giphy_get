@@ -8,7 +8,16 @@ import 'package:giphy_get/src/views/tab/giphy_tab_view.dart';
 import 'package:provider/provider.dart';
 
 class MainView extends StatefulWidget {
-  MainView({Key? key}) : super(key: key);
+  MainView({
+    Key? key,
+    this.showEmojis = true,
+    this.showGIFs = true,
+    this.showStickers = true,
+  }) : super(key: key);
+
+  final bool showGIFs;
+  final bool showStickers;
+  final bool showEmojis;
 
   @override
   _MainViewState createState() => _MainViewState();
@@ -29,7 +38,14 @@ class _MainViewState extends State<MainView>
   void initState() {
     super.initState();
 
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(
+      length: [
+        widget.showGIFs,
+        widget.showEmojis,
+        widget.showStickers,
+      ].where((isShown) => isShown).length,
+      vsync: this,
+    );
   }
 
   @override
@@ -67,13 +83,22 @@ class _MainViewState extends State<MainView>
           GiphyTabTop(),
           GiphyTabBar(
             tabController: _tabController,
+            showGIFs: widget.showGIFs,
+            showStickers: widget.showStickers,
+            showEmojis: widget.showEmojis,
           ),
-          SearchAppBar(scrollController: this._scrollController),
-          Expanded(
-              child: GiphyTabView(
-            tabController: _tabController,
+          SearchAppBar(
             scrollController: this._scrollController,
-          )),
+          ),
+          Expanded(
+            child: GiphyTabView(
+              tabController: _tabController,
+              scrollController: this._scrollController,
+              showGIFs: widget.showGIFs,
+              showStickers: widget.showStickers,
+              showEmojis: widget.showEmojis,
+            ),
+          ),
           GiphyTabBottom()
         ],
       );

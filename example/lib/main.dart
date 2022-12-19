@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: const [
         Locale('en', ''),
         Locale('es', ''),
+        Locale('da', ''),
       ],
       home: const MyHomePage(title: 'Giphy Get Demo'),
       themeMode: Provider.of<ThemeProvider>(context).currentTheme,
@@ -163,7 +164,13 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             floatingActionButton: FloatingActionButton(
                 onPressed: () async {
-                  giphyGetWrapper.getGif('', context);
+                  giphyGetWrapper.getGif(
+                    '',
+                    context,
+                    showGIFs: true,
+                    showStickers: true,
+                    showEmojis: true,
+                  );
                 },
                 tooltip: 'Open Sticker',
                 child: const Icon(Icons
