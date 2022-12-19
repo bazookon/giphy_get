@@ -145,51 +145,55 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         double.parse(gif.images!.fixedWidth.height));
 
     return ClipRRect(
-        borderRadius: BorderRadius.circular(10.0),
-        child: InkWell(
-            onTap: () => _selectedGif(gif),
-            child: gif.images == null || gif.images?.fixedWidth.webp == null
-                ? Container()
-                : ExtendedImage.network(gif.images!.fixedWidth.webp!,
-                    cache: true,
-                    gaplessPlayback: true,
-                    fit: BoxFit.fill,
-                    headers: {'accept': 'image/*'}, loadStateChanged: (state) {
-                    return AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 350),
-                      child: gif.images == null
-                          ? Container()
-                          : case2(
-                              state.extendedImageLoadState,
-                              {
-                                LoadState.loading: AspectRatio(
-                                  aspectRatio: _aspectRatio,
-                                  child: Container(
-                                    color: Theme.of(context).cardColor,
-                                  ),
-                                ),
-                                LoadState.completed: AspectRatio(
-                                  aspectRatio: _aspectRatio,
-                                  child: ExtendedRawImage(
-                                    fit: BoxFit.fill,
-                                    image: state.extendedImageInfo?.image,
-                                  ),
-                                ),
-                                LoadState.failed: AspectRatio(
-                                  aspectRatio: _aspectRatio,
-                                  child: Container(
-                                    color: Theme.of(context).cardColor,
-                                  ),
-                                ),
-                              },
-                              AspectRatio(
-                                aspectRatio: _aspectRatio,
-                                child: Container(
-                                  color: Theme.of(context).cardColor,
-                                ),
-                              )),
-                    );
-                  })));
+      borderRadius: BorderRadius.circular(10.0),
+      child: InkWell(
+        onTap: () => _selectedGif(gif),
+        child: gif.images == null || gif.images?.fixedWidth.webp == null
+            ? Container()
+            : ExtendedImage.network(
+                gif.images!.fixedWidth.webp!,
+                cache: true,
+                gaplessPlayback: true,
+                fit: BoxFit.fill,
+                headers: {'accept': 'image/*'},
+                loadStateChanged: (state) => AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 350),
+                  child: gif.images == null
+                      ? Container()
+                      : case2(
+                          state.extendedImageLoadState,
+                          {
+                            LoadState.loading: AspectRatio(
+                              aspectRatio: _aspectRatio,
+                              child: Container(
+                                color: Theme.of(context).cardColor,
+                              ),
+                            ),
+                            LoadState.completed: AspectRatio(
+                              aspectRatio: _aspectRatio,
+                              child: ExtendedRawImage(
+                                fit: BoxFit.fill,
+                                image: state.extendedImageInfo?.image,
+                              ),
+                            ),
+                            LoadState.failed: AspectRatio(
+                              aspectRatio: _aspectRatio,
+                              child: Container(
+                                color: Theme.of(context).cardColor,
+                              ),
+                            ),
+                          },
+                          AspectRatio(
+                            aspectRatio: _aspectRatio,
+                            child: Container(
+                              color: Theme.of(context).cardColor,
+                            ),
+                          ),
+                        ),
+                ),
+              ),
+      ),
+    );
   }
 
   Future<void> _loadMore() async {

@@ -39,10 +39,13 @@ class _MainViewState extends State<MainView>
     super.initState();
 
     _tabController = TabController(
-        length: [widget.showGIFs, widget.showEmojis, widget.showStickers]
-            .where((element) => element)
-            .length,
-        vsync: this);
+      length: [
+        widget.showGIFs,
+        widget.showEmojis,
+        widget.showStickers,
+      ].where((isShown) => isShown).length,
+      vsync: this,
+    );
   }
 
   @override
@@ -84,15 +87,18 @@ class _MainViewState extends State<MainView>
             showStickers: widget.showStickers,
             showEmojis: widget.showEmojis,
           ),
-          SearchAppBar(scrollController: this._scrollController),
-          Expanded(
-              child: GiphyTabView(
-            tabController: _tabController,
+          SearchAppBar(
             scrollController: this._scrollController,
-            showGIFs: widget.showGIFs,
-            showStickers: widget.showStickers,
-            showEmojis: widget.showEmojis,
-          )),
+          ),
+          Expanded(
+            child: GiphyTabView(
+              tabController: _tabController,
+              scrollController: this._scrollController,
+              showGIFs: widget.showGIFs,
+              showStickers: widget.showStickers,
+              showEmojis: widget.showEmojis,
+            ),
+          ),
           GiphyTabBottom()
         ],
       );

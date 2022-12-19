@@ -12,14 +12,14 @@ class GiphyGifWidget extends StatefulWidget {
   final bool showGiphyLabel;
   final BorderRadius? borderRadius;
   final Alignment imageAlignment;
-  const GiphyGifWidget(
-      {Key? key,
-      required this.gif,
-      required this.giphyGetWrapper,
-      this.borderRadius,
-      this.imageAlignment = Alignment.center,
-      this.showGiphyLabel = true})
-      : super(key: key);
+  const GiphyGifWidget({
+    Key? key,
+    required this.gif,
+    required this.giphyGetWrapper,
+    this.borderRadius,
+    this.imageAlignment = Alignment.center,
+    this.showGiphyLabel = true,
+  }) : super(key: key);
 
   @override
   State<GiphyGifWidget> createState() => _GiphyGifWidgetState();
@@ -51,26 +51,27 @@ class _GiphyGifWidgetState extends State<GiphyGifWidget> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               GestureDetector(
-                  onLongPress: () {
-                    _triggerShowHideMenu();
-                  },
-                  onTap: () {
-                    setState(() {
-                      _timerMenu?.cancel();
-                      _showMenu = false;
-                    });
-                  },
-                  child: Container(
-                    width: double.parse(widget.gif.images!.fixedWidth.width),
-                    height: double.parse(widget.gif.images!.fixedWidth.height),
-                    clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                      borderRadius: widget.borderRadius,
-                    ),
-                    child: ExtendedImage.network(
-                      widget.gif.images!.fixedWidth.url,
-                    ),
-                  )),
+                onLongPress: () {
+                  _triggerShowHideMenu();
+                },
+                onTap: () {
+                  setState(() {
+                    _timerMenu?.cancel();
+                    _showMenu = false;
+                  });
+                },
+                child: Container(
+                  width: double.parse(widget.gif.images!.fixedWidth.width),
+                  height: double.parse(widget.gif.images!.fixedWidth.height),
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                    borderRadius: widget.borderRadius,
+                  ),
+                  child: ExtendedImage.network(
+                    widget.gif.images!.fixedWidth.url,
+                  ),
+                ),
+              ),
               widget.showGiphyLabel
                   ? FittedBox(
                       child: Text(
@@ -110,12 +111,17 @@ class _GiphyGifWidgetState extends State<GiphyGifWidget> {
                       ),
                     ),
                     TextButton(
-                        onPressed: () {
-                          widget.giphyGetWrapper
-                              .getGif('@${widget.gif.username}', context);
-                        },
-                        child: Text('${l.moreBy} @${widget.gif.username}',
-                            style: buttonsTextStyle))
+                      onPressed: () {
+                        widget.giphyGetWrapper.getGif(
+                          '@${widget.gif.username}',
+                          context,
+                        );
+                      },
+                      child: Text(
+                        '${l.moreBy} @${widget.gif.username}',
+                        style: buttonsTextStyle,
+                      ),
+                    )
                   ],
                 ),
               ),

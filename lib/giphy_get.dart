@@ -46,34 +46,44 @@ class GiphyGet {
     }
 
     return showModalBottomSheet<GiphyGif>(
-        clipBehavior: Clip.antiAlias,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(10.0))),
-        isScrollControlled: true,
-        context: context,
-        builder: (ctx) => MultiProvider(
-                providers: [
-                  ChangeNotifierProvider(
-                    create: (ctx) => AppBarProvider(
-                        queryText = queryText, debounceTimeInMilliseconds),
-                  ),
-                  ChangeNotifierProvider(
-                    create: (ctx) => SheetProvider(),
-                  ),
-                  ChangeNotifierProvider(
-                      create: (ctx) => TabProvider(
-                          apiKey: apiKey,
-                          randomID: randomID,
-                          tabColor: tabColor ??
-                              Theme.of(context).colorScheme.secondary,
-                          searchText: searchText,
-                          rating: rating,
-                          lang: lang))
-                ],
-                child: SafeArea(
-                    child: MainView(
-                        showGIFs: showGIFs,
-                        showStickers: showStickers,
-                        showEmojis: showEmojis))));
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(10.0),
+        ),
+      ),
+      isScrollControlled: true,
+      context: context,
+      builder: (ctx) => MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (ctx) => AppBarProvider(
+              queryText = queryText,
+              debounceTimeInMilliseconds,
+            ),
+          ),
+          ChangeNotifierProvider(
+            create: (ctx) => SheetProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (ctx) => TabProvider(
+              apiKey: apiKey,
+              randomID: randomID,
+              tabColor: tabColor ?? Theme.of(context).colorScheme.secondary,
+              searchText: searchText,
+              rating: rating,
+              lang: lang,
+            ),
+          )
+        ],
+        child: SafeArea(
+          child: MainView(
+            showGIFs: showGIFs,
+            showStickers: showStickers,
+            showEmojis: showEmojis,
+          ),
+        ),
+      ),
+    );
   }
 }

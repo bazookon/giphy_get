@@ -10,7 +10,6 @@ class TabProvider with ChangeNotifier {
   String lang = GiphyLanguage.english;
   String randomID = "";
 
-  // TabType
   String? _tabType;
   String get tabType => _tabType ?? '';
   set tabType(String tabType) {
@@ -18,14 +17,15 @@ class TabProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // Constructor
-  TabProvider(
-      {required this.apiKey,
-      this.tabColor,
-      this.searchText,
-      required this.rating,
-      required this.randomID,
-      required this.lang});
+  TabProvider({
+    required this.apiKey,
+    this.tabColor,
+    this.searchText,
+    required this.rating,
+    required this.randomID,
+    required this.lang,
+  });
+
   void setTabColor(Color tabColor) {
     tabColor = tabColor;
     notifyListeners();
