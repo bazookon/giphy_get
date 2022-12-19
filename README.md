@@ -74,7 +74,10 @@ GiphyGif gif = await GiphyGet.getGif(
 | `randomID`                   | String | An ID/proxy for a specific user.                                                                                | `null`                          |
 | `searchText`                 | String | Input search hint, we recomend use [flutter_18n package](https://pub.dev/packages/flutter_i18n) for translation | `"Search GIPHY"`                |
 | `tabColor`                   | Color  | Color for tabs and loading progress,                                                                            | `Theme.of(context).accentColor` |
-| `debounceTimeInMilliseconds` | int    | Time to pause between search keystrokes,                                                                        | `350`                           |
+| `debounceTimeInMilliseconds` | int    | Time to pause between search keystrokes                                                                         | `350`                           |
+| `showGIFs`                   | bool   | Whether to show the GIFs tab or not                                                                             | `true`                          |
+| `showStickers`               | bool   | Whether to show the stickers tab or not                                                                         | `true`                          |
+| `showEmojis`                 | bool   | Whether to show the emojis tab or not                                                                           | `true`                          |
 
 ### [Get Random ID](https://developers.giphy.com/docs/api/endpoint#random-id)
 
@@ -98,9 +101,9 @@ Params
 |---------------------------|--------------------------------------------------|-----------------|------------|
 | gif `required` | GiphyGif |GiphyGif object from stream or JSON | null |  
 |giphyGetWrapper `required`| GiphyGetWrapper |instance required for tap to more | null |
-| showGiphyLabel | boolean | show or hide `Powered by GIPHY`label at bottom | true|
+| showGiphyLabel | boolean | show or hide `Powered by GIPHY`label at bottom | true|
 |borderRadius| BorderRadius ex: BorderRadius.circular(10)| add border radius to image | null|
-|imageAlignment| Alignment | this widget is a [STACK](https://api.flutter.dev/flutter/widgets/Stack-class.html) with Image and tap buttons this property adjust alignment| Alignment.center|
+|imageAlignment| Alignment | this widget is a [STACK](https://api.flutter.dev/flutter/widgets/Stack-class.html) with Image and tap buttons this property adjust alignment| Alignment.center|
 
 ## GiphyGetWrapper
 
