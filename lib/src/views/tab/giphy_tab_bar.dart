@@ -22,9 +22,19 @@ class GiphyTabBar extends StatefulWidget {
   _GiphyTabBarState createState() => _GiphyTabBarState();
 }
 
+class TabWithType {
+  final Tab tab;
+  final String type;
+
+  TabWithType({
+    required this.tab,
+    required this.type,
+  });
+}
+
 class _GiphyTabBarState extends State<GiphyTabBar> {
   late TabProvider _tabProvider;
-  late List<Tab> _tabs;
+  late List<TabWithType> _tabs;
 
   @override
   void initState() {
@@ -48,9 +58,12 @@ class _GiphyTabBarState extends State<GiphyTabBar> {
     // Set TabList
     final l = GiphyGetUILocalizations.labelsOf(context);
     _tabs = [
-      if (widget.showGIFs) Tab(text: l.gifsLabel),
-      if (widget.showStickers) Tab(text: l.stickersLabel),
-      if (widget.showEmojis) Tab(text: l.emojisLabel),
+      if (widget.showGIFs)
+        TabWithType(tab: Tab(text: l.gifsLabel), type: GiphyType.gifs),
+      if (widget.showStickers)
+        TabWithType(tab: Tab(text: l.stickersLabel), type: GiphyType.stickers),
+      if (widget.showEmojis)
+        TabWithType(tab: Tab(text: l.emojisLabel), type: GiphyType.emoji),
     ];
 
     super.didChangeDependencies();
@@ -78,25 +91,12 @@ class _GiphyTabBarState extends State<GiphyTabBar> {
       indicatorColor: Colors.transparent,
       indicatorSize: TabBarIndicatorSize.label,
       controller: widget.tabController,
-      tabs: _tabs,
+      tabs: _tabs.map((e) => e.tab).toList(),
       onTap: _setTabType,
     );
   }
 
   _setTabType(int pos) {
-    String _tabType;
-    // set Tab Type to provider
-    switch (widget.tabController.index) {
-      case 0:
-        _tabType = GiphyType.gifs;
-        break;
-      case 1:
-        _tabType = GiphyType.stickers;
-        break;
-      default:
-        _tabType = GiphyType.emoji;
-        break;
-    }
-    _tabProvider.tabType = _tabType;
+    _tabProvider.tabType = _tabs[pos].type;
   }
 }
