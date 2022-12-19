@@ -37,16 +37,13 @@ return MaterialApp(
         GiphyGetUILocalizations.delegate
       ],
       supportedLocales: [
-
-        //Your supported languages
+        // Your supported languages
         Locale('en', ''),
         Locale('es', ''),
       ],
       home: MyHomePage(title: 'Giphy Get Demo'),
       themeMode: Provider.of<ThemeProvider>(context).currentTheme,
     );
-
-
 ```
 
 ### Get only Gif
@@ -82,10 +79,8 @@ GiphyGif gif = await GiphyGet.getGif(
 ### [Get Random ID](https://developers.giphy.com/docs/api/endpoint#random-id)
 
 ```dart
-
 GiphyClient giphyClient = GiphyClient(apiKey: "YOUR API KEY");
 String randomId = await giphyClient.getRandomId();
-
 ```
 
 # Widgets
