@@ -35,6 +35,9 @@ class GiphyGet {
     String searchText = "",
     String queryText = "",
     bool modal = true,
+    bool showGIFs = true,
+    bool showStickers = true,
+    bool showEmojis = true,
     Color? tabColor,
   }) {
     if (apiKey == "") {
@@ -47,22 +50,28 @@ class GiphyGet {
             borderRadius: BorderRadius.vertical(top: Radius.circular(10.0))),
         isScrollControlled: true,
         context: context,
-        builder: (ctx) => MultiProvider(providers: [
-              ChangeNotifierProvider(
-                create: (ctx) => AppBarProvider(queryText = queryText),
-              ),
-              ChangeNotifierProvider(
-                create: (ctx) => SheetProvider(),
-              ),
-              ChangeNotifierProvider(
-                  create: (ctx) => TabProvider(
-                      apiKey: apiKey,
-                      randomID: randomID,
-                      tabColor:
-                          tabColor ?? Theme.of(context).colorScheme.secondary,
-                      searchText: searchText,
-                      rating: rating,
-                      lang: lang))
-            ], child: SafeArea(child: MainView())));
+        builder: (ctx) => MultiProvider(
+                providers: [
+                  ChangeNotifierProvider(
+                    create: (ctx) => AppBarProvider(queryText = queryText),
+                  ),
+                  ChangeNotifierProvider(
+                    create: (ctx) => SheetProvider(),
+                  ),
+                  ChangeNotifierProvider(
+                      create: (ctx) => TabProvider(
+                          apiKey: apiKey,
+                          randomID: randomID,
+                          tabColor: tabColor ??
+                              Theme.of(context).colorScheme.secondary,
+                          searchText: searchText,
+                          rating: rating,
+                          lang: lang))
+                ],
+                child: SafeArea(
+                    child: MainView(
+                        showGIFs: showGIFs,
+                        showStickers: showStickers,
+                        showEmojis: showEmojis))));
   }
 }

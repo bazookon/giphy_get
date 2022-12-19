@@ -163,7 +163,13 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             floatingActionButton: FloatingActionButton(
                 onPressed: () async {
-                  giphyGetWrapper.getGif('', context);
+                  giphyGetWrapper.getGif(
+                    '',
+                    context,
+                    showGIFs: true,
+                    showStickers: true,
+                    showEmojis: true,
+                  );
                 },
                 tooltip: 'Open Sticker',
                 child: const Icon(Icons
