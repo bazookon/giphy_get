@@ -1,3 +1,5 @@
+## [3.2.0] - 2022-12-19
+* Search Debounce added [#30](https://github.com/bazookon/giphy_get/pull/40) thanks to [simplenotezy](https://github.com/simplenotezy)
 ## [3.1.1] - 2022-09-06
 * Update dependencies to latest
 

@@ -16,6 +16,7 @@ jobs:
 
     steps:        
       - uses: actions/checkout@v2
+      
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
@@ -24,6 +25,9 @@ jobs:
 
       - name: Analyze
         run: flutter analyze
+      
+      - name: Add .env file
+        run: echo "GIPHY_API_KEY=${GIPHY_API_KEY} TEST=true" > example/.env
       
       - name: Run tests
         run: flutter test --coverage
