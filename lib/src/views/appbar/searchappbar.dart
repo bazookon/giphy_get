@@ -42,21 +42,23 @@ class _SearchAppBarState extends State<SearchAppBar> {
     // Focus
     _focus.addListener(_focusListener);
 
-    // Establish the debouncer
-    final _debouncer = Debouncer(
-        delay:
-            Duration(milliseconds: _appBarProvider.debounceTimeInMilliseconds));
-
-    //Set Texfielf
+    //Set Texfield Controller
     _textEditingController = new TextEditingController(
         text: Provider.of<AppBarProvider>(context, listen: false).queryText);
 
-    // Listener TextField
-    _textEditingController.addListener(() {
-      _debouncer.call(() {
-        if (_appBarProvider.queryText != _textEditingController.text) {
-          _appBarProvider.queryText = _textEditingController.text;
-        }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Establish the debouncer
+      final _debouncer = Debouncer(
+          delay: Duration(
+              milliseconds: _appBarProvider.debounceTimeInMilliseconds));
+
+      // Listener TextField
+      _textEditingController.addListener(() {
+        _debouncer.call(() {
+          if (_appBarProvider.queryText != _textEditingController.text) {
+            _appBarProvider.queryText = _textEditingController.text;
+          }
+        });
       });
     });
 
