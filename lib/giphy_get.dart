@@ -39,6 +39,7 @@ class GiphyGet {
     bool showStickers = true,
     bool showEmojis = true,
     Color? tabColor,
+    int debounceTimeInMilliseconds = 350,
   }) {
     if (apiKey == "") {
       throw Exception("apiKey must be not null or not empty");
@@ -53,7 +54,8 @@ class GiphyGet {
         builder: (ctx) => MultiProvider(
                 providers: [
                   ChangeNotifierProvider(
-                    create: (ctx) => AppBarProvider(queryText = queryText),
+                    create: (ctx) => AppBarProvider(
+                        queryText = queryText, debounceTimeInMilliseconds),
                   ),
                   ChangeNotifierProvider(
                     create: (ctx) => SheetProvider(),

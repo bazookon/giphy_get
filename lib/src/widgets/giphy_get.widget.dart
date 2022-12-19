@@ -38,6 +38,7 @@ class GiphyGetWrapper extends StatelessWidget {
       showGIFs: showGIFs,
       showStickers: showStickers,
       showEmojis: showEmojis,
+      debounceTimeInMilliseconds: 350,
     );
     if (gif != null) streamController.add(gif);
     // stream.add(gif!);
