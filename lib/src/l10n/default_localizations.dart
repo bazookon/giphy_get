@@ -1,3 +1,7 @@
+import 'package:giphy_get/src/l10n/lang/et.dart';
+import 'package:giphy_get/src/l10n/lang/lt.dart';
+import 'package:giphy_get/src/l10n/lang/lv.dart';
+
 import 'lang/en.dart';
 import 'lang/es.dart';
 import 'lang/da.dart';
@@ -18,6 +22,9 @@ const localizations = <String, GiphyGetUILocalizationLabels>{
   'en': EnLocalizations(),
   'es': EsLocalizations(),
   'da': DaLocalizations(),
+  'lt': LtLocalizations(),
+  'lv': LvLocalizations(),
+  'et': EtLocalizations(),
 };
 
 class DefaultLocalizations extends EnLocalizations {
