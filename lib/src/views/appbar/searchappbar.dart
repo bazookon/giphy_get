@@ -121,7 +121,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
                             icon: Icon(
                               Icons.clear,
                               color:
-                                  Theme.of(context).textTheme.bodyText1!.color!,
+                                  Theme.of(context).textTheme.bodyLarge!.color!,
                             ),
                             onPressed: () {
                               setState(() {
