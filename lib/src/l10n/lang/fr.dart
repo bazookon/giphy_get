@@ -1,4 +1,4 @@
-import 'package:giphy_get/l10n.dart';
+import '../default_localizations.dart';
 
 class FrLocalizations extends GiphyGetUILocalizationLabels {
   @override
@@ -21,7 +21,7 @@ class FrLocalizations extends GiphyGetUILocalizationLabels {
 
   @override
   final String viewOnGiphy;
-  FrLocalizations({
+  const FrLocalizations({
     this.searchInputLabel = 'Recherche GIPHY',
     this.emojisLabel = 'Emojis',
     this.gifsLabel = 'GIFs',
