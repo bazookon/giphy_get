@@ -82,17 +82,14 @@ class _GiphyTabBarState extends State<GiphyTabBar> {
 
     if (_tabs.length == 1) return SizedBox();
 
-    return TabBar(
-      unselectedLabelColor: Theme.of(context).brightness == Brightness.light
-          ? Colors.black54
-          : Colors.white54,
-      labelColor:
-          _tabProvider.tabColor ?? Theme.of(context).colorScheme.secondary,
-      indicatorColor: Colors.transparent,
-      indicatorSize: TabBarIndicatorSize.label,
-      controller: widget.tabController,
-      tabs: _tabs.map((e) => e.tab).toList(),
-      onTap: _setTabType,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 5.0),
+      child: TabBar(
+        indicatorSize: TabBarIndicatorSize.label,
+        controller: widget.tabController,
+        tabs: _tabs.map((e) => e.tab).toList(),
+        onTap: _setTabType,
+      ),
     );
   }
 

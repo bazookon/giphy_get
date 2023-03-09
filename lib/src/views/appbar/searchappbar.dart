@@ -114,6 +114,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
                       focusNode: _focus,
                       controller: _textEditingController,
                       decoration: InputDecoration(
+                        isDense: true,
                         filled: true,
                         prefixIcon: _searchIcon(),
                         hintText: l.searchInputLabel,
@@ -121,7 +122,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
                             icon: Icon(
                               Icons.clear,
                               color:
-                                  Theme.of(context).textTheme.bodyText1!.color!,
+                                  Theme.of(context).textTheme.bodyLarge!.color!,
                             ),
                             onPressed: () {
                               setState(() {

@@ -31,15 +31,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Giphy Get Demo',
       theme: ThemeData(
-        brightness: Brightness.light,
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+          brightness: Brightness.light,
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          useMaterial3: Provider.of<ThemeProvider>(context).material3),
       darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.purple,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+          brightness: Brightness.dark,
+          primarySwatch: Colors.purple,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          useMaterial3: Provider.of<ThemeProvider>(context).material3),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -49,6 +49,7 @@ class MyApp extends StatelessWidget {
         Locale('en', ''),
         Locale('es', ''),
         Locale('da', ''),
+        Locale('fr', ''),
       ],
       home: const MyHomePage(title: 'Giphy Get Demo'),
       themeMode: Provider.of<ThemeProvider>(context).currentTheme,
@@ -134,6 +135,16 @@ class _MyHomePageState extends State<MyHomePage> {
                           onChanged: (value) {
                             themeProvider.setCurrentTheme(
                                 value ? ThemeMode.dark : ThemeMode.light);
+                          })
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Expanded(child: Text("Material 3")),
+                      Switch(
+                          value: themeProvider.material3,
+                          onChanged: (value) {
+                            themeProvider.setMaterial3(value);
                           })
                     ],
                   ),

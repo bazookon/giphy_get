@@ -11,4 +11,12 @@ class ThemeProvider extends ChangeNotifier {
     _currentTheme = mode;
     notifyListeners();
   }
+
+  bool _material3 = true;
+  bool get material3 => _material3;
+
+  void setMaterial3(bool value) {
+    _material3 = value;
+    notifyListeners();
+  }
 }
