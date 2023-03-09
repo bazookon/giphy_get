@@ -14,7 +14,7 @@ class _GiphyTabTopState extends State<GiphyTabTop> {
       margin: EdgeInsets.symmetric(vertical: 8.0),
       width: 50,
       height: 2,
-      color: Theme.of(context).textTheme.bodyText1!.color!,
+      color: Theme.of(context).textTheme.bodyLarge!.color!,
     );
   }
 }
