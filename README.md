@@ -93,21 +93,21 @@ Optional but this widget is required if you get more gif's of user or view on Gi
 ## GiphyGifWidget
 
 Params
-| Value | Type | Description | Default |
-|---------------------------|--------------------------------------------------|-----------------|------------|
-| gif `required` | GiphyGif |GiphyGif object from stream or JSON | null |  
-|giphyGetWrapper `required`| GiphyGetWrapper |instance required for tap to more | null |
-| showGiphyLabel | boolean | show or hide `Powered by GIPHY`label at bottom | true|
-|borderRadius| BorderRadius ex: BorderRadius.circular(10)| add border radius to image | null|
-|imageAlignment| Alignment | this widget is a [STACK](https://api.flutter.dev/flutter/widgets/Stack-class.html) with Image and tap buttons this property adjust alignment| Alignment.center|
+| Value                      | Type                                       | Description                                                                                                                                  | Default          |
+| -------------------------- | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| gif `required`             | GiphyGif                                   | GiphyGif object from stream or JSON                                                                                                          | null             |
+| giphyGetWrapper `required` | GiphyGetWrapper                            | instance required for tap to more                                                                                                            | null             |
+| showGiphyLabel             | boolean                                    | show or hide `Powered by GIPHY`label at bottom                                                                                               | true             |
+| borderRadius               | BorderRadius ex: BorderRadius.circular(10) | add border radius to image                                                                                                                   | null             |
+| imageAlignment             | Alignment                                  | this widget is a [STACK](https://api.flutter.dev/flutter/widgets/Stack-class.html) with Image and tap buttons this property adjust alignment | Alignment.center |
 
 ## GiphyGetWrapper
 
 Params
-| Value | Type | Description | Default |
-| ---------|-------------|--------------------|--------------- |
-| `giphy_api_key` required | String | Your Giphy API KEY | null |
-| `builder`| function | return Stream\<GiphyGif\> and Instance of GiphyGetWrapper | null |
+| Value                    | Type     | Description                                               | Default |
+| ------------------------ | -------- | --------------------------------------------------------- | ------- |
+| `giphy_api_key` required | String   | Your Giphy API KEY                                        | null    |
+| `builder`                | function | return Stream\<GiphyGif\> and Instance of GiphyGetWrapper | null    |
 
 ## Methods
 

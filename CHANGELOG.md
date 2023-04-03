@@ -1,3 +1,7 @@
+## [3.3.1] - 2023-04-03
+* Up-to-date dependencies
+* [Bug Fix] TabBar text color [#48](https://github.com/bazookon/giphy_get/pull/48) thanks to [sbis04](https://github.com/sbis04)
+
 ## [3.3.0] - 2023-03-09
 * French Added [#46](https://github.com/bazookon/giphy_get/pull/46) thanks to  [benco8186](https://github.com/benco8186)
 * Material 3 supported [#44](https://github.com/bazookon/giphy_get/pull/44) Thanks to [hifiaz](https://github.com/hifiaz)
