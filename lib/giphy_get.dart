@@ -39,6 +39,8 @@ class GiphyGet {
     bool showStickers = true,
     bool showEmojis = true,
     Color? tabColor,
+    Color? textSelectedColor,
+    Color? textUnselectedColor,
     int debounceTimeInMilliseconds = 350,
   }) {
     if (apiKey == "") {
@@ -70,6 +72,10 @@ class GiphyGet {
               apiKey: apiKey,
               randomID: randomID,
               tabColor: tabColor ?? Theme.of(context).colorScheme.secondary,
+              textSelectedColor: textSelectedColor ??
+                  Theme.of(context).textTheme.titleSmall?.color,
+              textUnselectedColor: textUnselectedColor ??
+                  Theme.of(context).textTheme.bodySmall?.color,
               searchText: searchText,
               rating: rating,
               lang: lang,
