@@ -23,7 +23,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key key}) : super(key: key);
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -59,31 +59,31 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   final String title;
-  const MyHomePage({Key key, this.title}) : super(key: key);
+
+  const MyHomePage({required this.title, super.key});
   @override
   // ignore: library_private_types_in_public_api
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  ThemeProvider themeProvider;
+  late ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
 
   //Gif
-  GiphyGif currentGif;
+  GiphyGif? currentGif;
 
   // Giphy Client
-  GiphyClient client;
+  late GiphyClient client = GiphyClient(apiKey: giphyApiKey, randomId: '');
 
   // Random ID
   String randomId = "";
 
-  String giphyApiKey = dotenv.env["GIPHY_API_KEY"];
+  String giphyApiKey = dotenv.env["GIPHY_API_KEY"]!;
 
   @override
   void initState() {
     super.initState();
 
-    client = GiphyClient(apiKey: giphyApiKey, randomId: '');
     WidgetsBinding.instance.addPostFrameCallback((_) {
       client.getRandomId().then((value) {
         setState(() {
@@ -91,12 +91,6 @@ class _MyHomePageState extends State<MyHomePage> {
         });
       });
     });
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    themeProvider = Provider.of<ThemeProvider>(context);
   }
 
   @override
@@ -163,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ? SizedBox(
                           child: GiphyGifWidget(
                             imageAlignment: Alignment.center,
-                            gif: currentGif,
+                            gif: currentGif!,
                             giphyGetWrapper: giphyGetWrapper,
                             borderRadius: BorderRadius.circular(30),
                             showGiphyLabel: true,
