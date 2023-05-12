@@ -53,10 +53,10 @@ packages:
     dependency: transitive
     description:
       name: extended_image
-      sha256: "75e4b0ad0f8f63eed7935ff2506c809a670f5e6dd0f61304525879d53fc41a17"
+      sha256: "73b7051722be79f9e8f8c120951fd9d3b22e6153fda6105c322fb88c066952d6"
       url: "https://pub.dev"
     source: hosted
-    version: "7.0.2"
+    version: "8.0.1"
   extended_image_library:
     dependency: transitive
     description:
@@ -498,4 +498,4 @@ packages:
     version: "1.0.0"
 sdks:
   dart: ">=3.0.0-417 <4.0.0"
-  flutter: ">=3.7.0"
+  flutter: ">=3.10.0"
