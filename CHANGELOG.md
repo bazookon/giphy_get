@@ -1,3 +1,6 @@
+## [3.4.0] - 2023-05-11
+* Up-to-date dependencies
+* Ready to flutter 3.10 🎉
 ## [3.3.1] - 2023-04-03
 * Up-to-date dependencies
 * [Bug Fix] TabBar text color [#48](https://github.com/bazookon/giphy_get/pull/48) thanks to [sbis04](https://github.com/sbis04)
