@@ -109,6 +109,7 @@ Params
 | `giphy_api_key` required | String   | Your Giphy API KEY                                        | null    |
 | `builder`                | function | return Stream\<GiphyGif\> and Instance of GiphyGetWrapper | null    |
 
+
 ## Methods
 
 void getGif(String queryText,BuildContext context)
