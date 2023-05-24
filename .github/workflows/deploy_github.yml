@@ -1,33 +1,16 @@
-name: Flutter Web CI/CD
+name: Gh-Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [ master ]
 
 jobs:
-  build_and_deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+      - uses: actions/checkout@v2 # Only works with v2
+      - uses: subosito/flutter-action@v1
+      - uses: erickzanardo/flutter-gh-pages@v6
         with:
-            channel: 'stable'
-            architecture: x64
-
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Build Flutter web
-        working-directory: ./example
-        run: flutter build web --dart-define=GIPHY_API_KEY=${{ secrets.GIPHY_API_KEY }}
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          personal_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/web
+         workingDir: example
