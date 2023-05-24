@@ -23,7 +23,8 @@ jobs:
         run: flutter pub get
 
       - name: Build Flutter web
-        run: flutter build web  --target=./example/lib/main.dart --dart-define=GIPHY_API_KEY=${{ secrets.GIPHY_API_KEY }}
+        working-directory: ./example
+        run: flutter build web --dart-define=GIPHY_API_KEY=${{ secrets.GIPHY_API_KEY }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
