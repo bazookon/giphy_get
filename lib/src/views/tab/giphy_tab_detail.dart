@@ -97,7 +97,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         ((MediaQuery.of(context).size.height - 30) / _gifWidth).round();
 
     _limit = _crossAxisCount * _mainAxisCount;
-
+    if (_limit > 100) _limit = 100;
     // Initial offset
     offset = 0;
 
