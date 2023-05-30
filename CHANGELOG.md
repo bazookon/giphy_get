@@ -1,3 +1,6 @@
+## [3.4.1] - 2023-05-11
+* Turkish Added [#51](https://github.com/bazookon/giphy_get/pull/51) thanks to [mobisofts](https://github.com/mobisofts)
+
 ## [3.4.0] - 2023-05-11
 * Up-to-date dependencies
 * Ready to flutter 3.10 🎉
