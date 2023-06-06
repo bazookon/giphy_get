@@ -78,7 +78,7 @@ class _GiphyGifWidgetState extends State<GiphyGifWidget> {
                       l.poweredByGiphy,
                       style: TextStyle(fontSize: 12),
                     ))
-                  : Container()
+                  : const SizedBox.shrink()
             ],
           ),
           IgnorePointer(
