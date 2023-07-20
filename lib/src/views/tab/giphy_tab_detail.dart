@@ -149,7 +149,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
       child: InkWell(
         onTap: () => _selectedGif(gif),
         child: gif.images == null || gif.images?.fixedWidth.webp == null
-            ? Container()
+            ? const SizedBox.shrink()
             : ExtendedImage.network(
                 gif.images!.fixedWidth.webp!,
                 cache: true,
@@ -159,7 +159,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
                 loadStateChanged: (state) => AnimatedSwitcher(
                   duration: const Duration(milliseconds: 350),
                   child: gif.images == null
-                      ? Container()
+                      ? const SizedBox.shrink()
                       : case2(
                           state.extendedImageLoadState,
                           {

@@ -101,7 +101,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
     return Column(
       children: [
         _tabProvider.tabType == GiphyType.emoji
-            ? Container()
+            ? const SizedBox.shrink()
             : SizedBox(
                 height: 40,
                 child: Center(
