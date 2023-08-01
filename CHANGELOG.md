@@ -1,3 +1,9 @@
+## [3.5.0] - 2023-08-01
+* Up-to-date dependencies
+* Allowing to override the default tab top (the handlebar)
+* Allowing to override the default tab bottom (Giphy's credits)
+* Allowing to override the search part component. In this case the logic part of the search is still made by the original component, only the UI part is overriden.
+thanks to [orevial](https://github.com/orevial)
 ## [3.4.2] - 2023-07-18
 * Up-to-date dependencies
 
