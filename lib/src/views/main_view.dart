@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:giphy_get/giphy_get.dart';
 import 'package:giphy_get/src/providers/sheet_provider.dart';
 import 'package:giphy_get/src/views/appbar/searchappbar.dart';
 import 'package:giphy_get/src/views/tab/giphy_tab_bar.dart';
@@ -13,11 +14,17 @@ class MainView extends StatefulWidget {
     this.showEmojis = true,
     this.showGIFs = true,
     this.showStickers = true,
+    this.tabTopBuilder,
+    this.tabBottomBuilder,
+    this.searchAppBarBuilder,
   }) : super(key: key);
 
   final bool showGIFs;
   final bool showStickers;
   final bool showEmojis;
+  final TabTopBuilder? tabTopBuilder;
+  final TabBottomBuilder? tabBottomBuilder;
+  final SearchAppBarBuilder? searchAppBarBuilder;
 
   @override
   _MainViewState createState() => _MainViewState();
@@ -80,7 +87,7 @@ class _MainViewState extends State<MainView>
   Widget _bottomSheetBody() => Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          GiphyTabTop(),
+          widget.tabTopBuilder?.call(context) ?? GiphyTabTop(),
           GiphyTabBar(
             tabController: _tabController,
             showGIFs: widget.showGIFs,
@@ -89,6 +96,7 @@ class _MainViewState extends State<MainView>
           ),
           SearchAppBar(
             scrollController: this._scrollController,
+            searchAppBarBuilder: widget.searchAppBarBuilder,
           ),
           Expanded(
             child: GiphyTabView(
@@ -99,7 +107,7 @@ class _MainViewState extends State<MainView>
               showEmojis: widget.showEmojis,
             ),
           ),
-          GiphyTabBottom()
+          widget.tabBottomBuilder?.call(context) ?? GiphyTabBottom(),
         ],
       );
 }

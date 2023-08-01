@@ -122,21 +122,18 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
       );
     }
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      // child: StaggeredGrid.countB
-      child: MasonryGridView.count(
-        scrollDirection: _scrollDirection,
-        controller: widget.scrollController,
-        itemCount: _list.length,
-        crossAxisCount: _crossAxisCount,
-        mainAxisSpacing: _spacing,
-        crossAxisSpacing: _spacing,
-        itemBuilder: (ctx, idx) {
-          GiphyGif _gif = _list[idx];
-          return _item(_gif);
-        },
-      ),
+    return MasonryGridView.count(
+      padding: EdgeInsets.symmetric(horizontal: 8.0),
+      scrollDirection: _scrollDirection,
+      controller: widget.scrollController,
+      itemCount: _list.length,
+      crossAxisCount: _crossAxisCount,
+      mainAxisSpacing: _spacing,
+      crossAxisSpacing: _spacing,
+      itemBuilder: (ctx, idx) {
+        GiphyGif _gif = _list[idx];
+        return _item(_gif);
+      },
     );
   }
 
@@ -152,6 +149,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
             ? Container()
             : ExtendedImage.network(
                 gif.images!.fixedWidth.webp!,
+                semanticLabel: gif.title,
                 cache: true,
                 gaplessPlayback: true,
                 fit: BoxFit.fill,
