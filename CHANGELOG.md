@@ -1,3 +1,6 @@
+## [3.5.1] - 2023-10-31
+* Up-to-date dependencies
+
 ## [3.5.0] - 2023-08-01
 * Up-to-date dependencies
 * Allowing to override the default tab top (the handlebar)
