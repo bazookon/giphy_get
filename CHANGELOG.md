@@ -1,3 +1,6 @@
+## [3.5.3] - 2023-12-21
+* Up-to-date ios dependencies
+
 ## [3.5.2] - 2023-10-31
 * Up-to-date ios dependencies
 
