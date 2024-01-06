@@ -22,7 +22,7 @@ class HuLocalizations extends GiphyGetUILocalizationLabels {
   @override
   final String poweredByGiphy;
 
-  const EnLocalizations({
+  const HuLocalizations({
     this.searchInputLabel = 'GIPHY keresés',
     this.emojisLabel = 'Emojik',
     this.gifsLabel = 'GIFek',
