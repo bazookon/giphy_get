@@ -1,3 +1,9 @@
+## [3.5.5] - 2024-05-14
+* Up-to-date dependencies
+* Fixed issue with the with of the bottom sheet
+* Work's with flutter 3.22 🎉 and Webassembly
+
+
 ## [3.5.4] - 2024-01-09
 * Up-to-date dependencies
 * Hungarian Added [#60](https://github.com/bazookon/giphy_get/pull/60) thanks to [seelrd](https://github.com/seelrd)

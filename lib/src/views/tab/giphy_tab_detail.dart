@@ -77,6 +77,26 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
       default:
         break;
     }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Set items count responsive
+      _crossAxisCount =
+          ((context.size?.width ?? MediaQuery.of(context).size.width) /
+                  _gifWidth)
+              .round();
+
+      // Set vertical max items count
+      int _mainAxisCount =
+          ((MediaQuery.of(context).size.height - 30) / _gifWidth).round();
+
+      _limit = _crossAxisCount * _mainAxisCount;
+      if (_limit > 100) _limit = 100;
+      // Initial offset
+      offset = 0;
+
+      // Load Initial Data
+      _loadMore();
+    });
   }
 
   @override
@@ -88,21 +108,6 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
 
     // Listen query
     _appBarProvider.addListener(_listenerQuery);
-
-    // Set items count responsive
-    _crossAxisCount = (MediaQuery.of(context).size.width / _gifWidth).round();
-
-    // Set vertical max items count
-    int _mainAxisCount =
-        ((MediaQuery.of(context).size.height - 30) / _gifWidth).round();
-
-    _limit = _crossAxisCount * _mainAxisCount;
-    if (_limit > 100) _limit = 100;
-    // Initial offset
-    offset = 0;
-
-    // Load Initial Data
-    _loadMore();
   }
 
   @override

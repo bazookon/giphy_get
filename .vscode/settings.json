@@ -1,16 +1,13 @@
 {
-    // add dart fix --apply on save
-    "editor.codeActionsOnSave": {
-        "source.fixAll": "explicit",
-        "source.organizeImports": "explicit"
-    },
-    "dart.flutterSdkPath": ".fvm/flutter_sdk",
-    //Eliminar archivos .fvm de búsqueda
-    "search.exclude": {
-        "**/.fvm": true
-    },
-    // Eliminar de la observación de archivos
-    "files.watcherExclude": {
-        "**/.fvm": true
-    },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "dart.flutterSdkPath": ".fvm/versions/3.22.0",
+  "search.exclude": {
+    "**/.fvm": true
+  },
+  "files.watcherExclude": {
+    "**/.fvm": true
+  }
 }
