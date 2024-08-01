@@ -1,3 +1,4 @@
+import 'lang/ar.dart';
 import 'lang/da.dart';
 import 'lang/en.dart';
 import 'lang/es.dart';
@@ -17,7 +18,8 @@ const localizations = <String, GiphyGetUILocalizationLabels>{
   'lv': LvLocalizations(),
   'et': EtLocalizations(),
   'fr': FrLocalizations(),
-  'hu': HuLocalizations()
+  'hu': HuLocalizations(),
+  'ar': ArLocalizations()
 };
 
 class DefaultLocalizations extends EnLocalizations {
