@@ -1,3 +1,7 @@
+## [3.5.6] - 2024-05-14
+* Up-to-date dependencies
+* Arabic Added [#64](https://github.com/bazookon/giphy_get/pull/64) thanks to [anasalhajhasan](https://github.com/anasalhajhasan)
+
 ## [3.5.5] - 2024-05-14
 * Up-to-date dependencies
 * Fixed issue with the with of the bottom sheet

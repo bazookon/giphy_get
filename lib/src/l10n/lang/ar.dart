@@ -18,11 +18,11 @@ class ArLocalizations extends GiphyGetUILocalizationLabels {
 
   @override
   final String viewOnGiphy;
-  
+
   @override
   final String poweredByGiphy;
 
-  const EnLocalizations({
+  const ArLocalizations({
     this.searchInputLabel = 'بحث GIPHY',
     this.emojisLabel = 'الرموز التعبيرية',
     this.gifsLabel = 'صور متحركة',

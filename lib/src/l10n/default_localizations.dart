@@ -4,10 +4,10 @@ import 'lang/en.dart';
 import 'lang/es.dart';
 import 'lang/et.dart';
 import 'lang/fr.dart';
+import 'lang/hu.dart';
 import 'lang/lt.dart';
 import 'lang/lv.dart';
 import 'lang/tr.dart';
-import 'lang/hu.dart';
 
 const localizations = <String, GiphyGetUILocalizationLabels>{
   'en': EnLocalizations(),
