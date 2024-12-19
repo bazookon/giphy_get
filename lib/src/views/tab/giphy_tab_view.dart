@@ -4,7 +4,7 @@ import 'package:giphy_get/src/client/models/type.dart';
 import 'giphy_tab_detail.dart';
 
 class GiphyTabView extends StatelessWidget {
-  final ScrollController scrollController;
+  final ScrollController? scrollController;
   final TabController tabController;
 
   const GiphyTabView({
@@ -28,18 +28,18 @@ class GiphyTabView extends StatelessWidget {
         if (showGIFs)
           GiphyTabDetail(
             type: GiphyType.gifs,
-            scrollController: scrollController,
+            scrollController: scrollController ?? ScrollController(),
             key: null,
           ),
         if (showStickers)
           GiphyTabDetail(
             type: GiphyType.stickers,
-            scrollController: scrollController,
+            scrollController: scrollController ?? ScrollController(),
           ),
         if (showEmojis)
           GiphyTabDetail(
             type: GiphyType.emoji,
-            scrollController: scrollController,
+            scrollController: scrollController ?? ScrollController(),
           )
       ],
     );

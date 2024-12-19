@@ -53,6 +53,13 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
   // Offset
   int offset = 0;
 
+  // Giphy Client from library
+  late GiphyClient client =
+      GiphyClient(apiKey: _tabProvider.apiKey, randomId: _tabProvider.randomID);
+
+  // canLoadMore
+  bool canLoadMore = true;
+
   @override
   void initState() {
     super.initState();
@@ -200,18 +207,17 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
   }
 
   Future<void> _loadMore() async {
-    print("Total of collections: ${_collection?.pagination?.totalCount}");
     //Return if is loading or no more gifs
-    if (_isLoading || _collection?.pagination?.totalCount == _list.length) {
-      print("No more object");
+    if (_isLoading || !canLoadMore) {
+      return;
+    }
+
+    if (_collection?.pagination?.totalCount == _list.length) {
+      canLoadMore = false;
       return;
     }
 
     _isLoading = true;
-
-    // Giphy Client from library
-    GiphyClient client = GiphyClient(
-        apiKey: _tabProvider.apiKey, randomId: _tabProvider.randomID);
 
     // Offset pagination for query
     if (_collection == null) {
@@ -245,6 +251,17 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
     // Set result to list
     if (_collection!.data.isNotEmpty && mounted) {
       setState(() {
+        // FIX Emjois api v2
+        if (widget.type == GiphyType.emoji) {
+          // check if _list.length is 0
+          // check if last item of _collection the same as _list.last
+          if (_list.isNotEmpty && _collection!.data.last.id == _list.last.id) {
+            //  set _collection.pagination.totalCount to _list.length
+            canLoadMore = false;
+            // avoid duplicated
+            return;
+          }
+        }
         _list.addAll(_collection!.data);
       });
     }

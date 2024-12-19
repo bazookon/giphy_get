@@ -3,7 +3,7 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit"
   },
-  "dart.flutterSdkPath": ".fvm/versions/3.22.3",
+  "dart.flutterSdkPath": ".fvm/versions/3.27.1",
   "search.exclude": {
     "**/.fvm": true
   },

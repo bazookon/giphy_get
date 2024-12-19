@@ -71,13 +71,12 @@ class GiphyClient {
   }) async {
     return _fetchCollection(
       baseUri.replace(
-        path: '$_apiVersion/${GiphyType.emoji}',
+        path: 'v2/${GiphyType.emoji}',
         queryParameters: <String, String>{
           'offset': '$offset',
           'limit': '$limit',
           'rating': rating,
           'lang': lang,
-          
         },
       ),
     );
