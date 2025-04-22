@@ -1,3 +1,6 @@
+# [3.6.1] - 2024-06-28
+* Added useRootNavigator parameter to showModalBottomSheet to allow GIFs to appear above bottom navigation bars
+
 # [3.6.0] - 2024-12-18
 * Up-to-date dependencies
 * Fixed issue with emojis api v2
