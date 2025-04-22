@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_dotenv: ^5.2.1
   giphy_get:
     path: ../
 
@@ -27,3 +28,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/img/
+    - .env

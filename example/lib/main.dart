@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:giphy_get/giphy_get.dart';
 import 'package:giphy_get/l10n.dart';
 import 'package:giphy_get_demo/providers/theme_provider.dart';
@@ -6,6 +7,8 @@ import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load(fileName: ".env");
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
@@ -63,13 +66,13 @@ class _MyHomePageState extends State<MyHomePage> {
   //Gif
   GiphyGif? currentGif;
 
-  // Giphy Client
-  late GiphyClient client = GiphyClient(apiKey: giphyApiKey, randomId: '');
-
   // Random ID
   String randomId = "";
 
-  String giphyApiKey = const String.fromEnvironment("GIPHY_API_KEY");
+  late String giphyApiKey = dotenv.env['GIPHY_API_KEY'] ?? "";
+
+  // Giphy Client
+  late GiphyClient client = GiphyClient(apiKey: giphyApiKey, randomId: '');
 
   @override
   void initState() {
@@ -86,6 +89,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    if (giphyApiKey.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text("Giphy Get Demo"),
+        ),
+        body: const Center(
+          child: Text(
+              "Please set your GIPHY API KEY in the environment variables"),
+        ),
+      );
+    }
+
     return GiphyGetWrapper(
         giphy_api_key: giphyApiKey,
         builder: (stream, giphyGetWrapper) {
