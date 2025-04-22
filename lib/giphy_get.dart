@@ -48,6 +48,7 @@ class GiphyGet {
     bool showGIFs = true,
     bool showStickers = true,
     bool showEmojis = true,
+    bool useRootNavigator = true,
     Color? tabColor,
     Color? textSelectedColor,
     Color? textUnselectedColor,
@@ -61,6 +62,7 @@ class GiphyGet {
     }
 
     return showModalBottomSheet<GiphyGif>(
+      useRootNavigator: useRootNavigator,
       clipBehavior: Clip.antiAlias,
       shape: Theme.of(context).bottomSheetTheme.shape ??
           RoundedRectangleBorder(
