@@ -8,10 +8,8 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('end-to-end test', () {
-    testWidgets('Try to load giphy',
-        (WidgetTester tester) async {
+    testWidgets('Try to load giphy', (WidgetTester tester) async {
       app.main();
-      
 
       // Finds the floating action button to tap on.
       final Finder fab = find.byType(FloatingActionButton);
@@ -21,7 +19,6 @@ void main() {
 
       // Trigger a frame.
       await tester.pumpAndSettle();
-
     });
   });
 }

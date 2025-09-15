@@ -1,3 +1,31 @@
+## 🚀 New: Batch & Progressive Loading (vNEXT)
+
+### Smarter, User-Friendly GIF Loading
+
+This release introduces a modern loading experience:
+
+- **Batch Loading:** Only visible GIFs are loaded/rendered, reducing network and memory usage. Off-screen GIFs are loaded as you scroll.
+- **Progressive Loading:** While a GIF loads, a blurred static thumbnail (if available) is shown, then swapped for the full GIF when ready—just like YouTube thumbnails!
+- **Custom Loading/Failed Widgets:** You can pass your own widgets to display while loading or on error, for a fully branded experience.
+
+#### Example: Custom Loading/Failed Widgets
+
+```dart
+GiphyTabDetail(
+  type: GiphyType.gifs,
+  scrollController: myController,
+  loadingWidget: MyCustomLoadingWidget(),
+  failedWidget: MyCustomFailedWidget(),
+)
+```
+
+#### How it works
+
+- The grid uses a lazy builder, so only visible GIFs are loaded.
+- Each GIF first shows a blurred static image (if available) as a placeholder, then swaps in the full GIF when loaded.
+- This keeps users confident that something is happening, even on slow networks.
+
+See the documentation in `GiphyTabDetail` and `GiphyGifWidget` for more details.
 # giphy_get
 
 [![Flutter_Tests](https://github.com/bazookon/giphy_get/actions/workflows/test.yml/badge.svg)](https://github.com/bazookon/giphy_get/actions/workflows/test.yml)

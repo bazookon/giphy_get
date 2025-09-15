@@ -39,8 +39,7 @@ class GiphyGetUILocalizations<T extends GiphyGetUILocalizationLabels> {
   }
 }
 
-class GiphyGetUILocalizationDelegate<
-        T extends GiphyGetUILocalizationLabels>
+class GiphyGetUILocalizationDelegate<T extends GiphyGetUILocalizationLabels>
     extends LocalizationsDelegate<GiphyGetUILocalizations> {
   final T? overrides;
   final bool _forceSupportAllLocales;

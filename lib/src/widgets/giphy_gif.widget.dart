@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui'; // For ImageFilter.blur
 
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,18 @@ class GiphyGifWidget extends StatefulWidget {
   final bool showGiphyLabel;
   final BorderRadius? borderRadius;
   final Alignment imageAlignment;
+
+  /// Optional custom widget to show while loading
+  final Widget? loadingWidget;
+
+  /// Optional custom widget to show on load failure
+
+  /// GiphyGifWidget displays a single GIF with progressive loading.
+  ///
+  /// - Shows a blurred static thumbnail (if available) while the full GIF loads.
+  /// - Swaps in the full GIF when ready, keeping the user visually engaged.
+  /// - Used throughout the plugin for consistent, user-friendly loading feedback.
+  final Widget? failedWidget;
   const GiphyGifWidget({
     Key? key,
     required this.gif,
@@ -19,6 +32,8 @@ class GiphyGifWidget extends StatefulWidget {
     this.borderRadius,
     this.imageAlignment = Alignment.center,
     this.showGiphyLabel = true,
+    this.loadingWidget,
+    this.failedWidget,
   }) : super(key: key);
 
   @override
@@ -26,6 +41,18 @@ class GiphyGifWidget extends StatefulWidget {
 }
 
 class _GiphyGifWidgetState extends State<GiphyGifWidget> {
+  /// Utility function for switch-like mapping (copied from giphy_tab_detail.dart)
+  TValue? case2<TOptionType, TValue>(
+    TOptionType selectedOption,
+    Map<TOptionType, TValue> branches, [
+    TValue? defaultValue = null,
+  ]) {
+    if (!branches.containsKey(selectedOption)) {
+      return defaultValue;
+    }
+    return branches[selectedOption];
+  }
+
   bool _showMenu = false;
   Timer? _timerMenu;
 
@@ -42,6 +69,11 @@ class _GiphyGifWidgetState extends State<GiphyGifWidget> {
       fontSize: 12,
       color: Colors.white,
     );
+
+    // Progressive loading: use blurred thumbnail as placeholder
+    final String? placeholderUrl = widget.gif.images?.fixedWidthStill?.url ??
+        widget.gif.images?.previewWebp?.url ??
+        widget.gif.images?.downsizedStill?.url;
 
     return Container(
       child: Stack(
@@ -69,6 +101,71 @@ class _GiphyGifWidgetState extends State<GiphyGifWidget> {
                   ),
                   child: ExtendedImage.network(
                     widget.gif.images!.fixedWidth.url,
+                    fit: BoxFit.fill,
+                    cache: true,
+                    gaplessPlayback: true,
+                    headers: {'accept': 'image/*'},
+                    // Show blurred placeholder while loading
+                    loadStateChanged: (state) {
+                      final aspectRatio = double.parse(
+                              widget.gif.images!.fixedWidth.width) /
+                          double.parse(widget.gif.images!.fixedWidth.height);
+                      return AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 350),
+                        child: case2(
+                          state.extendedImageLoadState,
+                          {
+                            LoadState.loading: AspectRatio(
+                              aspectRatio: aspectRatio,
+                              child: placeholderUrl != null
+                                  ? Stack(
+                                      fit: StackFit.expand,
+                                      children: [
+                                        ImageFiltered(
+                                          imageFilter: ImageFilter.blur(
+                                              sigmaX: 8, sigmaY: 8),
+                                          child: Image.network(
+                                            placeholderUrl,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        Align(
+                                          alignment: Alignment.center,
+                                          child: widget.loadingWidget ??
+                                              CircularProgressIndicator(
+                                                  strokeWidth: 2),
+                                        ),
+                                      ],
+                                    )
+                                  : widget.loadingWidget ??
+                                      Container(
+                                        color: Theme.of(context).cardColor,
+                                      ),
+                            ),
+                            LoadState.completed: AspectRatio(
+                              aspectRatio: aspectRatio,
+                              child: ExtendedRawImage(
+                                fit: BoxFit.fill,
+                                image: state.extendedImageInfo?.image,
+                              ),
+                            ),
+                            LoadState.failed: AspectRatio(
+                              aspectRatio: aspectRatio,
+                              child: widget.failedWidget ??
+                                  Container(
+                                    color: Theme.of(context).cardColor,
+                                  ),
+                            ),
+                          },
+                          AspectRatio(
+                            aspectRatio: aspectRatio,
+                            child: Container(
+                              color: Theme.of(context).cardColor,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
@@ -114,6 +211,8 @@ class _GiphyGifWidgetState extends State<GiphyGifWidget> {
                         widget.giphyGetWrapper.getGif(
                           '@${widget.gif.username}',
                           context,
+                          loadingWidget: widget.loadingWidget,
+                          failedWidget: widget.failedWidget,
                         );
                       },
                       child: Text(

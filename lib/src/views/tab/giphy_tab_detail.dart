@@ -1,3 +1,5 @@
+import 'dart:ui'; // For ImageFilter.blur
+
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -12,8 +14,28 @@ import 'package:provider/provider.dart';
 class GiphyTabDetail extends StatefulWidget {
   final String type;
   final ScrollController scrollController;
-  GiphyTabDetail({Key? key, required this.type, required this.scrollController})
-      : super(key: key);
+
+  /// Optional custom widget to show while loading
+  final Widget? loadingWidget;
+
+  /// Optional custom widget to show on load failure
+
+  /// GiphyTabDetail displays a grid of GIFs with efficient batch loading and progressive image loading.
+  ///
+  /// - Only visible GIFs are loaded and rendered, leveraging MasonryGridView's lazy itemBuilder.
+  /// - Progressive loading: a blurred static thumbnail (if available) is shown while the full GIF loads, then swapped in.
+  /// - This keeps users confident that something is happening, even on slow networks.
+  ///
+  /// See also: GiphyGifWidget for single GIF progressive loading.
+  final Widget? failedWidget;
+
+  GiphyTabDetail({
+    Key? key,
+    required this.type,
+    required this.scrollController,
+    this.loadingWidget,
+    this.failedWidget,
+  }) : super(key: key);
 
   @override
   _GiphyTabDetailState createState() => _GiphyTabDetailState();
@@ -130,7 +152,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
   Widget build(BuildContext context) {
     if (_list.isEmpty) {
       return Center(
-        child: CircularProgressIndicator(),
+        child: widget.loadingWidget ?? CircularProgressIndicator(),
       );
     }
 
@@ -153,6 +175,12 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
     double _aspectRatio = (double.parse(gif.images!.fixedWidth.width) /
         double.parse(gif.images!.fixedWidth.height));
 
+    // Progressive loading: use blurred thumbnail as placeholder
+    // Try to use fixedWidthStill, previewWebp, or downsizedStill as a static/blurred placeholder
+    final String? placeholderUrl = gif.images?.fixedWidthStill?.url ??
+        gif.images?.previewWebp?.url ??
+        gif.images?.downsizedStill?.url;
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(10.0),
       child: InkWell(
@@ -166,6 +194,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
                 gaplessPlayback: true,
                 fit: BoxFit.fill,
                 headers: {'accept': 'image/*'},
+                // Show blurred placeholder while loading
                 loadStateChanged: (state) => AnimatedSwitcher(
                   duration: const Duration(milliseconds: 350),
                   child: gif.images == null
@@ -175,9 +204,32 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
                           {
                             LoadState.loading: AspectRatio(
                               aspectRatio: _aspectRatio,
-                              child: Container(
-                                color: Theme.of(context).cardColor,
-                              ),
+                              child: placeholderUrl != null
+                                  ? Stack(
+                                      fit: StackFit.expand,
+                                      children: [
+                                        // Blurred thumbnail
+                                        ImageFiltered(
+                                          imageFilter: ImageFilter.blur(
+                                              sigmaX: 8, sigmaY: 8),
+                                          child: Image.network(
+                                            placeholderUrl,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        // Optional: loading indicator overlay
+                                        Align(
+                                          alignment: Alignment.center,
+                                          child: widget.loadingWidget ??
+                                              CircularProgressIndicator(
+                                                  strokeWidth: 2),
+                                        ),
+                                      ],
+                                    )
+                                  : widget.loadingWidget ??
+                                      Container(
+                                        color: Theme.of(context).cardColor,
+                                      ),
                             ),
                             LoadState.completed: AspectRatio(
                               aspectRatio: _aspectRatio,
@@ -188,9 +240,10 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
                             ),
                             LoadState.failed: AspectRatio(
                               aspectRatio: _aspectRatio,
-                              child: Container(
-                                color: Theme.of(context).cardColor,
-                              ),
+                              child: widget.failedWidget ??
+                                  Container(
+                                    color: Theme.of(context).cardColor,
+                                  ),
                             ),
                           },
                           AspectRatio(
