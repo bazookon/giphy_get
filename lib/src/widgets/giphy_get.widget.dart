@@ -31,6 +31,12 @@ class GiphyGetWrapper extends StatelessWidget {
     bool showGIFs = true,
     bool showStickers = true,
     bool showEmojis = true,
+
+    /// Optional custom widget to show while loading
+    Widget? loadingWidget,
+
+    /// Optional custom widget to show on load failure
+    Widget? failedWidget,
   }) async {
     GiphyGif? gif = await GiphyGet.getGif(
       queryText: queryText,
@@ -41,6 +47,8 @@ class GiphyGetWrapper extends StatelessWidget {
       showStickers: showStickers,
       showEmojis: showEmojis,
       debounceTimeInMilliseconds: 350,
+      loadingWidget: loadingWidget,
+      failedWidget: failedWidget,
     );
     if (gif != null) streamController.add(gif);
   }

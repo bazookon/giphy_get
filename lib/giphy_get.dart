@@ -36,27 +36,32 @@ typedef SearchAppBarBuilder = Widget Function(
 
 class GiphyGet {
   // Show Bottom Sheet
-  static Future<GiphyGif?> getGif({
-    required BuildContext context,
-    required String apiKey,
-    String rating = GiphyRating.g,
-    String lang = GiphyLanguage.english,
-    String randomID = "",
-    String searchText = "",
-    String queryText = "",
-    bool modal = true,
-    bool showGIFs = true,
-    bool showStickers = true,
-    bool showEmojis = true,
-    bool useRootNavigator = true,
-    Color? tabColor,
-    Color? textSelectedColor,
-    Color? textUnselectedColor,
-    int debounceTimeInMilliseconds = 350,
-    TabTopBuilder? tapTopBuilder,
-    TabBottomBuilder? tabBottomBuilder,
-    SearchAppBarBuilder? searchAppBarBuilder,
-  }) {
+  static Future<GiphyGif?> getGif(
+      {required BuildContext context,
+      required String apiKey,
+      String rating = GiphyRating.g,
+      String lang = GiphyLanguage.english,
+      String randomID = "",
+      String searchText = "",
+      String queryText = "",
+      bool modal = true,
+      bool showGIFs = true,
+      bool showStickers = true,
+      bool showEmojis = true,
+      bool useRootNavigator = true,
+      Color? tabColor,
+      Color? textSelectedColor,
+      Color? textUnselectedColor,
+      int debounceTimeInMilliseconds = 350,
+      TabTopBuilder? tapTopBuilder,
+      TabBottomBuilder? tabBottomBuilder,
+      SearchAppBarBuilder? searchAppBarBuilder,
+
+      /// Optional custom widget to show while loading
+      Widget? loadingWidget,
+
+      /// Optional custom widget to show on load failure
+      Widget? failedWidget}) {
     if (apiKey == "") {
       throw Exception("apiKey must be not null or not empty");
     }
@@ -106,6 +111,8 @@ class GiphyGet {
             tabTopBuilder: tapTopBuilder,
             tabBottomBuilder: tabBottomBuilder,
             searchAppBarBuilder: searchAppBarBuilder,
+            loadingWidget: loadingWidget,
+            failedWidget: failedWidget,
           ),
         ),
       ),

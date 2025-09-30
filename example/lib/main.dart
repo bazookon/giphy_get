@@ -174,18 +174,24 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             floatingActionButton: FloatingActionButton(
-                onPressed: () async {
-                  giphyGetWrapper.getGif(
-                    '',
-                    context,
+              onPressed: () async {
+                giphyGetWrapper.getGif('', context,
                     showGIFs: true,
                     showStickers: true,
                     showEmojis: true,
-                  );
-                },
-                tooltip: 'Open Sticker',
-                child: const Icon(Icons
-                    .insert_emoticon)), // This trailing comma makes auto-formatting nicer for build methods.
+                    loadingWidget: CircularProgressIndicator(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                    failedWidget: Container(
+                      color: Theme.of(context).cardColor,
+                      child: const Center(
+                        child: Text("Load Failed"),
+                      ),
+                    ));
+              },
+              tooltip: 'Open Sticker',
+              child: const Icon(Icons.insert_emoticon),
+            ), // This trailing comma makes auto-formatting nicer for build methods.
           );
         });
   }

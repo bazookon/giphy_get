@@ -7,6 +7,12 @@ class GiphyTabView extends StatelessWidget {
   final ScrollController? scrollController;
   final TabController tabController;
 
+  /// Optional custom widget to show while loading
+  final Widget? loadingWidget;
+
+  /// Optional custom widget to show on load failure
+  final Widget? failedWidget;
+
   const GiphyTabView({
     Key? key,
     required this.scrollController,
@@ -14,6 +20,8 @@ class GiphyTabView extends StatelessWidget {
     this.showEmojis = true,
     this.showGIFs = true,
     this.showStickers = true,
+    this.loadingWidget,
+    this.failedWidget,
   }) : super(key: key);
 
   final bool showGIFs;
@@ -30,16 +38,22 @@ class GiphyTabView extends StatelessWidget {
             type: GiphyType.gifs,
             scrollController: scrollController ?? ScrollController(),
             key: null,
+            loadingWidget: loadingWidget,
+            failedWidget: failedWidget,
           ),
         if (showStickers)
           GiphyTabDetail(
             type: GiphyType.stickers,
             scrollController: scrollController ?? ScrollController(),
+            loadingWidget: loadingWidget,
+            failedWidget: failedWidget,
           ),
         if (showEmojis)
           GiphyTabDetail(
             type: GiphyType.emoji,
             scrollController: scrollController ?? ScrollController(),
+            loadingWidget: loadingWidget,
+            failedWidget: failedWidget,
           )
       ],
     );

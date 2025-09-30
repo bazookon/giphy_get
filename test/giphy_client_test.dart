@@ -8,8 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 class MockClient extends Mock implements Client {}
 
 Future<void> main() async {
-
-  var _apiKey = Platform.environment['GIPHY_API_KEY']??'';
+  var _apiKey = Platform.environment['GIPHY_API_KEY'] ?? '';
 
   group('GiphyClient', () {
     test('should fetch trending gifs', () async {
@@ -54,7 +53,6 @@ Future<void> main() async {
       final gif = await client.random(tag: '');
 
       expect(gif, TypeMatcher<GiphyGif>());
-     
     });
 
     test('should load a gif by id', () async {
@@ -66,7 +64,8 @@ Future<void> main() async {
       final gif = await client.byId('l46Cc0Ped9R0uiTkY');
 
       expect(gif, TypeMatcher<GiphyGif>());
-      expect(gif.title?.toLowerCase(), 'Beyonce freedom GIF by BET Awards'.toLowerCase());
+      expect(gif.title?.toLowerCase(),
+          'Beyonce freedom GIF by BET Awards'.toLowerCase());
     });
 
     test('should parse gifs correctly', () async {
@@ -79,7 +78,6 @@ Future<void> main() async {
       final gif = (await client.trending()).data.first;
       expect(gif.rating, GiphyRating.g);
       expect(gif.type, 'gif');
-    
     });
 
     test('should parse users correctly', () async {
@@ -90,7 +88,7 @@ Future<void> main() async {
 
       // Gif Validation
       final user = (await client.trending()).data.first.user;
-     
+
       expect(user?.profileUrl, isNotNull);
     });
 
